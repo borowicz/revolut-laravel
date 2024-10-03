@@ -21,3 +21,7 @@ Homestead.yaml
 Homestead.json
 /.vagrant
 .phpunit.result.cache
+/.ddev/
+/.idea/
+/.idea/workspace.xml
+/tmp/
