@@ -16,3 +16,16 @@ go to:
         >>> save csv file
  
 ```
+
+
+install
+```shell
+composer install
+./artisan migrate
+php artisan breeze:install
+npm install
+npm run build
+npm run build
+./artisan db:seed --class=DatabaseSeeder
+
+```

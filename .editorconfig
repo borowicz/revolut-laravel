@@ -16,3 +16,25 @@ indent_size = 2
 
 [docker-compose.yml]
 indent_size = 4
+
+[{composer.json,package.json}]
+indent_size = 2
+indent_style = tab
+
+[{composer.lock,package-lock.json}]
+indent_size = 2
+indent_style = tab
+
+[*.json]
+insert_final_newline = ignore
+
+# Tab indentation (no size specified)
+[*.js]
+indent_style = space
+indent_size = 2
+
+[**.min.js]
+indent_style = ignore
+insert_final_newline = ignore
+
+root = true
