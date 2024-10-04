@@ -2,23 +2,22 @@
 
 namespace App\Models\Revolut\Stock;
 
+use Illuminate\Database\Eloquent\Concerns\HasTimestamps;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Models\Revolut\AbstractRevolutModel;
 
-class StockTransaction extends AbstractRevolutModel
+class CashCurrent extends AbstractRevolutModel
 {
-    use HasFactory, SoftDeletes;
+    use HasFactory, SoftDeletes, HasTimestamps;
+
+    protected $table = 'stock_cash';
 
     protected $fillable = [
         'hash',
-        'date',
-        'ticker',
-        'type',
-        'quantity',
-        'price',
-        'total',
+        'source',
+        'when',
         'currency',
-        'rate',
+        'cash',
     ];
 }
