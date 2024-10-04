@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Schema;
  * php artisan migrate:refresh --path=./database/migrations/2024_10_03_091922_create_table_commodities_exchanges.php
  */
 return new class extends Migration {
-    private const TABLE_NAME = 'commodities_transactions';
+    private const TABLE_NAME = 'commodities_exchanges';
 
     public function up(): void
     {
@@ -19,7 +19,6 @@ return new class extends Migration {
             $table->string('hash');
 
             $table->string('source');
-            $table->string('hash');
             $table->date('when');
             $table->string('currency', 10); // USD, EUR, PLN
             $table->string('product', 10);
