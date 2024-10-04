@@ -15,7 +15,7 @@ class DatabaseSeeder extends Seeder
     {
         User::factory()->create([
             'name' => 'revolut',
-            'email' => 'revolut@revolut-laravel.ddev.site ',
+            'email' => 'revolut@rl.local',
             'password' => Hash::make('csv'),
         ]);
     }
