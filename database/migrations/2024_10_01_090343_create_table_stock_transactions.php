@@ -17,14 +17,15 @@ return new class extends Migration {
         Schema::create(self::TABLE_NAME, function (Blueprint $table) {
             $table->id();
             $table->string('hash');
+
             $table->string('date');
             $table->string('ticker')->default('');
             $table->string('type')->default('');
             $table->decimal('quantity', 14, 6)->nullable();
-            $table->decimal('price', 14, 6)->nullable();
-            $table->decimal('total', 14, 6)->nullable();
+            $table->decimal('price_per_share', 14, 6)->nullable();
+            $table->decimal('total_amount', 14, 6)->nullable();
             $table->string('currency')->default('');
-            $table->decimal('rate', 14, 6)->nullable();
+            $table->decimal('fx_rate', 14, 6)->nullable();
 
             $table->timestamps();
             $table->softDeletes();

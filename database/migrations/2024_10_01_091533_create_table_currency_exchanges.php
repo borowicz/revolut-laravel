@@ -7,10 +7,10 @@ use Illuminate\Support\Facades\Schema;
 /**
  *- -***
  * @example
- * php artisan migrate:refresh --path=./database/migrations/2024_10_01_091533_create_table_currency_exchange.php
+ * php artisan migrate:refresh --path=./database/migrations/2024_10_01_091533_create_table_currency_exchanges.php
  */
 return new class extends Migration {
-    private const TABLE_NAME = 'currency_exchange';
+    private const TABLE_NAME = 'currency_exchanges';
 
     public function up(): void
     {
