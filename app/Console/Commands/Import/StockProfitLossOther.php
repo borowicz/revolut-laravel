@@ -11,15 +11,15 @@ use Illuminate\Support\Facades\Session;
 use App\Console\ImportDataInterface;
 
 /**
- * @see /revolut/stock/tickers
+ * @see /revolut/stock/profit-loss-other/transactions
  *  records c.a.
  *- -***
  *
- * Class StockTickers
+ * Class StockProfitLossOther
  */
-class StockTickers extends AbstractImportCommand implements ImportDataInterface
+class StockProfitLossOther extends AbstractImportCommand implements ImportDataInterface
 {
-    protected $signature = 'revolut:import:stock:tickers';
+    protected $signature = 'revolut:import:stock:other-profit-loss {file} {--force=0}';
 
     protected $description = 'Fetch and store stock profit loss from csv file';
 
@@ -38,3 +38,4 @@ class StockTickers extends AbstractImportCommand implements ImportDataInterface
         // TODO: Implement setCommandSchedule() method.
     }
 }
+

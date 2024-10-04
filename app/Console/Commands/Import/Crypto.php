@@ -1,7 +1,5 @@
 <?php
 
-namespace App\Console\Commands\Import;
-
 use Carbon\Carbon;
 use Symfony\Component\Console\Output\OutputInterface;
 use Maatwebsite\Excel\Facades\Excel;
@@ -11,17 +9,17 @@ use Illuminate\Support\Facades\Session;
 use App\Console\ImportDataInterface;
 
 /**
- * @see /revolut/stock/tickers
+ * @see /revolut/crypto/transactions
  *  records c.a.
  *- -***
  *
- * Class StockTickers
+ * Class StockProfitLossOther
  */
-class StockTickers extends AbstractImportCommand implements ImportDataInterface
+class Crypto extends AbstractImportCommand implements FetchDataInterface
 {
-    protected $signature = 'revolut:import:stock:tickers';
+    protected $signature = 'revolut:import:crypto {file} {--force=0}';
 
-    protected $description = 'Fetch and store stock profit loss from csv file';
+    protected $description = 'Import crypto transactions';
 
     public function handle()
     {
@@ -38,3 +36,4 @@ class StockTickers extends AbstractImportCommand implements ImportDataInterface
         // TODO: Implement setCommandSchedule() method.
     }
 }
+

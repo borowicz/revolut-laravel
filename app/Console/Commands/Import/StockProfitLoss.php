@@ -1,7 +1,5 @@
 <?php
 
-namespace App\Console\Commands\Import;
-
 use Carbon\Carbon;
 use Symfony\Component\Console\Output\OutputInterface;
 use Maatwebsite\Excel\Facades\Excel;
@@ -11,15 +9,15 @@ use Illuminate\Support\Facades\Session;
 use App\Console\ImportDataInterface;
 
 /**
- * @see /revolut/stock/tickers
+ * @see /revolut/stock/profit-loss/transactions
  *  records c.a.
  *- -***
  *
- * Class StockTickers
+ * Class StockProfitLoss
  */
-class StockTickers extends AbstractImportCommand implements ImportDataInterface
+class StockProfitLoss extends AbstractImportCommand implements FetchDataInterface
 {
-    protected $signature = 'revolut:import:stock:tickers';
+    protected $signature = 'revolut:import:stock:profit-loss {file} {--force=0}';
 
     protected $description = 'Fetch and store stock profit loss from csv file';
 
@@ -38,3 +36,4 @@ class StockTickers extends AbstractImportCommand implements ImportDataInterface
         // TODO: Implement setCommandSchedule() method.
     }
 }
+
