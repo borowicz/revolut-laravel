@@ -18,5 +18,8 @@ class DatabaseSeeder extends Seeder
             'email' => 'revolut@rl.local',
             'password' => Hash::make('csv'),
         ]);
+
+//        $this->call(NoteSeeder::class);
+//        $this->call(StockMarketSeeder::class);
     }
 }
