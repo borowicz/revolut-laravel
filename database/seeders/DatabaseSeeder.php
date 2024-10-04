@@ -13,13 +13,20 @@ class DatabaseSeeder extends Seeder
 {
     public function run(): void
     {
-        User::factory()->create([
+        $userData = [
             'name' => 'revolut',
             'email' => 'revolut@rl.local',
             'password' => Hash::make('csv'),
-        ]);
+        ];
+        $userCheck = User::select()
+            ->where('name', $userData['name'])
+            ->where('email', $userData['email'])
+            ->first();
+        if (!$userCheck) {
+            User::factory()->create($userData);
+        }
 
-//        $this->call(NoteSeeder::class);
-//        $this->call(StockMarketSeeder::class);
+        $this->call(NoteSeeder::class);
+        $this->call(StockMarketSeeder::class);
     }
 }

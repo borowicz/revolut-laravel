@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use App\Models\Revolut\Stock\StockMarket;
 
 /**
  * - -***
@@ -190,6 +191,11 @@ class StockMarketSeeder extends Seeder
         ];
 
         foreach ($entries as $entry) {
+            $check = StockMarket::where('name', $entry['name'])->first();
+            if ($check) {
+                continue;
+            }
+
             DB::table('stock_markets')->insert($entry);
         }
     }

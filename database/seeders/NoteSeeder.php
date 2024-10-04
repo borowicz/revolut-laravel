@@ -17,6 +17,7 @@ class NoteSeeder extends Seeder
         $entry = [
             'title' => 'Welcome in Revolut Laravel',
             'content' => '...',
+            'user_id' => 1,
         ];
         DB::table('notes')->insert($entry);
 
