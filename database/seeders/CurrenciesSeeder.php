@@ -4,7 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
-use App\Models\Revolut\Currency;
+use App\Models\Revolut\CurrencyExchanges;
 
 /**
  * - -***
@@ -14,7 +14,7 @@ class CurrenciesSeeder extends Seeder
 {
     public function run()
     {
-        $model = new Currency();
+        $model = new CurrencyExchanges();
         $tableName = $model->getTable();
         $dataTimeNow = date('Y-m-d H:i:s');
 

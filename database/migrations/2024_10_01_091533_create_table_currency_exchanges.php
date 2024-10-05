@@ -24,6 +24,7 @@ return new class extends Migration {
             $table->decimal('exchange_rate', 14, 6); // rate eg. 1.234567 EURUSD
 
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

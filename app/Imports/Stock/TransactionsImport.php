@@ -31,6 +31,8 @@ class TransactionsImport extends AbstractImport
             return null;
         }
 
+        // Date,Ticker,Type,Quantity,Price per share,Total Amount,Currency,FX Rate
+        $when = Carbon::parse($row[0])->format('Y-m-d H:i:s');
         $ticker = $row[1] ?? '';
         $type = $row[2] ?? '';
         $quantity = $row[3] ?? 0;
@@ -46,7 +48,7 @@ class TransactionsImport extends AbstractImport
 
         $entry = [
             'hash'            => $hash,
-            'date'            => $row[0],
+            'date'            => $when,
             'ticker'          => $ticker,
             'type'            => $type,
             'quantity'        => $quantity,
@@ -55,7 +57,8 @@ class TransactionsImport extends AbstractImport
             'currency'        => $currency,
             'fx_rate'         => $rate,
         ];
-
+dump($row);
+dump($entry);
         $importStats['inserted']++;
 
         Session::put('importStats', $importStats);
