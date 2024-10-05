@@ -24,8 +24,9 @@
         </div>
 
         <div class="px-4 sm:px-6 lg:px-8">
-            @include('livewire.revolut.stock.cash.table')
+            @include('livewire.revolut.stock.cash-table')
         </div>
+        @include('livewire.partials.pagination')
         <br class="clearfix"/>
     </div>
 </div>
