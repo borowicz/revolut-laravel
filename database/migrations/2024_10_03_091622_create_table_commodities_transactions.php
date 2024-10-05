@@ -16,18 +16,17 @@ return new class extends Migration {
     {
         Schema::create(self::TABLE_NAME, function (Blueprint $table) {
             $table->id();
-            $table->string('hash');
+            $table->string('hash')->unique()->index();
 
             // Type,Product,Started Date,Completed Date,Description,Amount,Fee,Currency,State,Balance
-            $table->string('date');
             $table->string('type')->default('');
             $table->string('product')->default('');
-            $table->string('started_date')->default('');
-            $table->string('completed_date')->default('');
+            $table->datetime('started_date')->nullable();
+            $table->dateTime('completed_date')->nullable();
             $table->string('description')->default('');
             $table->decimal('amount', 14, 6)->nullable();
             $table->decimal('fee', 14, 6)->nullable();
-            $table->decimal('currency', 14, 6)->nullable();
+            $table->string('currency')->default('');
             $table->string('state')->default('');
             $table->string('balance')->default('');
 

@@ -13,7 +13,7 @@ class CommoditiesTransactionsImport extends AbstractImport
 
     public function model(array $row)
     {
-        if (stristr($row[0], 'symbol')) {
+        if (stristr($row[0], 'type')) {
             return null;
         }
 
@@ -35,22 +35,21 @@ class CommoditiesTransactionsImport extends AbstractImport
             return null;
         }
 
-        $type = $row[1] ?? '';
-        $product = $row[2] ?? '';
-        $dateStarted = $row[3] ?? '';
-        $dateCompleted = $row[4] ?? '';
-        $description = $row[5] ?? '';
+        $type = $row[0] ?? '';
+        $product = $row[1] ?? '';
+        $dateStarted = $row[2] ?? '';
+        $dateCompleted = $row[3] ?? '';
+        $description = $row[4] ?? '';
         $amount = $row[5] ?? 0;
-        $fees = $row[5] ?? 0;
-        $currency = $row[6] ?? '';
-        $state = $row[6] ?? '';
-        $balance = $row[6] ?? 0;
+        $fees = $row[6] ?? 0;
+        $currency = $row[7] ?? '';
+        $state = $row[8] ?? '';
+        $balance = $row[9] ?? 0;
 
         $dateStarted = Carbon::parse($dateStarted)->format('Y-m-d H:i:s');
         $dateCompleted = Carbon::parse($dateCompleted)->format('Y-m-d H:i:s');
 
         $amount = $this->cleanValue($amount);
-//        $price = $this->cleanValue($price);
         $balance = $this->cleanValue($balance);
         $fees = $this->cleanValue($fees);
 
@@ -72,7 +71,7 @@ class CommoditiesTransactionsImport extends AbstractImport
 
         Session::put('importStats', $importStats);
 
-        $results = Commodities::create($entry);
+        $results = CommoditiesTransaction::create($entry);
 
         debugbar()->info('$entry: ' . json_encode($entry, JSON_PRETTY_PRINT));
 
