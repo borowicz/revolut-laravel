@@ -5,9 +5,8 @@ namespace App\Console\Commands\Import;
 use Carbon\Carbon;
 use Symfony\Component\Console\Output\OutputInterface;
 use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Console\Command;
 use Illuminate\Console\Scheduling\Schedule;
-use Illuminate\Support\Facades\File;
-use Illuminate\Support\Facades\Session;
 use App\Console\ImportDataInterface;
 
 /**
@@ -19,7 +18,7 @@ use App\Console\ImportDataInterface;
  */
 class StockTickers extends AbstractImportCommand implements ImportDataInterface
 {
-    protected $signature = 'revolut:import:stock:tickers';
+    protected $signature = 'revolut:import:stock:tickers {file}';
 
     protected $description = 'Fetch and store stock profit loss from csv file';
 

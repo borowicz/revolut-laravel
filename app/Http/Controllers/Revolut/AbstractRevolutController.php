@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\Revolut;
 
-abstract class AbstractRevolut
+use App\Http\Controllers\Controller;
+
+abstract class AbstractRevolutController extends Controller
 {
     public static function setHash(array $array): string
     {

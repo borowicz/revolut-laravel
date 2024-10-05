@@ -2,20 +2,32 @@
 
 namespace App\Console\Commands\Import;
 
+use Illuminate\Console\Command;
+use App\Imports\AbstractImport;
 use App\Console\AbstractCommand;
-
-use Carbon\Carbon;
-use Symfony\Component\Console\Output\OutputInterface;
-use Maatwebsite\Excel\Facades\Excel;
-use Illuminate\Console\Scheduling\Schedule;
-use Illuminate\Support\Facades\File;
-use Illuminate\Support\Facades\Session;
-use App\Console\ImportDataInterface;
 
 /**
  *- -***
  */
 abstract class AbstractImportCommand extends AbstractCommand
 {
+    public $csvFile;
 
+    public function init()
+    {
+        parent::init();
+
+        AbstractImport::setStats();
+
+        $csvFile = $this->argument('file') ?? '';
+        if (!file_exists($csvFile)) {
+            $this->error('File not found: ' . $csvFile);
+
+            return Command::FAILURE;
+        }
+
+        $this->csvFile = $csvFile;
+
+        return Command::SUCCESS;
+    }
 }

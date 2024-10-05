@@ -12,11 +12,24 @@ abstract class AbstractApiService
     protected $apiService;
     protected $apiLocalJson = 'app/revolut/jsons/%s_%s_%s.json';
 
-    public function __construct(Client $client, string $apiKey, string $apiUrl)
+//    public function __construct(Client $client)
+//    {
+//        $this->client = $client;
+//    }
+
+//    public function __construct(Client $client, string $apiKey, string $apiUrl)
+//    {
+//        $this->client = $client;
+//        $this->apiKey = $apiKey;
+//        $this->apiUrl = $apiUrl;
+//    }
+
+    protected function getJsonFilePath(string $ticker, string $when): string
     {
-        $this->client = $client;
-        $this->apiKey = $apiKey;
-        $this->apiUrl = $apiUrl;
+        $result = sprintf($this->apiLocalJson, $when, $ticker, $this->apiService);
+        $result = storage_path($result);
+
+        return $result;
     }
 
     public function getStockPriceData(string $ticker, string $when, bool $force = false): array
@@ -24,8 +37,7 @@ abstract class AbstractApiService
         $results = [];
 
         if (!$force) {
-            $jsonFile = sprintf($this->apiLocalJson, $when, $ticker, $this->apiService);
-            $jsonFile = storage_path($jsonFile);
+            $jsonFile = $this->getJsonFilePath($ticker, $when);
 
             if (file_exists($jsonFile)) {
                 $json = file_get_contents($jsonFile);

@@ -1,12 +1,13 @@
 <?php
 
-namespace App\Imports;
+namespace App\Imports\Stock;
 
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Str;
-use App\Http\Controllers\Revolut\AbstractRevolut;
-use App\Models\Revolut\Currency;
+use App\Http\Controllers\Revolut\AbstractRevolutController;
+use App\Imports\AbstractImport;
+use App\Models\Revolut\CurrencyExchanges;
 
 class CurrencyImport extends AbstractImport
 {
@@ -24,13 +25,13 @@ class CurrencyImport extends AbstractImport
         $importStats['sheets'][$currentCurrency]['total']++;
 
         $today = Carbon::today()->format('Y-m-d');
-        $hash = AbstractRevolut::setHash($row);
+        $hash = AbstractRevolutController::setHash($row);
         $when = $row[0] ?? '';
-        $when = Carbon::parse($when )->format('Y-m-d');
+        $when = Carbon::parse($when)->format('Y-m-d');
 
         $currency = Str::substr($currentCurrency, 0, 3);
 
-        $check = Currency::where('hash', $hash)->first();
+        $check = CurrencyExchanges::where('hash', $hash)->first();
         if ($check) {
             $importStats['skipped']++;
             $importStats['sheets'][$currentCurrency]['skipped']++;
@@ -66,6 +67,6 @@ class CurrencyImport extends AbstractImport
 
         Session::put('importStats', $importStats);
 
-        return new Currency($item);
+        return new CurrencyExchanges($item);
     }
 }

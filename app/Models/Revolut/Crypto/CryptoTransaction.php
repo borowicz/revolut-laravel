@@ -12,6 +12,13 @@ class CryptoTransaction extends AbstractRevolutModel
     use HasFactory, SoftDeletes;
 
     protected $fillable = [
-
+        'hash',
+        'date',
+        'symbol',
+        'type',
+        'quantity',
+        'price',
+        'value',
+        'fees',
     ];
 }

@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Imports;
+namespace App\Imports\Stock;
 
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Str;
-use App\Http\Controllers\Revolut\AbstractRevolut;
+use App\Http\Controllers\Revolut\AbstractRevolutController;
+use App\Imports\AbstractImport;
 use App\Models\Revolut\StockProfitLossTransaction;
 
 class ProfitLossImport extends AbstractImport
@@ -24,7 +25,7 @@ class ProfitLossImport extends AbstractImport
         $importStats = Session::get('importStats');
         $importStats['total']++;
 
-        $hash = AbstractRevolut::setHash($row);
+        $hash = AbstractRevolutController::setHash($row);
 
         $check = $this->model::where('hash', $hash)->first();
         if ($check) {

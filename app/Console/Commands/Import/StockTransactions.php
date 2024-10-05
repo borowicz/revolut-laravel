@@ -8,20 +8,22 @@ use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Console\Command;
 use Illuminate\Console\Scheduling\Schedule;
 use App\Console\ImportDataInterface;
-use App\Imports\CryptoTransactionsImport;
+use App\Imports\Stock\TransactionsImport;
+
+//use Illuminate\Support\Facades\Schedule;
 
 /**
- * @see /revolut/crypto/transactions
- *  records c.a.
+ * @see /revolut/stock
+ *  records c.a. 800
  *- -***
  *
- * Class StockProfitLossOther
+ * Class StockTransactions
  */
-class Crypto extends AbstractImportCommand implements ImportDataInterface
+class StockTransactions extends AbstractImportCommand implements ImportDataInterface
 {
-    protected $signature = 'revolut:import:crypto {file}';
+    protected $signature = 'revolut:import:stock:transactions {file}';
 
-    protected $description = 'Import crypto transactions';
+    protected $description = 'Import stock transaction from csv file';
 
     public function handle()
     {
@@ -37,7 +39,7 @@ class Crypto extends AbstractImportCommand implements ImportDataInterface
 
     public function getData()
     {
-        $result = Excel::import(new CryptoTransactionsImport(), $this->csvFile);
+        $result = Excel::import(new TransactionsImport(), $this->csvFile);
     }
 
     public function setCommandSchedule(Schedule $schedule): void
@@ -45,4 +47,3 @@ class Crypto extends AbstractImportCommand implements ImportDataInterface
         $schedule->command(__CLASS__, [])->daily()->at('1:23');
     }
 }
-

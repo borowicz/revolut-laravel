@@ -1,10 +1,13 @@
 <?php
 
-namespace App\Imports;
+namespace App\Imports\Stock;
 
-use Maatwebsite\Excel\Concerns\ToModel;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Session;
-use App\Models\Revolut\StockTransaction;
+use Illuminate\Support\Str;
+use App\Http\Controllers\Revolut\AbstractRevolutController;
+use App\Imports\AbstractImport;
+use App\Models\Revolut\Stock\StockTransaction;
 
 class TransactionsImport extends AbstractImport
 {
@@ -17,11 +20,9 @@ class TransactionsImport extends AbstractImport
         }
 
         $importStats = Session::get('importStats');
-
         $importStats['total']++;
 
-        $hash = hash_hmac('sha1', serialize($row), config('app.key'));
-
+        $hash = AbstractRevolutController::setHash($row);
         $check = StockTransaction::where('hash', $hash)->first();
         if ($check) {
             $importStats['skipped']++;
@@ -44,15 +45,15 @@ class TransactionsImport extends AbstractImport
         $rate = $this->setNumber($rate);
 
         $entry = [
-            'hash'     => $hash,
-            'date'     => $row[0],
-            'ticker'   => $ticker,
-            'type'     => $type,
-            'quantity' => $quantity,
-            'price'    => $price,
-            'total'    => $total,
-            'currency' => $currency,
-            'rate'     => $rate,
+            'hash'            => $hash,
+            'date'            => $row[0],
+            'ticker'          => $ticker,
+            'type'            => $type,
+            'quantity'        => $quantity,
+            'price_per_share' => $price,
+            'total_amount'    => $total,
+            'currency'        => $currency,
+            'fx_rate'         => $rate,
         ];
 
         $importStats['inserted']++;

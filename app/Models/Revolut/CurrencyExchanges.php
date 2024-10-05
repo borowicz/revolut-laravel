@@ -4,7 +4,7 @@ namespace App\Models\Revolut;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class Currency extends AbstractRevolutModel
+class CurrencyExchanges extends AbstractRevolutModel
 {
     use HasFactory;
 

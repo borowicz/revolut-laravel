@@ -16,6 +16,7 @@ return new class extends Migration {
     {
         Schema::create(self::TABLE_NAME, function (Blueprint $table) {
             $table->id();
+            $table->integer('disabled')->default(0);
             $table->string('hash')->unique();
             $table->string('source')->default('');
             $table->string('refreshed')->default('');

@@ -43,11 +43,17 @@ abstract class AbstractImport implements ToModel
     {
         $result = $value;
 
-        $result = str_replace(' ', '', $result);
-        $result = str_replace('$', '', $result);
-        $result = str_replace('€', '', $result);
+//        $result = str_replace('$', '', $result);
+//        $result = str_replace('€', '', $result);
 
-        $result = trim(str_replace(',', '', $result));
+        $result = preg_replace('/[^0-9\.\,]/', '', $result);
+        $result = str_replace([',', ' '], '', $result);
+
+        // Replace the decimal comma with a period
+        $result = str_replace(',', '.', $result);
+
+        // Convert the cleaned string to a number
+//        $result = (float) $result;
 
         return $result;
     }

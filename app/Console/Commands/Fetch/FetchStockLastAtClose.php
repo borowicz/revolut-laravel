@@ -2,54 +2,80 @@
 
 namespace App\Console\Commands\Fetch;
 
-use Carbon\Carbon;
-use Symfony\Component\Console\Output\OutputInterface;
-use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Console\Command;
 use Illuminate\Console\Scheduling\Schedule;
-use Illuminate\Support\Facades\File;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Session;
-use App\Imports\CurrencyImport;
-use App\Models\Revolut\Currency;
-use App\Http\Services\AlphaVantageService;
-use App\Http\Services\PolygonIoService;
-use App\Models\Revolut\Stock\StockPrices;
-use App\Http\Controllers\Revolut\AbstractRevolut;
 use App\Console\AbstractCommand;
 use App\Console\FetchDataInterface;
+use App\Http\Services\{
+    AlphaVantageService,
+    PolygonIoService,
+};
 
+/**
+ *- -***
+ */
 class FetchStockLastAtClose  extends AbstractCommand implements FetchDataInterface
 {
     protected $signature = 'revolut:fetch:stock {ticker?} {service?} {--f|force=0}';
 
     protected $description = 'Fetch and store stock price by ticker';
 
+    protected $tickers = [];
     protected $apiService;
-    protected $apiSource = 'polygonIo';
+    protected $apiSource;
     protected $disabledTickers = [];
 
     public function handle()
     {
+//dd(__CLASS__);
+        $this->init();
+        $selectedApi = $this->argument('service') ?? '';
+        $this->apiService = $this->setApiService($selectedApi);
+
+        $importStats = [
+            'source'   => get_class($this->apiService),
+            'total'    => 0,
+            'inserted' => 0,
+            'skipped'  => 0,
+        ];
+        Session::put('importStats', $importStats);
+//dd($this->apiService);
+        $this->getData();
+//
+        $this->getSummary();
+
         return Command::SUCCESS;
     }
 
-    public function getData()
+    public function setApiService(string $selectedService = 'polygonIo')
     {
-        // TODO: Implement getData() method.
+        $selectedService = strtolower($selectedService);
+
+        return match (strtolower($selectedService)) {
+            'alphavantage', 'alpha', 'a' => new AlphaVantageService(),
+            'polygonio', 'polygon', 'p', '' => new PolygonIoService(),
+            default => new PolygonIoService(),
+        };
+    }
+
+    public function getData(): bool
+    {
+        return true;
     }
 
     public function fetchData(string $value)
     {
-        // TODO: Implement fetchData() method.
+
     }
 
-    public function setModel(): void
+    public function getTickers() : array
     {
-        // TODO: Implement setModel() method.
+        return StockTransaction::getTickers();
     }
 
     public function setCommandSchedule(Schedule $schedule): void
     {
-        // TODO: Implement setCommandSchedule() method.
+        $schedule->command(__CLASS__, [])->daily()->at('7:01');
     }
 }

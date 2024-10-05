@@ -20,25 +20,17 @@ abstract class AbstractCommand extends Command
 
     public $force = false;
 
+    public $options = [];
+
     public $csvFile;
 
     public $csvFileLocal;
 
-    public function initImport()
+    public function init()
     {
-        $this->csvFile = $this->argument('file');
-        if (!file_exists($this->csvFile)) {
-            $this->error('File not found: ' . $csvFile);
-
-            return Command::FAILURE;
-        }
-
-        $options = $this->options();
-        $this->force = (($options['force'] ?? false) != 0) ?? true;
-
-        AbstractImport::setStats();
-
-        return Command::SUCCESS;
+        $this->options = $this->options() ?? [];
+        $this->force = $options['force'] ?? false;
+        $this->getVerbosity();
     }
 
     public function getVerbosity()
@@ -61,5 +53,12 @@ abstract class AbstractCommand extends Command
 
             $this->info('results: ' . PHP_EOL . $importStats, OutputInterface::VERBOSITY_VERBOSE);
         }
+
+        $this->storeLog();
+    }
+
+    public function storeLog()
+    {
+
     }
 }
