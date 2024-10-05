@@ -12,6 +12,16 @@ class CommoditiesTransaction extends AbstractRevolutModel
     use HasFactory, SoftDeletes;
 
     protected $fillable = [
-
+        'hash',
+        'type',
+        'product',
+        'started_date',
+        'completed_date',
+        'description',
+        'amount',
+        'fee',
+        'currency',
+        'state',
+        'balance',
     ];
 }
