@@ -22,7 +22,7 @@ abstract class AbstractCommand extends Command
 
     public $options = [];
 
-    public $csvFile;
+    public $sourceFile;
 
     public $csvFileLocal;
 

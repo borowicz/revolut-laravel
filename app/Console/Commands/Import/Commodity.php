@@ -26,7 +26,13 @@ class Commodity extends AbstractImportCommand implements ImportDataInterface
     public function handle()
     {
         $this->init();
-        $this->info(' >> CSV: ' . $this->csvFile, OutputInterface::VERBOSITY_VERBOSE);
+        $this->info(' >> CSV: ' . $this->sourceFile, OutputInterface::VERBOSITY_VERBOSE);
+
+        if (!$this->isValidCsv()) {
+            $this->error(' >> Invalid CSV: ' . $this->sourceFile);
+
+            return Command::FAILURE;
+        }
 
         $this->getData();
 
@@ -37,7 +43,7 @@ class Commodity extends AbstractImportCommand implements ImportDataInterface
 
     public function getData()
     {
-        $result = Excel::import(new CommoditiesTransactionsImport(), $this->csvFile);
+        $result = Excel::import(new CommoditiesTransactionsImport(), $this->sourceFile);
     }
 
     public function setCommandSchedule(Schedule $schedule): void

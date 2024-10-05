@@ -1,14 +1,12 @@
 <?php
 
-use Illuminate\Foundation\Inspiring;
-use Illuminate\Support\Facades\Artisan;
 use Illuminate\Console\Scheduling\Schedule;
 
 $schedule = app(Schedule::class);
 foreach (
     [
         App\Console\Commands\Fetch\FetchCurrencyExchangesGoogleDrive::class,
-        App\Console\Commands\Import\StockTransactions::class,
+        \App\Console\Commands\Import\Stock\StockTransactions::class,
     ] as $commandClass
 ) {
     //$cmdName = (new $commandClass())->getName();

@@ -17,7 +17,8 @@
 		"league/fractal": "^0.20.1",
 		"livewire/livewire": "^3.5",
 		"maatwebsite/excel": "^3.1",
-		"nesbot/carbon": "^3.8"
+		"nesbot/carbon": "^3.8",
+		"smalot/pdfparser": "^2.11"
 	},
 	"require-dev": {
 		"barryvdh/laravel-debugbar": "^3.13",

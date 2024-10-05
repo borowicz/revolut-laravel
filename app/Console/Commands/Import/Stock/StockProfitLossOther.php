@@ -1,13 +1,11 @@
 <?php
 
-namespace App\Console\Commands\Import;
+namespace App\Console\Commands\Import\Stock;
 
-use Carbon\Carbon;
-use Symfony\Component\Console\Output\OutputInterface;
-use Maatwebsite\Excel\Facades\Excel;
+use App\Console\Commands\Import\AbstractImportCommand;
+use App\Console\ImportDataInterface;
 use Illuminate\Console\Command;
 use Illuminate\Console\Scheduling\Schedule;
-use App\Console\ImportDataInterface;
 
 /**
  * @see /revolut/stock/profit-loss-other/transactions
