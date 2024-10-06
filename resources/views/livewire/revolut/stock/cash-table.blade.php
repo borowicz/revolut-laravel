@@ -1,9 +1,7 @@
 <table class="min-w-full divide-y divide-gray-300 table-fixed">
-    <thead>
+    <thead class="font-medium text-gray-500 uppercase tracking-wider text-center">
     <tr>
-        <th scope="col" class="px-6 py-3 pl-4 pr-2 text-left text-sm font-semibold text-gray-900 sm:pl-0"
-        >&nbsp;
-        </th>
+        <th scope="col" class="px-6 py-3 pl-4 pr-2 text-left text-sm font-semibold text-gray-900 sm:pl-0">&nbsp;</th>
         <th scope="col" class="px-6 py-3 text-left text-sm font-semibold text-gray-900"
         >{{ __('when') }}</th>
         <th scope="col" class="px-6 py-3 text-left text-sm font-semibold text-gray-900"

@@ -19,7 +19,9 @@
             </div>
             <div class="items-center">
                 @include('livewire.partials.pagination')
-                @include('livewire.partials.select-pagination')
+                <div>
+                    @include('livewire.partials.select-pagination')
+                </div>
             </div>
         </div>
 

@@ -1,26 +1,25 @@
-<table class="min-w-full divide-y divide-gray-200">
-    <thead class="font-medium text-gray-500 uppercase tracking-wider
-                                        text-center">
+<table class="min-w-full divide-y divide-gray-300 table-fixed">
+    <thead class="font-medium text-gray-500 uppercase tracking-wider text-center">
     <tr>
         <th>&nbsp;</th>
-        <th class="px-6 py-3 text-left text-xs hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900">
+        <th class="px-6 py-3 text-left text-sm font-semibold text-gray-900 hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900">
             {{ __('When') }}
         </th>
-        <th class="px-6 py-3 text-left text-xs hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900">
+        <th class="px-6 py-3 text-left text-sm font-semibold text-gray-900 hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900">
             {{ __('Ticker') }}
         </th>
-        <th class="px-6 py-3 text-right text-xs hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900">
+        <th class="px-6 py-3 text-right text-sm font-semibold text-gray-900 hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900">
             {{ __('Close') }}
         </th>
-        <th class="px-6 py-3 text-right text-xs hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900">
+        <th class="px-6 py-3 text-right text-sm font-semibold text-gray-900 hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900">
             {{ __('Open') }}
         </th>
-        <th class="px-6 py-3 text-right text-xs hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900">
+        <th class="px-6 py-3 text-right text-sm font-semibold text-gray-900 hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900">
             {{ __('High') }}
         </th>
-        <th class="px-6 py-3 text-right text-xs hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900">
+        <th class="px-6 py-3 text-right text-sm font-semibold text-gray-900 hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900">
             {{ __('Low') }}
-        <th class="px-6 py-3 text-center text-xs hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900">
+        <th class="px-6 py-3 text-center text-sm font-semibold text-gray-900 hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900">
             @if(isset($sortField))
                 <button wire:click="sortBy('type')"
                         class="flex items-center space-x-1">
