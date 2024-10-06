@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
+use App\Livewire\Revolut\Dashboard;
 use App\Livewire\Note\{CreateNote, EditNote, ShowNotes,};
 use App\Livewire\Revolut\Stock\CashFlow\{CreateCash, ShowCash,};
 use App\Livewire\Revolut\Stock\{
@@ -14,14 +15,15 @@ use App\Livewire\Revolut\Stock\{
     TickersList,
     Transactions,
 };
-//use App\Livewire\Forms\UploadForm;
 
 Route::get('/', function () {
+    session(['last_login_at' => now()]);
+
     return redirect('/login');
 });
 
 Route::get('/dashboard', function () {
-    return view('dashboard');
+    return view('dashboard', Dashboard::getRevolutSummary());
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
@@ -60,7 +62,7 @@ Route::prefix('revolut')
 
                 Route::get('/markets', Transactions::class)->name('stock.markets');
 
-                Route::get('/tickers', Transactions::class)->name('stock.tickers');
+                Route::get('/tickers', TickersList::class)->name('stock.tickers');
 
                 Route::get('/upload', Transactions::class)->name('stock.upload');
             });

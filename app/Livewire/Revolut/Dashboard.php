@@ -106,7 +106,12 @@ debugbar()->info($items);
             if ($name !== 'StockTransaction') {
                 $result[$model] = $current;
             } else {
-                $current['stats'] = self::getModelInfoStockTransactions($currentModel);
+                $stats = self::getModelInfoStockTransactions($currentModel);
+                if (!$stats) {
+                    continue;
+                }
+
+                $current['stats'] = $stats;
 
                 $result = array_merge([$model => $current], $result);
             }
@@ -118,6 +123,10 @@ debugbar()->info($items);
     public static function getModelInfo(mixed $model): array
     {
         $result['count'] = $model::count();
+        if (0 === $result['count']) {
+            return [];
+        }
+
         if (in_array(SoftDeletes::class, class_uses($model))) {
             $result['total'] = $model::withTrashed()->count();
             $result['deleted'] = $model::onlyTrashed()->count();
@@ -162,7 +171,13 @@ debugbar()->info($items);
                     )
                 )
                 ->value('total_difference');
-            $current.= ', cash: ' . numberFormat($cash);
+
+//            $color = '';
+//            if ($cash < 0){
+//                $color = ' class="text-red-700"';
+//            }
+//            $current .= ', cash: <span' . $color . '>' . numberFormat($cash) . '</span>';
+            $current .= ', cash: ' . numberFormat($cash);
 
             $result[$ticker] = $current;
         }
@@ -197,9 +212,9 @@ debugbar()->info($items);
     public static function getModelInfoStockTransactions(mixed $model): array
     {
         $result = [];
-        $result['cash'] = self::getTransactionsCash($model);
-        $result['transactions'] = self::getTransactionsTypes($model);
-        $result['tickers'] = self::getTransactionsTickers($model);
+        $result['cash top up'] = self::getTransactionsCash($model);
+        $result['transactions tickers'] = self::getTransactionsTypes($model);
+        $result['stock tickers'] = self::getTransactionsTickers($model);
 
         return $result;
     }
