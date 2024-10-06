@@ -10,7 +10,7 @@ use App\Livewire\Revolut\AbstractComponent;
 class Markets extends AbstractComponent
 {
     public $itemStatus = [];
-    public $sortField = 'name';
+    public $sortField = 'disabled';
     public $sortDirection = 'ASC';
 
     public function updateStatus($itemId, $status)

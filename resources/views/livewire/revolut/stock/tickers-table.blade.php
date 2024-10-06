@@ -4,29 +4,20 @@
         <th>&nbsp;</th>
         <th class="px-6 py-3 text-left text-sm font-semibold text-gray-900 hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900">
             @include('livewire.partials.button-sort-field', [
-                'label' => 'market',
+                'label' => 'ticker',
                 'field' =>'name',
             ])
         </th>
-        <th class="px-6 py-3 text-left text-sm font-semibold text-gray-900 hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900">
-            @include('livewire.partials.button-sort-field', [
-                'label' => 'symbol',
-                'field' =>'symbol',
-            ])
+        <th class="px-6 py-3 text-left lowercase hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900">
+            {{ __('market') }}
+        </th>
+        <th class="px-6 py-3 text-left lowercase hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900">
+            {{ __('news services') }}
         </th>
         <th class="px-6 py-3 text-center lowercase hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900">
-            @include('livewire.partials.button-sort-field', [
-                'label' => 'country',
-                'field' =>'country',
-            ])
+            &nbsp;
         </th>
-        <th class="px-6 py-3 text-center text-sm font-semibold text-gray-900">
-            {{ __('suffixes') }}
-        </th>
-        <th class="px-6 py-3 text-center text-sm font-semibold text-gray-900">
-            {{ __('actions') }}
-        </th>
-        <th class="px-6 py-3 text-right lowercase hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900">
+        <th class="px-6 py-3 text-right text-sm font-semibold text-gray-900 hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900">
             @include('livewire.partials.button-sort-field', [
                 'label' => 'status',
                 'field' =>'disabled',
@@ -38,20 +29,13 @@
     @forelse ($items as $key => $item)
         <tr class="even:bg-gray-50 odd:bg-white">
             <td title="{{ $item->hash }}">&nbsp;{{ $key+1 }}&nbsp;</td>
-            <td class="px-3 py-2" title="{{ $item->name }}">
-                @if(empty($item->short_name))
-                    {{ shorted($item->name ?? '') }}
-                @else
-                    {{ $item->short_name }}
-                @endif
+            <td class="px-3 py-2" title="{{ $item->notes }}">
+                {{ $item->ticker }}
             </td>
             <td class="px-3 py-2 text-left">
-                {{ $item->symbol ?? '' }}
+                {{ $item->market ?? '' }}
             </td>
-            <td class="px-3 py-2 text-left text-sm">
-                {{ $item->country ?? '' }}
-            </td>
-            <td class="px-3 py-2 text-right text-sm text-gray-500">
+            <td class="px-3 py-2 text-left text-sm text-gray-500">
 
                 [<a target="_blank"
                     href="https://finance.yahoo.com/quote/{{ $item->ticker }}/?.tsrc={{ config('revolut.source') }}"

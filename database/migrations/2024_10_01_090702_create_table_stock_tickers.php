@@ -11,13 +11,20 @@ use Illuminate\Support\Facades\Schema;
  */
 return new class extends Migration {
     private const TABLE_NAME = 'stock_tickers';
+    private const TABLE_RELATED = 'stock_markets';
 
     public function up(): void
     {
         Schema::create(self::TABLE_NAME, function (Blueprint $table) {
             $table->id();
+//            $table->foreignId('stock_markets_id')->constrained();
+            $table->foreign('id')
+                ->references('id')
+                ->on(self::TABLE_RELATED)
+                ->onDelete('cascade');
             $table->integer('disabled')->default(0);
             $table->string('hash');
+
             $table->string('ticker')->unique();
             $table->string('url')->default('');
             $table->text('notes')->default('');
