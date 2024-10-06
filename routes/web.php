@@ -4,7 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
 use App\Livewire\Revolut\Dashboard;
 use App\Livewire\Note\{CreateNote, EditNote, ShowNotes,};
-use App\Livewire\Revolut\Stock\CashFlow\{CreateCash, ShowCash,};
+use App\Livewire\Revolut\Stock\CashFlow\{CreateCash, EditCash,};
+use App\Livewire\Revolut\Stock\Markets\{CreateMarket, EditMarket};
 use App\Livewire\Revolut\Stock\{
     Cash,
     Details,
@@ -14,6 +15,7 @@ use App\Livewire\Revolut\Stock\{
     Summary,
     TickersList,
     Transactions,
+    Markets,
 };
 
 Route::get('/', function () {
@@ -54,13 +56,17 @@ Route::prefix('revolut')
                 Route::prefix('cash')->group(function () {
                     Route::get('/', Cash::class)->name('stock.cash');
                     Route::get('/cash/flow', CreateCash::class)->name('stock.cash.flow');
-                    Route::get('/cash/flow/create', ShowCash::class)->name('stock.cash.flow.create');
+                    Route::get('/cash/flow/create', EditCash::class)->name('stock.cash.flow.create');
                 });
 
                 Route::get('/transactions', Transactions::class)->name('stock.transactions');
                 Route::get('/transaction/details/{ticker}', Transactions::class)->name('stock.transactions.details');
 
-                Route::get('/markets', Transactions::class)->name('stock.markets');
+                Route::prefix('markets')->group(function () {
+                    Route::get('/', Markets::class)->name('stock.markets');
+                    Route::get('/create', CreateMarket::class)->name('stock.markets.create');
+                    Route::get('/edit/{id}', EditMarket::class)->name('stock.markets.edit');
+                });
 
                 Route::get('/tickers', TickersList::class)->name('stock.tickers');
 

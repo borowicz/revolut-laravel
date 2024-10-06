@@ -60,4 +60,14 @@ abstract class AbstractComponent extends Component
 
         return $hasPages;
     }
+
+    public function sortBy($field)
+    {
+        if ($this->sortField === $field) {
+            $this->sortDirection = $this->sortDirection === 'ASC' ? 'DESC' : 'ASC';
+        } else {
+            $this->sortField = $field;
+            $this->sortDirection = 'DESC';
+        }
+    }
 }

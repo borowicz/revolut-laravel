@@ -2,8 +2,9 @@
 
 namespace App\Livewire\Revolut\Stock\Markets;
 
-use App\Models\Revolut\StockMarket;
 use Livewire\Component;
+use App\Livewire\Revolut\Stock\Markets;
+use App\Models\Revolut\Stock\StockMarket;
 
 class EditMarket extends Component
 {
@@ -63,7 +64,7 @@ class EditMarket extends Component
 
     public function render()
     {
-        return view('livewire.pages.stock.markets.form')
+        return view('livewire.revolut.stock.markets-form')
             ->layout('layouts.app');
     }
 }

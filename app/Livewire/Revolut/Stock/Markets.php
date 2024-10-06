@@ -1,14 +1,17 @@
 <?php
 
-namespace App\Livewire\Revolut\Stock\Markets;
+namespace App\Livewire\Revolut\Stock;
 
-use App\Models\Revolut\StockMarket;
-use App\Models\Revolut\StockTicker;
 use Livewire\Component;
+use App\Models\Revolut\Stock\StockMarket;
+use App\Models\Revolut\Stock\StockTicker;
+use App\Livewire\Revolut\AbstractComponent;
 
-class ShowMarkets extends Component
+class Markets extends AbstractComponent
 {
     public $itemStatus = [];
+    public $sortField = 'name';
+    public $sortDirection = 'ASC';
 
     public function updateStatus($itemId, $status)
     {
@@ -24,14 +27,18 @@ class ShowMarkets extends Component
 
     public function render()
     {
-        $items = StockMarket::all();
+        $query = StockMarket::query();
+        $query->orderBy($this->sortField, $this->sortDirection);
+        $items = $query->get();
+
         foreach ($items as $item) {
             $this->itemStatus[$item->id] = $item->disabled;
         }
 
-        return view('livewire.pages.stock.markets.show', [
-            'items' => StockMarket::all(),
-
+        return view('livewire.revolut.stock.markets', [
+            'items' => $items,
+            'hasPages' => false,
+            'sortField' => '',
         ])->layout('layouts.app');
     }
 
@@ -40,3 +47,4 @@ class ShowMarkets extends Component
         $item->delete();
     }
 }
+

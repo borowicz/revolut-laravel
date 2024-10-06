@@ -4,8 +4,8 @@ namespace App\Livewire\Revolut\Stock\CashFlow;
 
 use Livewire\Component;
 use App\Livewire\Revolut\AbstractComponent;
-use App\Http\Controllers\Revolut\AbstractRevolut;
-use App\Models\Revolut\Stock\CashCurrent;
+//use App\Http\Controllers\Revolut\AbstractRevolut;
+//use App\Models\Revolut\Stock\CashCurrent;
 
 class CreateCash extends AbstractComponent
 {
@@ -69,7 +69,7 @@ class CreateCash extends AbstractComponent
 
     public function render()
     {
-        return view('livewire.revolut.stock.cash.form', [
+        return view('livewire.revolut.stock.cash-form', [
                 'items' => CashCurrent::query()->orderBy('when', 'DESC'),
             ])
             ->layout('layouts.app');
