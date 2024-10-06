@@ -20,7 +20,7 @@ if (!function_exists('dateFormatISO')) {
 if (!function_exists('numberFormat')) {
     function numberFormat($number, $decimals = 2, $decimalPoint = '.', $thousandSeparator = ' ')
     {
-        return number_format($number, $decimals, $decimalPoint, $thousandSeparator);
+        return number_format($number ?? 0, $decimals, $decimalPoint, $thousandSeparator);
     }
 }
 

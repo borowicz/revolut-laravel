@@ -20,7 +20,7 @@ class Dashboard extends AbstractComponent
         }
         $user = auth()->user()->toArray();
         $user['sessionTime'] = session()->get('last_login_at')?->toArray()['formatted'];
-debugbar()->info($items);
+
         return ['today' => $today, 'user' => $user, 'items' => $items,];
     }
 

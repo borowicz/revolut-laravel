@@ -36,7 +36,8 @@ abstract class AbstractImport implements ToModel
         $value = $this->cleanValue($value);
         $value = (float)$value;
 
-        return number_format($value, $decimal, '.', '');
+//        return number_format($value, $decimal, '.', '');
+        return numberFormat($value, $decimal, '.', '');
     }
 
     protected function cleanValue(string $value): string

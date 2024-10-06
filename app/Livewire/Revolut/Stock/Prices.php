@@ -49,7 +49,7 @@ class Prices  extends AbstractComponent
         $hasPages = $this->hasPagination($items);
 
         $this->tickers = StockTransaction::getTickers();
-//dd($hasPages);
+
         return view('livewire.revolut.stock.prices', [
             'showButtons' => false,
             'items' => $items,
