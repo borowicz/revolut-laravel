@@ -12,7 +12,5 @@ interface FetchDataInterface
 {
     public function getData(): bool;
 
-    public function fetchData(string $value);
-
     public function setCommandSchedule(Schedule $schedule): void;
 }

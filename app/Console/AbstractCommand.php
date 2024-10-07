@@ -45,16 +45,23 @@ abstract class AbstractCommand extends Command
         return $this->isDeBug;
     }
 
-    public function getSummary()
+    public function getSummary(bool $session = true, bool $saveLog = false): void
     {
         if ($this->getOutput()->getVerbosity() >= OutputInterface::VERBOSITY_VERBOSE) {
-            $importStats = Session::get('importStats');
+            if ($session) {
+                $importStats = Session::get('importStats');
+            } else {
+                $importStats = $this->importStats;
+            }
+
             $importStats = json_encode($importStats, JSON_PRETTY_PRINT);
 
             $this->info('results: ' . PHP_EOL . $importStats, OutputInterface::VERBOSITY_VERBOSE);
         }
 
-        $this->storeLog();
+        if ($saveLog) {
+            $this->storeLog();
+        }
     }
 
     public function storeLog()

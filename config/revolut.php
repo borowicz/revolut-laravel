@@ -5,13 +5,20 @@ return [
 
     'source' => env('APP_SOURCE_URL', ''),
 
-    'apiKey' => [
-        'alphavantage' => env('API_KEY_ALPHAVANTAGE'),
-        'polygonio'    => env('API_KEY_POLYGONIO'),
-        'finhubio'     => env('API_KEY_FINHUBIO'),
-        'nasdaq'       => env('API_KEY_NASDAQ'),
+    'api' => [
+        'alphavantage'    => env('API_KEY_ALPHAVANTAGE'),
+        'alphavantageUrl' => env('API_URL_ALPHAVANTAGE', 'https://www.alphavantage.co/query'),
 
-        'googleSheet' => env('API_KEY_GOOGLE_SHEET'),
+        'polygonio'       => env('API_KEY_POLYGONIO'),
+        'polygonioUrl'    => env('API_URL_POLYGONIO', 'https://api.polygon.io/v1/open-close/'),
+
+        'finhubio'        => env('API_KEY_FINHUBIO'),
+        'finhubioUrl'     => env('API_URL_FINHUBIO', 'ttps://finnhub.io/api/v1/quote'),
+
+        'nasdaq'          => env('API_KEY_NASDAQ'),
+        'nasdaqUrl'       => env('API_URL_NASDAQ', 'https://api.nasdaq.com/api/quote/'),
+
+        'googleSheet'     => env('API_KEY_GOOGLE_SHEET'),
     ],
 
     'currency' => [

@@ -7,22 +7,22 @@ use GuzzleHttp\Client;
 abstract class AbstractApiService
 {
     protected $client;
+    public $apiName;
     protected $apiKey;
     protected $apiUrl;
     protected $apiService;
-    protected $apiLocalJson = 'app/revolut/jsons/%s_%s_%s.json';
+    protected $apiLocalJson = 'app/revolut/jsons/%s_%s__%s.json';
+    protected $jsonFile;
 
-//    public function __construct(Client $client)
-//    {
-//        $this->client = $client;
-//    }
+    public function __construct()
+    {
+        $this->client = new Client();
+        $this->setApiKeyUrl();
+    }
 
-//    public function __construct(Client $client, string $apiKey, string $apiUrl)
-//    {
-//        $this->client = $client;
-//        $this->apiKey = $apiKey;
-//        $this->apiUrl = $apiUrl;
-//    }
+    public function setApiKeyUrl()
+    {
+    }
 
     protected function getJsonFilePath(string $ticker, string $when): string
     {
@@ -32,25 +32,25 @@ abstract class AbstractApiService
         return $result;
     }
 
+    public function getJsonPath(string $ticker, string $when): string
+    {
+        return sprintf($this->apiLocalJson, $when, $ticker, $this->apiName);
+    }
+
     public function getStockPriceData(string $ticker, string $when, bool $force = false): array
     {
-        $results = [];
+        $this->jsonFile = $this->getJsonPath($when, $ticker);
+        $jsonFile = storage_path($this->jsonFile);
 
         if (!$force) {
-            $jsonFile = $this->getJsonFilePath($ticker, $when);
-
             if (file_exists($jsonFile)) {
                 $json = file_get_contents($jsonFile);
                 if (!empty($json)) {
-                    $results = json_decode($json, true);
+                    return json_decode($json, true);
                 }
-            }
-
-            if ($results) {
-                return $results;
             }
         }
 
-        return $results;
+        return [];
     }
 }
