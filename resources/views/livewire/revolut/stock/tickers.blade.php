@@ -14,7 +14,6 @@
                     <p class="mt-2 text-sm text-gray-700">...</p>
                 </div>
                 <div class="mt-4 sm:ml-16 sm:mt-0 sm:flex-none">
-
                     @include('livewire.partials.button-create',
                             ['label' => 'market', 'routeName'=> 'stock.markets.create']
                     )
@@ -25,6 +24,7 @@
                 @include('livewire.partials.pagination')
                 <div>
                     @include('livewire.partials.select-pagination')
+                    @include('livewire.partials.select-tickers')
                 </div>
             </div>
         </div>

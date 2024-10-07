@@ -6,17 +6,13 @@ $menuItems = [
      'prices' => 'stock.prices',
      'cash' => 'stock.cash',
      'transactions' => 'stock.transactions',
-     'markets' => 'stock.markets',
      'tickers' => 'stock.tickers',
+     'markets' => 'stock.markets',
      'upload' => 'stock.upload',
 ];
 @endphp
 
-{{--@dump(url()->current())--}}
-{{--@dump(request()->route())--}}
 @foreach($menuItems as $menuText => $menuRoute)
-{{--@dump($menuRoute . '.*')--}}
-{{--@dump(request()->routeIs($menuRoute))--}}
 
     <a href="{{ route($menuRoute) }}"
        class="inline-flex items-center px-4 py-2 rounded-md
