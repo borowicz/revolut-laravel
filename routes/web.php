@@ -4,6 +4,12 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
 use App\Livewire\Revolut\Dashboard;
 use App\Livewire\Note\{CreateNote, EditNote, ShowNotes,};
+use App\Livewire\Revolut\Crypto\{
+    Summary as CryptoSummary,
+    Transactions as CryptoTransactions,
+    TickersList as CryptoTickersList,
+    Upload as CryptoUpload,
+};
 use App\Livewire\Revolut\Stock\CashFlow\{CreateCash, EditCash,};
 use App\Livewire\Revolut\Stock\Markets\{CreateMarket, EditMarket};
 use App\Livewire\Revolut\Stock\{
@@ -73,9 +79,18 @@ Route::prefix('revolut')
 
                 Route::get('/upload', StockUpload::class)->name('stock.upload');
             });
+
         Route::prefix('crypto')->group(function () {
-                Route::get('/', ShowNotes::class)->name('crypto.index');
+                Route::get('/', CryptoSummary::class)->name('crypto.index');
+
+                Route::get('/transactions', CryptoTransactions::class)->name('crypto.transactions');
+                Route::get('/transaction/details/{ticker}', CryptoTransactions::class)->name('crypto.transactions.details');
+
+                Route::get('/tickers', CryptoTickersList::class)->name('crypto.tickers');
+
+                Route::get('/upload', CryptoUpload::class)->name('crypto.upload');
             });
+
         Route::prefix('commodities')->group(function () {
                 Route::get('/', ShowNotes::class)->name('commodities.index');
             });

@@ -59,18 +59,6 @@ class StockTransaction extends AbstractRevolutModel
         return $query;
     }
 
-//    public static function getTickers()
-//    {
-//        return self::query()
-//            ->select('ticker')
-//            ->distinct()
-//            ->where('ticker', '!=', '')
-//            ->orderBy('ticker')
-//            ->get()
-//            ->pluck('ticker')
-//            ->toArray();
-//    }
-
     public static function getTypes()
     {
         return self::query()

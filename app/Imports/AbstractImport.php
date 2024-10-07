@@ -40,6 +40,24 @@ abstract class AbstractImport implements ToModel
         return numberFormat($value, $decimal, '.', '');
     }
 
+    protected function getCurrency(string $string): string
+    {
+        $currencySymbol = '';
+
+        preg_match('/([€£$])([\d,]+\.\d{2})/', $string, $matches);
+
+        if (!empty($matches)) {
+            $currencySymbol = $matches[1];
+//            $amount = $matches[2];
+//            echo "Currency: " . $currencySymbol . "\n";
+//            echo "Amount: " . $amount . "\n";
+        }
+//        else {
+////            echo "No currency found.";
+//        }
+
+        return $currencySymbol;
+    }
     protected function cleanValue(string $value): string
     {
         $result = $value;

@@ -21,4 +21,30 @@ class CryptoTransaction extends AbstractRevolutModel
         'value',
         'fees',
     ];
+
+    public static function getTickers(bool $all = false)
+    {
+        $results = self::query()
+            ->select('symbol')
+            ->distinct()
+            ->where('symbol', '!=', '')
+            ->whereNotNull('symbol')
+            ->orderBy('symbol')
+            ->get()
+            ->pluck('symbol')
+            ->toArray();
+
+        return $results;
+    }
+
+    public static function getTypes()
+    {
+        return self::query()
+            ->select('type')
+            ->distinct()
+            ->orderBy('type')
+            ->get()
+            ->pluck('type')
+            ->toArray();
+    }
 }

@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Imports;
+namespace App\Imports\Crypto;
 
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Session;
+use App\Imports\AbstractImport;
 use App\Http\Controllers\Revolut\AbstractRevolutController;
 use App\Models\Revolut\Crypto\CryptoTransaction;
 
@@ -43,8 +44,11 @@ class CryptoTransactionsImport extends AbstractImport
         $when = $row[6] ?? '';
         $when = Carbon::parse($when)->format('Y-m-d H:i:s');
 
-        $quantity = $this->cleanValue($quantity);
+        $currency = $this->getCurrency($price);
+
         $price = $this->cleanValue($price);
+
+        $quantity = $this->cleanValue($quantity);
         $value = $this->cleanValue($value);
         $fees = $this->cleanValue($fees);
 
@@ -54,11 +58,14 @@ class CryptoTransactionsImport extends AbstractImport
             'symbol'   => $symbol,
             'type'     => $type,
             'quantity' => $quantity,
+
+            'currency' => $currency,
+
             'price'    => $price,
             'value'    => $value,
             'fees'     => $fees,
         ];
-
+dump($entry);
         $importStats['inserted']++;
 
         Session::put('importStats', $importStats);

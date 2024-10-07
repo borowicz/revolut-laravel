@@ -48,7 +48,7 @@ class Commodity extends AbstractImportCommand implements FetchDataInterface
 
     public function setCommandSchedule(Schedule $schedule): void
     {
-        $schedule->command(__CLASS__, [])->daily()->at('1:23');
+        $schedule->command(__CLASS__, [])->daily()->at('1:35');
     }
 }
 

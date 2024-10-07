@@ -21,7 +21,10 @@ return new class extends Migration {
             $table->string('date');
             $table->string('symbol')->default('');
             $table->string('type')->default('');
-            $table->decimal('quantity', 14, 6)->nullable();
+
+            $table->string('currency')->default('');
+
+            $table->decimal('quantity', 20, 9)->nullable();
             $table->decimal('price', 14, 6)->nullable();
             $table->decimal('value', 14, 6)->nullable();
             $table->string('fees')->default('');

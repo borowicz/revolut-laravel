@@ -2,13 +2,12 @@
 
 namespace App\Console\Commands\Import;
 
-use Carbon\Carbon;
-use Symfony\Component\Console\Output\OutputInterface;
-use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Console\Command;
 use Illuminate\Console\Scheduling\Schedule;
+use Maatwebsite\Excel\Facades\Excel;
+use Symfony\Component\Console\Output\OutputInterface;
 use App\Console\FetchDataInterface;
-use App\Imports\CryptoTransactionsImport;
+use App\Imports\Crypto\CryptoTransactionsImport;
 
 /**
  * @see /revolut/crypto/transactions
@@ -48,7 +47,7 @@ class Crypto extends AbstractImportCommand implements FetchDataInterface
 
     public function setCommandSchedule(Schedule $schedule): void
     {
-        $schedule->command(__CLASS__, [])->daily()->at('1:23');
+        $schedule->command(__CLASS__, [])->daily()->at('1:47');
     }
 }
 
