@@ -16,6 +16,7 @@ use App\Livewire\Revolut\Stock\{
     TickersList,
     Transactions,
     Markets,
+    Upload as StockUpload,
 };
 
 Route::get('/', function () {
@@ -70,7 +71,7 @@ Route::prefix('revolut')
 
                 Route::get('/tickers', TickersList::class)->name('stock.tickers');
 
-                Route::get('/upload', Transactions::class)->name('stock.upload');
+                Route::get('/upload', StockUpload::class)->name('stock.upload');
             });
         Route::prefix('crypto')->group(function () {
                 Route::get('/', ShowNotes::class)->name('crypto.index');

@@ -5,16 +5,16 @@
         <th class="px-6 py-3 text-left text-sm font-semibold text-gray-900 hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900">
             @include('livewire.partials.button-sort-field', [
                 'label' => 'ticker',
-                'field' =>'name',
+                'field' =>'ticker',
             ])
         </th>
-        <th class="px-6 py-3 text-left lowercase hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900">
+        <th class="px-6 py-3 text-left lowercase">
             {{ __('market') }}
         </th>
-        <th class="px-6 py-3 text-left lowercase hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900">
+        <th class="px-6 py-3 text-left lowercase">
             {{ __('news services') }}
         </th>
-        <th class="px-6 py-3 text-center lowercase hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900">
+        <th class="px-6 py-3 text-center lowercase">
             &nbsp;
         </th>
         <th class="px-6 py-3 text-right text-sm font-semibold text-gray-900 hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900">
