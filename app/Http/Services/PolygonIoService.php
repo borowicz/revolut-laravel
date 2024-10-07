@@ -7,23 +7,14 @@ use Illuminate\Support\Facades\Log;
 class PolygonIoService extends AbstractApiService implements ApiInterface
 {
     protected $apiUrl = 'https://api.polygon.io/v1/open-close/';
-    protected $sleepDelay = 15; // second delay between, free tier: 5 requests per minute
+    protected $sleepDelay = 15; // second delay between request, free tier: 5 requests per minute
+
     public function setApiKeyUrl(): void
     {
         $this->apiKey = config('revolut.api.polygonio');
         if (empty($this->apiKey)) {
             $this->apiUrl = config('revolut.api.polygonioUrl');
         }
-    }
-
-    public function getStockPriceData(string $ticker, string $when, bool $force = false): array
-    {
-        $localCache = parent::getStockPriceData($ticker, $when, $force);
-        if ($localCache) {
-            return $localCache;
-        }
-
-        return $this->fetchApi($ticker, $when, $force);
     }
 
     public function fetchApi(string $ticker, string $when, bool $force = false): array
@@ -44,7 +35,7 @@ class PolygonIoService extends AbstractApiService implements ApiInterface
             throw new \Exception($e->getMessage());
         }
 
-        if ($response && 200 !== $statusCode = $response?->getStatusCode()) {
+        if ($response || 200 !== $statusCode = $response?->getStatusCode()) {
             Log::warning($this->apiName . ' - ' . $statusCode);
         }
 
@@ -57,12 +48,10 @@ class PolygonIoService extends AbstractApiService implements ApiInterface
         }
 
         $result = $this->setItem($data, $ticker);
-
+        $this->storeLocalJson($result);
         if ($this->sleepDelay) {
             sleep($this->sleepDelay);
         }
-
-        $this->storeLocalJson($result);
 
         return $result;
     }

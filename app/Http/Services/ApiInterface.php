@@ -9,6 +9,4 @@ interface ApiInterface
     public function fetchApi(string $ticker, string $when, bool $force = false): array;
 
     public function setItem(array $data, string $ticker): array;
-
-    public function getStockPriceData(string $ticker, string $when, bool $force = false): array;
 }

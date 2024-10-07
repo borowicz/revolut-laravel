@@ -42,7 +42,7 @@ abstract class AbstractApiService
         file_put_contents(storage_path($this->jsonFile), json_encode($data));
     }
 
-    public function getStockPriceData(string $ticker, string $when, bool $force = false): array
+    public function getStockPriceDataCached(string $ticker, string $when, bool $force = false): array
     {
         $this->jsonFile = $this->getJsonPath($when, $ticker);
         $jsonFile = storage_path($this->jsonFile);
@@ -57,5 +57,15 @@ abstract class AbstractApiService
         }
 
         return [];
+    }
+
+    public function getStockPriceData(string $ticker, string $when, bool $force = false): array
+    {
+        $localCache = $this->getStockPriceDataCached($ticker, $when, $force);
+        if ($localCache) {
+            return $localCache;
+        }
+
+        return $this->fetchApi($ticker, $when, $force);
     }
 }
