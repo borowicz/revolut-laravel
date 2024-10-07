@@ -2,10 +2,10 @@
 @php
 $menuItems = [
     // 'name' => 'route.name',
-    'crypto' => 'crypto.index',
-    'transactions' => 'crypto.transactions',
-    'tickers' => 'crypto.tickers',
-    'upload' => 'crypto.upload',
+    'commodities' => 'commodities.index',
+//    'transactions' => 'commodities.transactions',
+//    'tickers' => 'commodities.tickers',
+    'upload' => 'commodities.upload',
 ];
 @endphp
 

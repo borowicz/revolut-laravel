@@ -9,6 +9,10 @@ use App\Imports\Stock\TransactionsImport;
 
 class Upload extends UploadForm
 {
+    public function render()
+    {
+        return view('livewire.revolut.crypto.upload')->layout('layouts.app');
+    }
     public function uploadCsv()
     {
         $this->validate();

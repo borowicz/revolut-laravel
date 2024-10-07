@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Livewire\Revolut\Money;
+namespace App\Livewire\Revolut\Commodities;
 
 use Illuminate\Http\Request;
 use Livewire\WithPagination;
 use App\Livewire\Revolut\AbstractComponent;
-use App\Models\Revolut\Stock\StockTransaction;
+use App\Models\Revolut\Crypto\CryptoTransaction;
 
 class Transactions extends AbstractComponent
 {
@@ -33,19 +33,11 @@ class Transactions extends AbstractComponent
 
     private function getItems()
     {
-        $ticker = '';
-//        if (!empty($this->selectedTicker)) {
-//            $ticker = $this->selectedTicker;
-//        }
-////        if (!empty($this->ticker)) {
-////            $ticker = $this->ticker;
-////        }
-
-        $query = StockTransaction::query()
+        $query = CryptoTransaction::query()
 //            ->search($this->search)
             ->where(function ($query) use ($ticker){
                 if (!empty($this->selectedTicker)) {
-                    $query->where('ticker', $this->selectedTicker);
+                    $query->where('symbol', $this->selectedTicker);
                 }
 //                if (!empty($ticker)) {
 //                    $query->where('ticker', $this->ticker);
@@ -67,11 +59,11 @@ class Transactions extends AbstractComponent
         debugbar()->info('$this->perPage: ' . $this->perPage);
 
         $results = $this->getItems();
-//dd($this->ticker);
-        $this->types = StockTransaction::getTypes();
-        $this->tickers = StockTransaction::getTickers();
 
-        return view('livewire.revolut.money.transactions', [
+        $this->types = CryptoTransaction::getTypes();
+        $this->tickers = CryptoTransaction::getTickers();
+
+        return view('livewire.revolut.commodities.transactions', [
             'hasPages' => $results['hasPages'],
             'items' => $results['items'],
         ])->layout('layouts.app');

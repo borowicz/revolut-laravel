@@ -26,6 +26,7 @@ class CryptoTransactionsImport extends AbstractImport
         if ($check) {
             $importStats['skipped']++;
             Session::put('importStats', $importStats);
+//            $check->update();
 
             return null;
         }
@@ -45,6 +46,7 @@ class CryptoTransactionsImport extends AbstractImport
         $when = Carbon::parse($when)->format('Y-m-d H:i:s');
 
         $currency = $this->getCurrency($price);
+        $currency = htmlspecialchars_decode($currency);
 
         $price = $this->cleanValue($price);
 
@@ -65,7 +67,7 @@ class CryptoTransactionsImport extends AbstractImport
             'value'    => $value,
             'fees'     => $fees,
         ];
-dump($entry);
+
         $importStats['inserted']++;
 
         Session::put('importStats', $importStats);

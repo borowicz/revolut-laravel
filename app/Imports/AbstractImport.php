@@ -42,21 +42,24 @@ abstract class AbstractImport implements ToModel
 
     protected function getCurrency(string $string): string
     {
-        $currencySymbol = '';
+        $value = str_replace(',', '', $string);
+        $cleaned = $this->cleanValue($value);
+        $result = str_replace($cleaned, '', $value);
 
-        preg_match('/([€£$])([\d,]+\.\d{2})/', $string, $matches);
+        // htmlspecialchars($result, ENT_QUOTES, 'UTF-8')
+        $currencySymbol = [
+            '€'       => 'EUR',
+            '&euro;'  => 'EUR',
+            '$'       => 'USD',
+            '&#36;'   => 'USD',
+            '£'       => 'GBP',
+            '&pound;' => 'GBP',
+            'zł'      => 'PLN',
+        ];
 
-        if (!empty($matches)) {
-            $currencySymbol = $matches[1];
-//            $amount = $matches[2];
-//            echo "Currency: " . $currencySymbol . "\n";
-//            echo "Amount: " . $amount . "\n";
-        }
-//        else {
-////            echo "No currency found.";
-//        }
+//        preg_match('/([€£$])([\d,]+\.\d{2})/', $string, $matches);
 
-        return $currencySymbol;
+        return $currencySymbol[$result] ?? $result;
     }
     protected function cleanValue(string $value): string
     {

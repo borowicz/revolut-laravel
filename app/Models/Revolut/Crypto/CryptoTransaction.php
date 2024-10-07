@@ -16,6 +16,7 @@ class CryptoTransaction extends AbstractRevolutModel
         'date',
         'symbol',
         'type',
+        'currency',
         'quantity',
         'price',
         'value',

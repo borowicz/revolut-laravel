@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Revolut\Crypto;
+namespace App\Livewire\Revolut\Money;
 
 use Illuminate\Support\Facades\Session;
 use Maatwebsite\Excel\Facades\Excel;
@@ -11,7 +11,7 @@ class Upload extends UploadForm
 {
     public function render()
     {
-        return view('livewire.revolut.crypto.upload')->layout('layouts.app');
+        return view('livewire.revolut.money.upload')->layout('layouts.app');
     }
 
     public function uploadCsv()

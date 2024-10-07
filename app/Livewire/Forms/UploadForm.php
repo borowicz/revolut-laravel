@@ -24,9 +24,4 @@ class UploadForm extends Component
         session()->forget('message');
         session()->forget('importStats');
     }
-
-    public function render()
-    {
-        return view('livewire.pages.upload')->layout('layouts.app');
-    }
 }

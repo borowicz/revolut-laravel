@@ -32,3 +32,5 @@ storage/*.key
 /tmp/
 public/vendor/
 storage/debugbar/
+/resources/views/livewire/pages/upload.blade.phps
+storage/uploads/

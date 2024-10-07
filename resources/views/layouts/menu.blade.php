@@ -11,7 +11,7 @@
     <x-nav-link :href="route('commodities.index')" :active="request()->routeIs('commodities.*')">
         {{ __('Commodities') }}
     </x-nav-link>
-    <x-nav-link :href="route('cash.index')" :active="request()->routeIs('cash.*')">
+    <x-nav-link :href="route('money.index')" :active="request()->routeIs('money.*')">
         {{ __('Cash') }}
     </x-nav-link>
     <x-nav-link :href="route('cron.index')" :active="request()->routeIs('cron.*')">

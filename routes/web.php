@@ -4,6 +4,18 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
 use App\Livewire\Revolut\Dashboard;
 use App\Livewire\Note\{CreateNote, EditNote, ShowNotes,};
+use App\Livewire\Revolut\Money\{
+    Summary as MoneySummary,
+    Transactions as MoneyTransactions,
+    TickersList as MoneyTickersList,
+    Upload as MoneyUpload,
+};
+use App\Livewire\Revolut\Commodities\{
+    Summary as CommoditiesSummary,
+    Transactions as CommoditiesTransactions,
+    TickersList as CommoditiesTickersList,
+    Upload as CommoditiesUpload,
+};
 use App\Livewire\Revolut\Crypto\{
     Summary as CryptoSummary,
     Transactions as CryptoTransactions,
@@ -92,15 +104,27 @@ Route::prefix('revolut')
             });
 
         Route::prefix('commodities')->group(function () {
-                Route::get('/', ShowNotes::class)->name('commodities.index');
+                Route::get('/', CommoditiesSummary::class)->name('commodities.index');
+
+                Route::get('/transactions', CommoditiesTransactions::class)->name('commodities.transactions');
+                Route::get('/transaction/details/{ticker}', CommoditiesTransactions::class)->name('commodities.transactions.details');
+
+                Route::get('/tickers', CommoditiesTickersList::class)->name('commodities.tickers');
+
+                Route::get('/upload', CommoditiesUpload::class)->name('commodities.upload');
             });
-        Route::prefix('accounts')->group(function () {
-                Route::get('/', ShowNotes::class)->name('accounts.index');
+
+        Route::prefix('money')->group(function () {
+                Route::get('/', MoneySummary::class)->name('money.index');
+
+                Route::get('/transactions', MoneyTransactions::class)->name('money.transactions');
+                Route::get('/transaction/details/{ticker}', MoneyTransactions::class)->name('money.transactions.details');
+
+                Route::get('/tickers', MoneyTickersList::class)->name('money.tickers');
+
+                Route::get('/upload', MoneyUpload::class)->name('money.upload');
             });
-        Route::prefix('cash')->group(function () {
-            Route::get('/', Transactions::class)->name('cash.index');
-            Route::get('/details/{ticker}', Transactions::class)->name('cash.details');
-            });
+
         Route::prefix('cron')->group(function () {
                 Route::get('/', ShowNotes::class)->name('cron.index');
             });
