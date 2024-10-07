@@ -11,7 +11,7 @@ use App\Console\FetchDataInterface;
 use App\Imports\CommoditiesTransactionsImport;
 
 /**
- * @see /revolut/crypto/transactions
+ * @see revolut/commodities/transactions
  *  records c.a.
  *- -***
  *

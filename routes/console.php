@@ -6,7 +6,9 @@ $schedule = app(Schedule::class);
 foreach (
     [
         App\Console\Commands\Fetch\FetchCurrencyExchangesGoogleDrive::class,
-        \App\Console\Commands\Import\Stock\StockTransactions::class,
+        App\Console\Commands\Import\StockTransactions::class,
+        App\Console\Commands\Import\Crypto::class,
+        App\Console\Commands\Import\Commodity::class,
     ] as $commandClass
 ) {
     //$cmdName = (new $commandClass())->getName();

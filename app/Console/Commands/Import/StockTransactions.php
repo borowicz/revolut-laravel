@@ -1,8 +1,7 @@
 <?php
 
-namespace App\Console\Commands\Import\Stock;
+namespace App\Console\Commands\Import;
 
-use App\Console\Commands\Import\AbstractImportCommand;
 use App\Console\FetchDataInterface;
 use App\Imports\Stock\TransactionsImport;
 use Illuminate\Console\Command;
