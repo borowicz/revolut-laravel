@@ -16,6 +16,8 @@ class TickersList extends AbstractComponent
 
     public $sortField = 'ticker';
 
+    public $sortDirection = 'ASC';
+
     public $status = 0; // Initial status
     public $itemStatus = []; // To track status for each item
 
@@ -32,16 +34,6 @@ class TickersList extends AbstractComponent
         $model->save();
     }
 
-//    public function sortBy($field)
-//    {
-//        if ($this->sortField === $field) {
-//            $this->sortDirection = $this->sortDirection === 'ASC' ? 'DESC' : 'ASC';
-//        } else {
-//            $this->sortField = $field;
-//            $this->sortDirection = 'DESC';
-//        }
-//    }
-
     public function render(Request $request)
     {
         debugbar()->info('$this->perPage: ' . $this->showButtons);
@@ -57,15 +49,18 @@ class TickersList extends AbstractComponent
 
         $items = $this->setPagination($query);
         $hasPages = $this->hasPagination($items);
-//dd($items->get());
+
         foreach ($items as $item) {
             $this->itemStatus[$item->id] = $item->disabled;
         }
 
         $this->showButtons = false;
         $this->tickers = null;
-//dd($items);
-        return view('livewire.revolut.stock.tickers', compact('items', 'hasPages'))
+
+        return view(
+                'livewire.revolut.stock.tickers',
+                compact('items', 'hasPages')
+            )
             ->layout('layouts.app');
     }
 
@@ -73,12 +68,17 @@ class TickersList extends AbstractComponent
     {
         $tickers = StockTransaction::getTickers();
 
+        $new = 0;
         foreach ($tickers as $ticker) {
             $hash = AbstractRevolut::setHash([$ticker]);
 
             $result = StockTicker::firstOrCreate(['hash' => $hash, 'ticker' => $ticker,]);
-//            session('message');
+            if (!$result) {
+                $new++;
+            }
         }
+
+        session('message', 'new entries: ' . $new);
     }
 
     public function details(string $ticker)

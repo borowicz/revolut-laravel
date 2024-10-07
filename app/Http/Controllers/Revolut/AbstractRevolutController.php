@@ -38,4 +38,24 @@ abstract class AbstractRevolutController extends Controller
 
         return $message;
     }
+
+    public static function getLastWorkDay(string $date = '')
+    {
+        $today = date('N'); // current day of the week as a number (1 for Monday, 7 for Sunday)
+        if ($date) {
+            // find
+        }
+
+        if ($today == 1) {
+            $lastWorkDay = strtotime('last Friday');
+        } elseif ($today == 7 || $today == 6) {
+            $lastWorkDay = strtotime('last Friday');
+        } else {
+            $lastWorkDay = strtotime('yesterday');
+        }
+
+        $lastWorkDay = date('Y-m-d', $lastWorkDay);
+
+        return $lastWorkDay;
+    }
 }

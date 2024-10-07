@@ -24,11 +24,11 @@ class FetchStockLastAtClose  extends AbstractCommand implements FetchDataInterfa
     protected $tickers = [];
     protected $apiService;
     protected $apiSource;
+    protected $apiSourceDefault = 'polygonIo';
     protected $disabledTickers = [];
 
     public function handle()
     {
-//dd(__CLASS__);
         $this->init();
         $selectedApi = $this->argument('service') ?? '';
         $this->apiService = $this->setApiService($selectedApi);

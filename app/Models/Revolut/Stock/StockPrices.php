@@ -29,8 +29,7 @@ class StockPrices extends AbstractRevolutModel
             ->where('ticker', $ticker)
             ->where('disabled', 0)
             ->where(DB::raw('(DATE_FORMAT(day, "%Y-%m-%d"))'), $transactionsDate)
-            ->first()
-        ;
+            ->first();
 
         return $check;
     }
@@ -40,7 +39,7 @@ class StockPrices extends AbstractRevolutModel
         $tableStockPrices = (new self)->getTable();
         $tableTicker = (new StockTicker())->getTable();
 
-        $results = self::query()
+        $query = self::query()
             ->select($tableStockPrices . '.ticker')
             ->distinct()
             ->leftJoin(
@@ -48,11 +47,13 @@ class StockPrices extends AbstractRevolutModel
                 $tableTicker . '.ticker',
                 $tableStockPrices . '.ticker',
             )
-            ->where($tableTicker . '.disabled', '=', 1)
-            ->get()
-            ->pluck('ticker');
+            ->where($tableTicker . '.disabled', '=', 1);
 
-        return $results->toArray();
+        $results = $query->get()
+            ->pluck('ticker')
+            ->toArray();
+
+        return $results;
     }
 
     public static function getLatestStockPricesList(string $ticker = null): array
