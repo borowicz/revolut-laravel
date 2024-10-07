@@ -7,7 +7,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Console\Command;
 use Illuminate\Console\Scheduling\Schedule;
-use App\Console\ImportDataInterface;
+use App\Console\FetchDataInterface;
 use App\Imports\CommoditiesTransactionsImport;
 
 /**
@@ -17,7 +17,7 @@ use App\Imports\CommoditiesTransactionsImport;
  *
  * Class Commodity
  */
-class Commodity extends AbstractImportCommand implements ImportDataInterface
+class Commodity extends AbstractImportCommand implements FetchDataInterface
 {
     protected $signature = 'revolut:import:commodity {file}';
 

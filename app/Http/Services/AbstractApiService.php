@@ -37,6 +37,11 @@ abstract class AbstractApiService
         return sprintf($this->apiLocalJson, $when, $ticker, $this->apiName);
     }
 
+    public function storeLocalJson(mixed $data): void
+    {
+        file_put_contents(storage_path($this->jsonFile), json_encode($data));
+    }
+
     public function getStockPriceData(string $ticker, string $when, bool $force = false): array
     {
         $this->jsonFile = $this->getJsonPath($when, $ticker);

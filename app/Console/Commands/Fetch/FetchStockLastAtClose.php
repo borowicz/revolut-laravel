@@ -48,15 +48,15 @@ class FetchStockLastAtClose  extends AbstractCommand implements FetchDataInterfa
         'total'    => 0,
         'inserted' => 0,
         'skipped'  => 0,
+        'cached'   => 0,
     ];
 
     public function handle()
     {
-        $this->init();
         $selectedApi = $this->argument('service') ?? $this->apiSourceDefault;
         $this->apiService = $this->setApiService($selectedApi);
         $this->apiService->apiName = $selectedApi;
-
+        $this->init();
         $this->importStats['source'] = get_class($this->apiService);
 
         $this->getData();
@@ -122,19 +122,18 @@ class FetchStockLastAtClose  extends AbstractCommand implements FetchDataInterfa
     public function setStockPriceForTicker(string $ticker, array $apiData): int
     {
         foreach ($apiData['items'] as $when => $item) {
+            $this->importStats['total']++;
             $hash = AbstractRevolutController::setHash($item);
             $when = $this->formatDate($when);
 
             $check = StockPrices::where('hash', $hash)->first();
-            if ($this->force) {
-                $check = false;
-            }
-
             if ($check) {
+                $this->importStats['skipped']++;
                 continue;
             }
 
-            $this-> setTicker($ticker, $hash, $when, $apiData['refreshed'], $item);
+            $this->setTicker($ticker, $hash, $when, $apiData['refreshed'], $item);
+            $this->importStats['inserted']++;
         }
 
         return 0;
@@ -166,6 +165,7 @@ class FetchStockLastAtClose  extends AbstractCommand implements FetchDataInterfa
         }
 
         $apiData = $this->apiService->getStockPriceData($ticker, $transactionsDate, $this->force);
+
         if (!$apiData) {
             Log::error($ticker . ' - NO data ');
 
@@ -177,11 +177,11 @@ class FetchStockLastAtClose  extends AbstractCommand implements FetchDataInterfa
         return 0;
     }
 
-    public function getStockPriceDataForTicker(string $ticker): void
+    public function getStockPriceDataForTicker(string $ticker, bool $force = false): void
     {
         $this->info('ticker: ' . $ticker, OutputInterface::VERBOSITY_VERBOSE);
 
-        $result = $this->getStockPriceDataForTickerData($ticker, $this->force);
+        $result = $this->getStockPriceDataForTickerData($ticker, $force);
         $message = AbstractRevolutController::getFetchResult($ticker, $result);
         if ($result > 1) {
             $this->error($message, OutputInterface::VERBOSITY_VERBOSE);

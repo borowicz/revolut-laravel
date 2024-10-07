@@ -10,7 +10,7 @@ use Illuminate\Console\Scheduling\Schedule;
  */
 interface FetchDataInterface
 {
-    public function getData(): bool;
+    public function getData();
 
     public function setCommandSchedule(Schedule $schedule): void;
 }

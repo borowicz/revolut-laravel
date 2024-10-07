@@ -18,8 +18,6 @@ class PolygonIoService extends AbstractApiService implements ApiInterface
 
     public function getStockPriceData(string $ticker, string $when, bool $force = false): array
     {
-//        $results = parent::getStockPriceData($ticker, $when, $force);
-
         $localCache = parent::getStockPriceData($ticker, $when, $force);
         if ($localCache) {
             return $localCache;
@@ -39,16 +37,14 @@ class PolygonIoService extends AbstractApiService implements ApiInterface
         $apiUrl = $this->apiUrl . $ticker . '/' . $when;
 
         try {
-            $response = $this->client->request('GET', $apiUrl, [
-                'query' => $queryParams
-            ]);
+            $response = $this->client->request('GET', $apiUrl, ['query' => $queryParams]);
         } catch (\Exception $e) {
             Log::warning($this->apiName . ' - ' . $e->getMessage());
 
             throw new \Exception($e->getMessage());
         }
 
-        if ($response && 200 !== $response?->getStatusCode()) {
+        if ($response && 200 !== $statusCode = $response?->getStatusCode()) {
             Log::warning($this->apiName . ' - ' . $statusCode);
         }
 
@@ -66,34 +62,13 @@ class PolygonIoService extends AbstractApiService implements ApiInterface
             sleep($this->sleepDelay);
         }
 
-        file_put_contents(storage_path($this->jsonFile), json_encode($result));
+        $this->storeLocalJson($result);
 
         return $result;
     }
 
-    public function getItem($data, $ticker): array
-    {
-        return [];
-    }
-//    {
-////        $result = [];
-//
-////        dd($data);
-//
-//        $result = [
-//            'info' => [],
-//            'ticker' => $ticker,
-//            'refreshed' => $data['refreshed'],
-//            'items' => $data['items'],
-//        ];
-//
-//        return $result;
-//    }
-
     public function setItem(array $data, string $ticker): array
     {
-//x@mielec-web:/var/www/html/rev$ ./artisan stock:fetch AAPL polygonio
-//array:10 [
 //  "status" => "OK"
 //  "from" => "2024-08-07"
 //  "symbol" => "AAPL"
@@ -104,7 +79,6 @@ class PolygonIoService extends AbstractApiService implements ApiInterface
 //  "volume" => 60109650.0
 //  "afterHours" => 208.25
 //  "preMarket" => 208.3
-//] // app/Http/Services/PolygonIoService.php:66
 
         $result = [
             'info' => [],

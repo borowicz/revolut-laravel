@@ -29,7 +29,8 @@ abstract class AbstractCommand extends Command
     public function init()
     {
         $this->options = $this->options() ?? [];
-        $this->force = $options['force'] ?? false;
+        $this->force = (empty($this->options['force'])) ? false : true;
+
         $this->getVerbosity();
     }
 

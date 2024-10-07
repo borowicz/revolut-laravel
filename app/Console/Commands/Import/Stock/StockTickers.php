@@ -7,7 +7,7 @@ use Illuminate\Console\Command;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Support\Facades\Session;
 use App\Console\Commands\Import\AbstractImportCommand;
-use App\Console\ImportDataInterface;
+use App\Console\FetchDataInterface;
 use App\Http\Controllers\Revolut\AbstractRevolutController;
 use App\Models\Revolut\Stock\StockTicker;
 use App\Models\Revolut\Stock\StockTransaction;
@@ -19,7 +19,7 @@ use App\Models\Revolut\Stock\StockTransaction;
  *
  * Class StockTickers
  */
-class StockTickers extends AbstractImportCommand implements ImportDataInterface
+class StockTickers extends AbstractImportCommand implements FetchDataInterface
 {
     protected $signature = 'revolut:import:stock:tickers {file?}';
 

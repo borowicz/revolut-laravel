@@ -3,7 +3,7 @@
 namespace App\Console\Commands\Import\Stock;
 
 use App\Console\Commands\Import\AbstractImportCommand;
-use App\Console\ImportDataInterface;
+use App\Console\FetchDataInterface;
 use Illuminate\Console\Command;
 use Illuminate\Console\Scheduling\Schedule;
 
@@ -14,7 +14,7 @@ use Illuminate\Console\Scheduling\Schedule;
  *
  * Class StockProfitLoss
  */
-class StockProfitLoss extends AbstractImportCommand implements ImportDataInterface
+class StockProfitLoss extends AbstractImportCommand implements FetchDataInterface
 {
     protected $signature = 'revolut:import:stock:profit-loss {file}';
 

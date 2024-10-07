@@ -7,7 +7,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Console\Command;
 use Illuminate\Console\Scheduling\Schedule;
-use App\Console\ImportDataInterface;
+use App\Console\FetchDataInterface;
 use App\Imports\CryptoTransactionsImport;
 
 /**
@@ -17,7 +17,7 @@ use App\Imports\CryptoTransactionsImport;
  *
  * Class StockProfitLossOther
  */
-class Crypto extends AbstractImportCommand implements ImportDataInterface
+class Crypto extends AbstractImportCommand implements FetchDataInterface
 {
     protected $signature = 'revolut:import:crypto {file}';
 

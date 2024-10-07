@@ -10,7 +10,7 @@ use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Support\Facades\File;
 use App\Imports\Stock\CostsImport;
 use App\Console\Commands\Import\AbstractImportCommand;
-use App\Console\ImportDataInterface;
+use App\Console\FetchDataInterface;
 
 
 /**
@@ -20,7 +20,7 @@ use App\Console\ImportDataInterface;
  *
  * Class StockCosts
  */
-class StockCosts extends AbstractImportCommand implements ImportDataInterface
+class StockCosts extends AbstractImportCommand implements FetchDataInterface
 {
     protected $signature = 'revolut:import:stock:cost:pdf {file}';
 

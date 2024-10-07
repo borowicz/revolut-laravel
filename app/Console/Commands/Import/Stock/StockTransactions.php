@@ -3,7 +3,7 @@
 namespace App\Console\Commands\Import\Stock;
 
 use App\Console\Commands\Import\AbstractImportCommand;
-use App\Console\ImportDataInterface;
+use App\Console\FetchDataInterface;
 use App\Imports\Stock\TransactionsImport;
 use Illuminate\Console\Command;
 use Illuminate\Console\Scheduling\Schedule;
@@ -19,7 +19,7 @@ use Symfony\Component\Console\Output\OutputInterface;
  *
  * Class StockTransactions
  */
-class StockTransactions extends AbstractImportCommand implements ImportDataInterface
+class StockTransactions extends AbstractImportCommand implements FetchDataInterface
 {
     protected $signature = 'revolut:import:stock:transactions {file}';
 
