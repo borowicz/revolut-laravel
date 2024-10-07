@@ -35,8 +35,11 @@ class PolygonIoService extends AbstractApiService implements ApiInterface
             throw new \Exception($e->getMessage());
         }
 
-        if ($response || 200 !== $statusCode = $response?->getStatusCode()) {
+        $statusCode = $response?->getStatusCode();
+        if ($response || 200 !== $statusCode) {
             Log::warning($this->apiName . ' - ' . $statusCode);
+
+            return [];
         }
 
         $body = $response->getBody();

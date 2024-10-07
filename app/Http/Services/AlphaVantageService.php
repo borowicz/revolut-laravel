@@ -23,15 +23,14 @@ class AlphaVantageService extends AbstractApiService implements ApiInterface
         // replace the "demo" apikey below with your own key from https://www.alphavantage.co/support/#api-key
         // https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=IBM&apikey=demo
         try {
-            // Send a GET request with query parameters
             $response = $this->client->request('GET', $this->apiUrl, [
-                'function' => 'TIME_SERIES_DAILY',
-                //            'function' => 'GLOBAL_QUOTE',
-                //            'function'   => 'TIME_SERIES_INTRADAY',
-                //            'interval'   => '5min',
-                //            'outputsize' => 'compact',
-                'symbol' => $ticker,
-                'apikey' => $this->apiKey,
+'function' => 'TIME_SERIES_DAILY',
+//            'function' => 'GLOBAL_QUOTE',
+//            'function'   => 'TIME_SERIES_INTRADAY',
+//            'interval'   => '5min',
+//            'outputsize' => 'compact',
+                'symbol'   => $ticker,
+                'apikey'   => $this->apiKey,
             ]);
         } catch (\Exception $e) {
             Log::warning($this->apiName . ' - ' . $e->getMessage());
@@ -39,8 +38,11 @@ class AlphaVantageService extends AbstractApiService implements ApiInterface
             throw new \Exception($e->getMessage());
         }
 
-        if ($response || 200 !== $statusCode = $response?->getStatusCode()) {
+        $statusCode = $response?->getStatusCode();
+        if ($response || 200 !== $statusCode) {
             Log::warning($this->apiName . ' - ' . $statusCode);
+
+            return [];
         }
 
         $body = $response->getBody();
