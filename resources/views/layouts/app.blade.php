@@ -31,6 +31,7 @@
             <main>
                 {{ $slot }}
             </main>
+            <div class="px-3 py-3 text-center text-sm text-gray-500"><a href="https://github.com/borowicz/revolut-laravel" target="_blank">&copy; github://borowicz/revolut-laravel</a></div>
         </div>
     </body>
 </html>

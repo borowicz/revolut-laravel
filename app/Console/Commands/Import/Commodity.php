@@ -2,11 +2,10 @@
 
 namespace App\Console\Commands\Import;
 
-use Carbon\Carbon;
-use Symfony\Component\Console\Output\OutputInterface;
-use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Console\Command;
 use Illuminate\Console\Scheduling\Schedule;
+use Maatwebsite\Excel\Facades\Excel;
+use Symfony\Component\Console\Output\OutputInterface;
 use App\Console\FetchDataInterface;
 use App\Imports\CommoditiesTransactionsImport;
 

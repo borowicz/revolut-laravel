@@ -18,9 +18,13 @@ class CryptoTransaction extends AbstractRevolutModel
         'type',
         'currency',
         'quantity',
+
         'price',
+        'price_raw',
         'value',
+        'value_raw',
         'fees',
+        'fees_raw',
     ];
 
     public static function getTickers(bool $all = false)

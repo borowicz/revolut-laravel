@@ -42,6 +42,7 @@ class CryptoTransactionsImport extends AbstractImport
         $price = $row[3] ?? 0;
         $value = $row[4] ?? 0;
         $fees = $row[5] ?? 0;
+
         $when = $row[6] ?? '';
         $when = Carbon::parse($when)->format('Y-m-d H:i:s');
 
@@ -63,9 +64,12 @@ class CryptoTransactionsImport extends AbstractImport
 
             'currency' => $currency,
 
-            'price'    => $price,
-            'value'    => $value,
-            'fees'     => $fees,
+            'price'     => $price,
+            'price_raw' => $row[3] ?? 0,
+            'value'     => $value,
+            'value_raw' => $row[4] ?? 0,
+            'fees'      => $fees,
+            'fees_raw'  => $row[5] ?? 0,
         ];
 
         $importStats['inserted']++;

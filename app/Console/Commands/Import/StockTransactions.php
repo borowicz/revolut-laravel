@@ -2,14 +2,12 @@
 
 namespace App\Console\Commands\Import;
 
-use App\Console\FetchDataInterface;
-use App\Imports\Stock\TransactionsImport;
 use Illuminate\Console\Command;
 use Illuminate\Console\Scheduling\Schedule;
 use Maatwebsite\Excel\Facades\Excel;
 use Symfony\Component\Console\Output\OutputInterface;
-
-//use Illuminate\Support\Facades\Schedule;
+use App\Console\FetchDataInterface;
+use App\Imports\Stock\TransactionsImport;
 
 /**
  * @see /revolut/stock

@@ -14,6 +14,8 @@ use App\Imports\Crypto\CryptoTransactionsImport;
  *  records c.a.
  *- -***
  *
+ * ./artisan revolut:import:crypto storage/app/revolut/crypt0–account-statement.csv
+ *
  * Class StockProfitLossOther
  */
 class Crypto extends AbstractImportCommand implements FetchDataInterface
