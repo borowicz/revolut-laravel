@@ -27,6 +27,7 @@ abstract class AbstractComponent extends Component
     public $sortDirection = 'DESC';
 
     public $selectedTicker = null;
+//    public $tickers = null;
 
     public $types;
 

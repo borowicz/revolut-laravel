@@ -5,19 +5,19 @@
         <th class="px-6 py-3 text-left text-sm font-semibold text-gray-900 hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900">
             @include('livewire.partials.button-sort-field', [
                 'label' => 'market',
-                'field' =>'name',
+                'field' => 'name',
             ])
         </th>
         <th class="px-6 py-3 text-left text-sm font-semibold text-gray-900 hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900">
             @include('livewire.partials.button-sort-field', [
                 'label' => 'symbol',
-                'field' =>'symbol',
+                'field' => 'symbol',
             ])
         </th>
         <th class="px-6 py-3 text-center lowercase hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900">
             @include('livewire.partials.button-sort-field', [
                 'label' => 'country',
-                'field' =>'country',
+                'field' => 'country',
             ])
         </th>
         <th class="px-6 py-3 text-center text-sm font-semibold text-gray-900">
@@ -29,7 +29,7 @@
         <th class="px-6 py-3 text-right lowercase hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900">
             @include('livewire.partials.button-sort-field', [
                 'label' => 'status',
-                'field' =>'disabled',
+                'field' => 'disabled',
             ])
         </th>
     </tr>

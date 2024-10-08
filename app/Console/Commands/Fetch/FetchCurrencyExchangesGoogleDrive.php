@@ -2,16 +2,16 @@
 
 namespace App\Console\Commands\Fetch;
 
+use App\Console\AbstractCommand;
+use App\Console\FetchDataInterface;
+use App\Imports\CurrencyImport;
 use Carbon\Carbon;
-use Maatwebsite\Excel\Facades\Excel;
-use Symfony\Component\Console\Output\OutputInterface;
 use Illuminate\Console\Command;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Session;
-use App\Console\AbstractCommand;
-use App\Console\FetchDataInterface;
-use App\Imports\Stock\CurrencyImport;
+use Maatwebsite\Excel\Facades\Excel;
+use Symfony\Component\Console\Output\OutputInterface;
 
 /**
  *- -***

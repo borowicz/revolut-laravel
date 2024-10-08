@@ -6,16 +6,16 @@
             {{ __('When') }}
         </th>
         <th class="px-6 py-3 text-left text-sm font-semibold text-gray-900 hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900">
-            {{ __('Ticker') }}
+            @include('livewire.partials.button-sort-field', [
+                'label' => 'ticker',
+                'field' => 'symbol',
+            ])
         </th>
-        <th class="px-6 py-3 text-right text-sm font-semibold text-gray-900 hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900">
-            {{ __('Quantity') }}
+        <th class="px-6 py-3 text-left text-sm font-semibold text-gray-900 hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900">
+            {{ __('Code') }}
         </th>
-        <th class="px-6 py-3 text-right text-sm font-semibold text-gray-900 hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900">
-            {{ __('Price') }}
-        </th>
-        <th class="px-6 py-3 text-right text-sm font-semibold text-gray-900 hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900">
-            {{ __('Total') }}
+        <th class="px-6 py-3 text-left text-sm font-semibold text-gray-900 hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900">
+            {{ __('exchange rate') }}
         </th>
     </tr>
     </thead>
@@ -26,8 +26,14 @@
             <td class="px-3 py-2">
                 {{ $item->date ?? '' }}
             </td>
+            <td class="px-3 py-2 text-center text-sm">
+                {{ $item->currency ?? '' }}
+            </td>
             <td class="px-3 py-2 text-sm">
-                {{ $item->type ?? '' }}
+                {{ $item->code ?? '' }}
+            </td>
+            <td class="px-3 py-2">
+                {{ $item->exchange_rate ?? '' }}
             </td>
         </tr>
     @empty

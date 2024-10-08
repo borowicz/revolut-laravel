@@ -1,13 +1,12 @@
 <?php
 
-namespace App\Imports\Stock;
+namespace App\Imports;
 
+use App\Http\Controllers\Revolut\AbstractRevolutController;
+use App\Models\Revolut\CurrencyExchanges;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Str;
-use App\Http\Controllers\Revolut\AbstractRevolutController;
-use App\Imports\AbstractImport;
-use App\Models\Revolut\CurrencyExchanges;
 
 class CurrencyImport extends AbstractImport
 {
@@ -56,7 +55,7 @@ class CurrencyImport extends AbstractImport
         $item = [
             'source'        => $importStats['source'],
             'hash'          => $hash,
-            'when'          => $when,
+            'date'          => $when,
             'currency'      => $currency,
             'code'          => $currentCurrency,
             'exchange_rate' => $this->setNumber($value, 6),

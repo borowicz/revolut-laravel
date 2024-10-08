@@ -16,11 +16,11 @@ return new class extends Migration {
     {
         Schema::create(self::TABLE_NAME, function (Blueprint $table) {
             $table->id();
-            $table->string('source');
-            $table->string('hash');
-            $table->date('when');
-            $table->string('currency', 5); // USD, EUR, PLN
-            $table->string('code', 10); // code eg. EURUSD
+            $table->string('source')->nullable();
+            $table->string('hash')->unique();
+            $table->date('date')->nullable();
+            $table->string('currency', 5)->default(''); // USD, EUR, PLN
+            $table->string('code', 10)->default(''); // code eg. EURUSD
             $table->decimal('exchange_rate', 14, 6); // rate eg. 1.234567 EURUSD
 
             $table->timestamps();

@@ -2,19 +2,17 @@
 
 namespace App\Livewire\Revolut;
 
-use App\Livewire\Revolut\Stock\Summary\StockCalculations;
-use App\Models\Revolut\Currency;
 use App\Models\Revolut\CurrencyExchanges;
-use Illuminate\Http\Request;
 
 class CurrencyToday extends AbstractComponent
 {
     public function render()
     {
-        $items = [];
-        $items['stocks'] = [];
+        $model = new CurrencyExchanges();
+        $items = $model->getExchangeCurrenciesToday()->get();
+        $tickers = $model->getExchangeCurrencies()->get()->toArray();
 
-        return view('livewire.revolut.currency.summary', ['items' => $items])
+        return view('livewire.revolut.currency.summary', ['items' => $items, 'tickers' => $tickers])
             ->layout('layouts.app');
     }
 }

@@ -19,6 +19,7 @@
                             'stock' => 'stock.index',
                             'crypto' => 'crypto.index',
                             'commodities' => 'commodities.index',
+                            'currency' => 'currency.index',
                         ];
                     @endphp
                     @include('livewire.partials.sub-menu')
