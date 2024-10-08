@@ -2,20 +2,18 @@
 
 namespace App\Livewire\Revolut\Crypto;
 
-use App\Livewire\Revolut\Stock\AbstractRevolut;
-use Carbon\Carbon;
+
 use Illuminate\Http\Request;
 use Livewire\WithPagination;
-use Livewire\Component;
-use App\Models\Revolut\Stock\StockTicker;
-use App\Models\Revolut\Stock\StockTransaction;
+use App\Livewire\Revolut\Stock\AbstractRevolut;
+use App\Models\Revolut\Crypto\CryptoTransaction;
 use App\Livewire\Revolut\AbstractComponent;
 
 class TickersList extends AbstractComponent
 {
     use WithPagination;
 
-    public $sortField = 'ticker';
+    public $sortField = 'symbol';
 
     public $sortDirection = 'ASC';
 
@@ -39,12 +37,7 @@ class TickersList extends AbstractComponent
     {
         debugbar()->info('$this->perPage: ' . $this->showButtons);
 
-        $query = StockTicker::query();
-        if ($query->count() < 1) {
-            $this->getAndSetTickersFromStockTransactions();
-
-            $query = StockTicker::query();
-        }
+        $query = CryptoTransaction::query();
 
         $query->orderBy($this->sortField, $this->sortDirection);
 

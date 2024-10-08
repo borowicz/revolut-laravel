@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
 use App\Livewire\Revolut\Dashboard;
+use App\Livewire\Revolut\CurrencyToday;
 use App\Livewire\Note\{CreateNote, EditNote, ShowNotes,};
 use App\Livewire\Revolut\Money\{
     Summary as MoneySummary,
@@ -124,6 +125,9 @@ Route::prefix('revolut')
 
                 Route::get('/upload', MoneyUpload::class)->name('money.upload');
             });
+
+
+        Route::get('currency', CurrencyToday::class)->name('currency.index');
 
         Route::prefix('cron')->group(function () {
                 Route::get('/', ShowNotes::class)->name('cron.index');

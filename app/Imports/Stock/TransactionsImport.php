@@ -57,8 +57,7 @@ class TransactionsImport extends AbstractImport
             'currency'        => $currency,
             'fx_rate'         => $rate,
         ];
-dump($row);
-dump($entry);
+
         $importStats['inserted']++;
 
         Session::put('importStats', $importStats);
@@ -66,7 +65,7 @@ dump($entry);
         $results = StockTransaction::create($entry);
 
         debugbar()->info('$entry: ' . json_encode($entry, JSON_PRETTY_PRINT));
-//        return new StockTransaction($entry);
+
         return $results;
     }
 }

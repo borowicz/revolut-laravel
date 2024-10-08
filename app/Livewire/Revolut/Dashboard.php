@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Revolut;
 
+use App\Models\Revolut\Stock\StockTransaction;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
@@ -21,7 +22,14 @@ class Dashboard extends AbstractComponent
         $user = auth()->user()->toArray();
         $user['sessionTime'] = session()->get('last_login_at')?->toArray()['formatted'];
 
-        return ['today' => $today, 'user' => $user, 'items' => $items,];
+        $results = [
+            'today' => $today,
+            'user'  => $user,
+            'items' => $items,
+            'stats' => self::getInfoStockTransactions(),
+        ];
+
+        return $results;
     }
 
     public static function getModels(): array
@@ -103,18 +111,18 @@ class Dashboard extends AbstractComponent
 
             $current['info'] = self::getModelInfo($model);
 
-            if ($name !== 'StockTransaction') {
+//            if ($name !== 'StockTransaction') {
                 $result[$model] = $current;
-            } else {
-                $stats = self::getModelInfoStockTransactions($currentModel);
-                if (!$stats) {
-                    continue;
-                }
-
-                $current['stats'] = $stats;
-
-                $result = array_merge([$model => $current], $result);
-            }
+//            } else {
+//                $stats = self::getModelInfoStockTransactions($currentModel);
+//                if (!$stats) {
+//                    continue;
+//                }
+//
+//                $current['stats'] = $stats;
+//
+//                $result = array_merge([$model => $current], $result);
+//            }
         }
 
         return $result;
@@ -209,8 +217,10 @@ class Dashboard extends AbstractComponent
         return numberFormat($cash);
     }
 
-    public static function getModelInfoStockTransactions(mixed $model): array
+    public static function getInfoStockTransactions(): array
     {
+        $model = new StockTransaction();
+
         $result = [];
         $result['cash top up'] = self::getTransactionsCash($model);
         $result['transactions tickers'] = self::getTransactionsTypes($model);

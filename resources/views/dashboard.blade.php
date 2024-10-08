@@ -17,45 +17,73 @@
                         {{ __('logged') }}: <span>{{ $user['sessionTime'] ?? '' }}</span>
                     @endif
 
-                    @forelse($items as $model => $item)
-                        <div class="py-3">
-                            <span class="text-xl text-gray-800 leading-tight" title="{{ $model }}">{{ $item['name'] }}</span>:
+                    <div class="py-3">
 
-                            @if(isset($item['stats']))
-                                <br>
-                                @forelse($item['stats'] as $stat => $stats)
-                                    <b>{{ __($stat) }}</b>:
-                                    @if(is_array($stats))
-                                        @foreach($stats as $s => $sVal)
-                                            <br/>&nbsp;&nbsp;&nbsp;&nbsp;{{ __($s) }}:&nbsp;{!! $sVal !!}
+                        <div class="grid grid-cols-2 gap-1">
+                            <div>
+
+                                @forelse($items as $key => $value)
+
+                                    <span class="text-xl text-gray-800 leading-tight"
+                                          title="{{ $key }}">{{ $value['name'] }}</span>:
+
+                                    @if (is_array($value['info']))
+                                        @foreach($value['info'] as $k => $v)
+
+                                            @if (is_array($v))
+                                                @foreach($v as $k1 => $v1)
+                                                    <br/><b>{{ __($k1) }}</b>: {{ $v1 }},&nbsp;
+                                                @endforeach
+                                            @else
+                                                <br/><b>{{ __($k) }}</b>: {{ $v }},&nbsp;
+                                            @endif
+
                                         @endforeach
-                                        <br/>
                                     @else
-                                        &nbsp;{{ $stats }}<br/>
-                                    @endif
-                                @empty
-                                    &nbsp;
-                                @endforelse
-                                <hr style="width: 90%">
-                            @endif
-
-                            @forelse($item['info'] as $key => $value)
-                                @if (is_array($value))
-                                    {{ __($key) }}:
-                                    @foreach($value as $k => $v)
                                         <br/><b>{{ __($k) }}</b>: {{ $v }},&nbsp;
-                                    @endforeach
-                                @else
-                                    <br/><b>{{ __($key) }}</b>: {{ $value }},&nbsp;
+                                    @endif
+
+                                    <br />
+                                    <br />
+
+                                @empty
+                                    &nbsp; {{ __('no data') }}&nbsp;<br style="clear: both"/>
+                                @endforelse
+                            </div>
+                            <!-- ... -->
+                            <div>
+                                <b>{{ __('transactions') }}</b>
+                                @if(isset($stats))
+                                    <br>
+                                    @forelse($stats as $stat => $s)
+                                        <b>{{ __($stat) }}</b>:
+                                        @if(is_array($s))
+                                            @foreach($s as $k => $sVal)
+                                                <br/>&nbsp;&nbsp;&nbsp;&nbsp;{{ __($k) }}:
+                                                &nbsp;{!! $sVal !!}
+                                            @endforeach
+                                            <br/>
+                                        @else
+                                            &nbsp;{{ $s }}<br/>
+                                        @endif
+                                    @empty
+                                        &nbsp;
+                                    @endforelse
+                                    <hr style="width: 90%">
                                 @endif
-                            @empty
-                                &nbsp; {{ __('no data') }}&nbsp;<br style="clear: both"/>
-                            @endforelse
+                            </div>
+                            <div class="grid grid-cols-subgrid gap-4 col-span-3">
+                                <div class="col-start-2">
+{{--                                    {{ __('user') }}:--}}
+                                ...
+                                </div>
+                            </div>
                         </div>
-                        <hr/>
-                    @empty
-                        {{ __('No summary data') }}.
-                    @endforelse
+
+                    </div>
+
+                    <hr/>
+
                 </div>
             </div>
         </div>

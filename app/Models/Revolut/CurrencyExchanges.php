@@ -17,6 +17,18 @@ class CurrencyExchanges extends AbstractRevolutModel
         'exchange_rate',
     ];
 
+    public static function getExchangeCurrenciesToday()
+    {
+        $results = self::query()
+            ->select('currency', 'code')
+            ->distinct('code')
+            ->orderBy('code')
+            ->get()
+            ->toArray();
+
+        return $results;
+    }
+
     public static function getExchangeCurrencies()
     {
         $results = self::query()

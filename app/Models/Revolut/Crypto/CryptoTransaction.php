@@ -27,6 +27,13 @@ class CryptoTransaction extends AbstractRevolutModel
         'fees_raw',
     ];
 
+    public static function getTickersList()
+    {
+        $results = self::query();
+
+        return $results;
+    }
+
     public static function getTickers(bool $all = false)
     {
         $results = self::query()
