@@ -1,6 +1,19 @@
-{{ __('summary') }}:<br/>
-<div class="text-base/6">
+{{ __('calculations') }}:<br/>
+<div class="text-sm">
+    @if ($items['totalCash'] ?? false)
+        {{ __('total top up cash') }}: {{ numberFormat($items['totalCash']) }},&nbsp;
+    @endif
+    @if ($items['totalValue'] ?? false)
+        {{ __('total tickers value') }}: {{ numberFormat($items['totalValue']) }},&nbsp;
+    @endif
+    @if ($items['totalMoney'] ?? false)
+        {{ __('current free money') }}: {{ numberFormat($items['totalMoney']) }},&nbsp;
+    @endif
+    @if ($items['totalMoney'] > 0 && $items['totalValue'] > 0)
+        {{ __('sum') }}: {{ numberFormat($items['totalMoney'] + $items['totalValue']) }},&nbsp;
+    @endif
     @if ($items['summary'] ?? false)
+        <br />
         @if($items['summary']['cashTotal'])
             {{ __('invested') }}: {{ numberFormat($items['summary']['cashTotal'] ?? 0) }},
             <br/>

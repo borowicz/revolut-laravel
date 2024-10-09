@@ -4,6 +4,7 @@ namespace App\Livewire\Revolut\Stock\Summary;
 
 use DateTime;
 use App\Models\Revolut\Stock\{
+    CashCurrent,
     StockTransaction,
     StockTicker,
     StockPrices,
@@ -23,6 +24,8 @@ class StockCalculations
     protected $disabledTickers = null;
     protected $showAll = false;
     protected $tickers = [];
+
+    protected $totalValue = 0;
 
     protected function setResults(): array
     {
@@ -120,6 +123,9 @@ class StockCalculations
         }
 
         $results['stocks'] = $this->recalculateTransactions($results['stocks']) ?? [];
+        $results['totalCash'] = StockTransaction::getTransactionsCash();
+        $results['totalMoney'] =  CashCurrent::select('total')->latest('id')->value('total') ?? 0;
+        $results['totalValue'] = $this->totalValue;
         $results['showButtons'] = true;
         $results['showAll'] = $this->showAll;
         $results['tickers'] = $this->tickers ?? [];
@@ -381,6 +387,8 @@ class StockCalculations
             // Calculate current value and profit
             $item['currentValue'] = $item['avgCurrent'] * $item['quantity'];
             $item['currentProfit'] = $item['currentValue'] + $item['diff'];
+
+            $this->totalValue += $item['currentValue'];
         }
 
         return $stock;
