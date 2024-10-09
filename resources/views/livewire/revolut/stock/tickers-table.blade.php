@@ -56,7 +56,7 @@
             <td class="px-3 py-2 text-center text-sm text-gray-500">
                 @include('livewire.partials.button-action', [
                     'label' => 'edit',
-                    'routeName' =>'stock.markets.edit',
+                    'routeName' =>'stock.tickers.edit',
                     'itemId' => $item->id,
                 ])
             </td>

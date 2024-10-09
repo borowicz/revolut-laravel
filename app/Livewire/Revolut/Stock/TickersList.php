@@ -14,19 +14,14 @@ class TickersList extends AbstractComponent
 {
     use WithPagination;
 
-    use WithPagination;
-
     public $sortField = 'ticker';
     public $sortDirection = 'ASC';
-    public $itemStatus = [];
-
     protected $listeners = ['refreshComponent' => '$refresh'];
 
     public function mount($ticker = null, $perPage = 10)
     {
         parent::mount($ticker, $perPage);
 
-        // Initialize item status
         $this->itemStatus = StockTicker::pluck('disabled', 'id')->toArray();
     }
 
@@ -38,7 +33,6 @@ class TickersList extends AbstractComponent
             $model->disabled = $newStatus;
             $model->save();
 
-            // Update the status in the local itemStatus array
             $this->itemStatus[$itemId] = $newStatus;
 
 //            $this->emit('updateStatus'); // Emit the statusUpdated event
@@ -92,6 +86,11 @@ class TickersList extends AbstractComponent
         }
 
         session('message', 'new entries: ' . $new);
+    }
+
+    public function edit(string $ticker)
+    {
+//        dd($ticker);
     }
 
     public function details(string $ticker)

@@ -69,70 +69,76 @@ Route::prefix('revolut')
     ->middleware(['auth', 'verified'])
     ->group(function () {
         Route::prefix('stock')->group(function () {
-                Route::get('/', Summary::class)->name('stock.index');
+            Route::get('/', Summary::class)->name('stock.index');
 
-                Route::get('/prices', Prices::class)->name('stock.prices');
-                Route::get('/prices/detail', Prices::class)->name('stock.prices.details');
+            Route::get('/prices', Prices::class)->name('stock.prices');
+            Route::get('/prices/detail', Prices::class)->name('stock.prices.details');
 
-                Route::prefix('cash')->group(function () {
-                    Route::get('/', Cash::class)->name('stock.cash');
-                    Route::get('/flow', CashFlow::class)->name('stock.cash.flow');
-                    Route::get('/flow/create', CreateCash::class)->name('stock.cash.flow.create');
-                    Route::get('/flow/edit', EditCash::class)->name('stock.cash.flow.edit');
-                });
-
-                Route::get('/transactions', Transactions::class)->name('stock.transactions');
-                Route::get('/transaction/details/{ticker}', Transactions::class)->name('stock.transactions.details');
-
-                Route::prefix('markets')->group(function () {
-                    Route::get('/', Markets::class)->name('stock.markets');
-                    Route::get('/create', CreateMarket::class)->name('stock.markets.create');
-                    Route::get('/edit/{id}', EditMarket::class)->name('stock.markets.edit');
-                });
-
-                Route::get('/tickers', TickersList::class)->name('stock.tickers');
-
-                Route::get('/upload', StockUpload::class)->name('stock.upload');
+            Route::prefix('cash')->group(function () {
+                Route::get('/', Cash::class)->name('stock.cash');
+                Route::get('/flow', CashFlow::class)->name('stock.cash.flow');
+                Route::get('/flow/create', CreateCash::class)->name('stock.cash.flow.create');
+                Route::get('/flow/edit', EditCash::class)->name('stock.cash.flow.edit');
             });
+
+            Route::get('/transactions', Transactions::class)->name('stock.transactions');
+            Route::get('/transaction/details/{ticker}', Transactions::class)->name('stock.transactions.details');
+
+            Route::prefix('markets')->group(function () {
+                Route::get('/', Markets::class)->name('stock.markets');
+                Route::get('/create', CreateMarket::class)->name('stock.markets.create');
+                Route::get('/edit/{id}', EditMarket::class)->name('stock.markets.edit');
+            });
+
+            Route::prefix('tickers')->group(function () {
+                Route::get('/', TickersList::class)->name('stock.tickers');
+                Route::get('/create', TickersList::class)->name('stock.tickers.create');
+                Route::get('/edit/{id}', TickersList::class)->name('stock.tickers.edit');
+            });
+
+            Route::get('/upload', StockUpload::class)->name('stock.upload');
+        });
 
         Route::prefix('crypto')->group(function () {
-                Route::get('/', CryptoSummary::class)->name('crypto.index');
+            Route::get('/', CryptoSummary::class)->name('crypto.index');
 
-                Route::get('/transactions', CryptoTransactions::class)->name('crypto.transactions');
-                Route::get('/transaction/details/{ticker}', CryptoTransactions::class)->name('crypto.transactions.details');
+            Route::get('/transactions', CryptoTransactions::class)->name('crypto.transactions');
+            Route::get('/transaction/details/{ticker}', CryptoTransactions::class)->name('crypto.transactions.details');
 
-                Route::get('/tickers', CryptoTickersList::class)->name('crypto.tickers');
+            Route::get('/tickers', CryptoTickersList::class)->name('crypto.tickers');
 
-                Route::get('/upload', CryptoUpload::class)->name('crypto.upload');
-            });
+            Route::get('/upload', CryptoUpload::class)->name('crypto.upload');
+        });
 
         Route::prefix('commodities')->group(function () {
-                Route::get('/', CommoditiesSummary::class)->name('commodities.index');
+            Route::get('/', CommoditiesSummary::class)->name('commodities.index');
 
-                Route::get('/transactions', CommoditiesTransactions::class)->name('commodities.transactions');
-                Route::get('/transaction/details/{ticker}', CommoditiesTransactions::class)->name('commodities.transactions.details');
+            Route::get('/transactions', CommoditiesTransactions::class)->name('commodities.transactions');
+            Route::get('/transaction/details/{ticker}', CommoditiesTransactions::class)->name(
+                'commodities.transactions.details'
+            );
 
-                Route::get('/tickers', CommoditiesTickersList::class)->name('commodities.tickers');
+            Route::get('/tickers', CommoditiesTickersList::class)->name('commodities.tickers');
 
-                Route::get('/upload', CommoditiesUpload::class)->name('commodities.upload');
-            });
+            Route::get('/upload', CommoditiesUpload::class)->name('commodities.upload');
+        });
 
         Route::prefix('money')->group(function () {
-                Route::get('/', MoneySummary::class)->name('money.index');
+            Route::get('/', MoneySummary::class)->name('money.index');
 
-                Route::get('/transactions', MoneyTransactions::class)->name('money.transactions');
-                Route::get('/transaction/details/{ticker}', MoneyTransactions::class)->name('money.transactions.details');
+            Route::get('/transactions', MoneyTransactions::class)->name('money.transactions');
+            Route::get('/transaction/details/{ticker}', MoneyTransactions::class)->name('money.transactions.details');
 
-                Route::get('/tickers', MoneyTickersList::class)->name('money.tickers');
+            Route::get('/tickers', MoneyTickersList::class)->name('money.tickers');
 
-                Route::get('/upload', MoneyUpload::class)->name('money.upload');
-            });
+            Route::get('/upload', MoneyUpload::class)->name('money.upload');
+        });
 
         Route::get('currency', CurrencyToday::class)->name('currency.index');
 
         Route::prefix('cron')->group(function () {
-                Route::get('/', ShowNotes::class)->name('cron.index');
-            });
+            Route::get('/', ShowNotes::class)->name('cron.index');
+        });
     });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

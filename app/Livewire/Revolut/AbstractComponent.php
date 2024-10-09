@@ -28,6 +28,8 @@ abstract class AbstractComponent extends Component
 
     public $types;
 
+    public $itemStatus = [];
+
     public $selectedType = null;
 
     public function mount($ticker = null, $perPage = 10)
