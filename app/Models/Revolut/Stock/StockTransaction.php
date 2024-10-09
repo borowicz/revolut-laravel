@@ -49,7 +49,8 @@ class StockTransaction extends AbstractRevolutModel
                 - SUM(CASE WHEN type LIKE "%with%" THEN total_amount ELSE 0 END)) AS total'
                 )
             )
-            ->value('total');
+            ->value('total')
+        ;
 
         return $cash;
     }

@@ -34,10 +34,11 @@ public/vendor/
 storage/debugbar/
 storage/uploads/
 /env.local
+/vendorLocal/
 
 ### remove after deploy
-composer.json
-composer.lock
+/composer.json
+/composer.lock
 /resources/views/livewire/pages/upload.blade.phps
 /resources/views/livewire/partials/button-disable.blade.phps
 

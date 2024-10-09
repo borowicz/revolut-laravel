@@ -108,23 +108,19 @@ class FetchCurrencyExchangesGoogleDrive extends AbstractCommand implements Fetch
         if (!file_exists($localPath)) {
             $this->info(' >> fetching sheet: ' . $sheet, OutputInterface::VERBOSITY_VERBOSE);
             $csvData = $this->fetchData($this->googleSheetUrl() . $sheet);
-            if (trim($csvData) == '') {
+            if (empty(trim($csvData))) {
                 $this->error('empty sheet: ' . $sheet);
 
                 return false;
             }
 
-            $cnt = substr_count($csvData, "\n");
-            $this->info(' >> sheet count: ' . $cnt, OutputInterface::VERBOSITY_VERBOSE);
-
+            $this->info(' >> sheet count: ' . substr_count($csvData, "\n"), OutputInterface::VERBOSITY_VERBOSE);
             file_put_contents($localPath, $csvData);
         } else {
-            $this->info(' >> local copy exist sheet: ' . $sheet, OutputInterface::VERBOSITY_VERBOSE);
+            $this->info(' >> local copy exists for sheet: ' . $sheet, OutputInterface::VERBOSITY_VERBOSE);
         }
 
-        $result = Excel::import(new CurrencyImport(), $localPath);
-
-        return $result;
+        return Excel::import(new CurrencyImport(), $localPath);
     }
 
     private function googleSheetUrl()

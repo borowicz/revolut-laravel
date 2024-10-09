@@ -2,16 +2,19 @@
 
 namespace App\Livewire\Revolut\Crypto;
 
-use App\Livewire\Revolut\AbstractComponent;
-use App\Livewire\Revolut\Stock\Summary\StockCalculations;
 use Illuminate\Http\Request;
+use App\Livewire\Revolut\AbstractComponent;
+use App\Models\Revolut\Crypto\CryptoTransaction;
 
 class Summary extends AbstractComponent
 {
-    public function render(StockCalculations $calculations, Request $request)
+    public function render(Request $request)
     {
         $items = [];
-        $items['stocks'] = [];
+
+//        $items['tickers'] = CryptoTransaction::getTickers($this->showAll);
+//        $items['types'] = CryptoTransaction::getTypes();
+        $items['crypto'] = CryptoTransaction::getSummary($this->showAll)->get();
 
         return view('livewire.revolut.crypto.summary', ['items' => $items])
             ->layout('layouts.app');

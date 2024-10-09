@@ -48,40 +48,21 @@ class StockCalculations
 
     protected function setValue(string $v = '')
     {
-        if (empty($v)) {
-            return 0;
-        }
-
-        $result = $v;
-//        $result = numberFormat($result, 2, '.', '');
-//        $result = (float)$result;
-
-        return $result;
+        return empty($v) ? 0 : $v;
     }
 
     public function determineTransactionType(string $type): string
     {
-        $type = strtolower($type);
-        $type = trim($type);
-
-        if (stristr($type, self::TYPE_CASH)) {
-            return self::TYPE_CASH;
-        }
-
-        if (stristr($type, self::TYPE_DIVIDEND)) {
-            return self::TYPE_DIVIDEND;
-        }
-
-        if (stristr($type, self::TYPE_SPLIT)) {
-            return self::TYPE_SPLIT;
-        }
-
-        if (stristr($type, self::TYPE_BUY)) {
-            return self::TYPE_BUY;
-        }
-
-        if (stristr($type, self::TYPE_SELL)) {
-            return self::TYPE_SELL;
+        foreach (
+            [self::TYPE_CASH,
+             self::TYPE_DIVIDEND,
+             self::TYPE_SPLIT,
+             self::TYPE_BUY,
+             self::TYPE_SELL] as $transactionType
+        ) {
+            if (stristr($type, $transactionType)) {
+                return $transactionType;
+            }
         }
 
         return 'other';
@@ -94,15 +75,7 @@ class StockCalculations
             $this->disabledTickers = $results;
         }
 
-        if (0 === count($this->disabledTickers)) {
-            return false;
-        }
-
-        if (in_array($ticker, $this->disabledTickers)) {
-            return true;
-        }
-
-        return false;
+        return in_array($ticker, $this->disabledTickers);
     }
 
     public function getData(bool $showAll = false, array $tickers = [])
@@ -115,16 +88,11 @@ class StockCalculations
             return ['stocks' => []];
         }
 
-        if (!$transactions['stocks']) {
-            $results = $this->setResults();
-//            throw new \Exception('No transactions found');
-        } else {
-            $results = $transactions;
-        }
+        $results = $transactions;
 
         $results['stocks'] = $this->recalculateTransactions($results['stocks']) ?? [];
         $results['totalCash'] = StockTransaction::getTransactionsCash();
-        $results['totalMoney'] =  CashCurrent::select('total')->latest('id')->value('total') ?? 0;
+        $results['totalMoney'] = CashCurrent::select('total')->latest('id')->value('total') ?? 0;
         $results['totalValue'] = $this->totalValue;
         $results['showButtons'] = true;
         $results['showAll'] = $this->showAll;
@@ -142,10 +110,6 @@ class StockCalculations
 
         $transactions = $query->get();
 
-        if (!count($transactions)) {
-            return [];
-        }
-
         return $this->initializeResults($transactions);
     }
 
@@ -154,8 +118,6 @@ class StockCalculations
         $results = $this->setResults();
         $results['latest'] = $this->latestStockPrices ?? [];
 
-        $previousYear = 0;
-
         foreach ($transactions as $transaction) {
             if (empty($transaction['ticker']) || $this->checkIfTickerDisabled($transaction['ticker'])) {
                 continue;
@@ -163,22 +125,14 @@ class StockCalculations
 
             $dateTime = new DateTime($transaction->date);
             $currentYear = $dateTime->format('Y');
-            if ($previousYear === 0) {
-                $previousYear = $currentYear;
-            }
 
-            $this->processTransaction($results, $transaction, $currentYear, $previousYear);
-//            if ($previousYear !== $currentYear) {
-//            }
-
-            $previousYear = $currentYear;
+            $this->processTransaction($results, $transaction, $currentYear);
         }
 
         return $results;
     }
 
-
-    protected function processTransaction(&$results, $transaction, $currentYear, $previousYear): void
+    protected function processTransaction(&$results, $transaction, $currentYear): void
     {
         $ticker = $transaction->ticker;
 
@@ -188,31 +142,21 @@ class StockCalculations
 
         if (!isset($results['yearly']['byStock'][$ticker])) {
             $results['yearly']['byStock'][$ticker] = $this->initializeStockItem($ticker);
-            unset (
-                $results['yearly']['byYear'][$currentYear]['ticker'],
-                $results['yearly']['byYear'][$currentYear]['quantity'],
-            );
         }
 
         if (!isset($results['yearly']['byYear'][$currentYear])) {
             $results['yearly']['byYear'][$currentYear] = $this->initializeStockItem($ticker);
-            unset (
-                $results['yearly']['byYear'][$currentYear]['ticker'],
-                $results['yearly']['byYear'][$currentYear]['quantity'],
-            );
         }
 
         $type = $this->determineTransactionType($transaction->type);
 
         if ($type == self::TYPE_CASH) {
             $this->handleCashTransaction($results, $transaction, $currentYear);
-
             return;
         }
 
         if (empty($ticker)) {
             $this->handleOtherTransactions($results, $transaction);
-
             return;
         }
 
@@ -221,11 +165,10 @@ class StockCalculations
         }
 
         $item = [
-            'previousYear' => $previousYear,
-            'currentYear'  => $currentYear,
-            'type'         => $type,
-            'ticker'       => $ticker,
-            'transaction'  => $transaction,
+            'currentYear' => $currentYear,
+            'type'        => $type,
+            'ticker'      => $ticker,
+            'transaction' => $transaction,
         ];
 
         $this->updateTransactionData(
@@ -266,7 +209,6 @@ class StockCalculations
         ];
     }
 
-
     protected function updateTransactionData(array &$stock, array &$yearly, array &$summary, array $item): void
     {
         $type = $item['type'];
@@ -276,18 +218,14 @@ class StockCalculations
         $quantity = $this->setValue($item['transaction']->quantity);
         $price = $this->setValue($item['transaction']->price_per_share);
         $total = $this->setValue($item['transaction']->total_amount);
-        $fee = 0;
 
-        if ($price > 0) {
-            $stock['prices'][] = [$item['transaction']->date, $price];
-            $fee = $total - round($quantity * $price, 2);
+        $fee = $total - round($quantity * $price, 2);
+        $stock['prices'][] = [$item['transaction']->date, $price];
+        $stock['fees'][] = $fee;
+        $stock['feesTotal'] += $fee;
+        $summary['feesTotal'] += $fee;
 
-            $stock['fees'][] = $fee;
-            $stock['feesTotal'] += $fee;
-            $summary['feesTotal'] += $fee;
-        }
-
-        if ($item['type'] === self::TYPE_BUY) {
+        if ($type === self::TYPE_BUY) {
             $stock['quantity'] += $quantity;
             $stock['total'] -= $total;
             $stock['spent'] += $total;
@@ -316,16 +254,12 @@ class StockCalculations
             $stock['dividend'] += $total;
 
             $yearly['byStock'][$ticker]['dividend'] += $total;
-
             $yearly['byYear'][$currentYear]['dividend'] += $total;
 
             $summary['dividend'] += $total;
         } elseif ($type === self::TYPE_SPLIT) {
             $stock['quantity'] += $quantity;
         }
-
-//        $results['yearly'][$ticker][$currentYear]['profit_loss'] =
-//            $results['yearly'][$ticker][$currentYear]['return'] - $results['yearly'][$ticker][$currentYear]['spent'];
     }
 
     protected function recalculateTransactions(array $stock): array
@@ -343,18 +277,9 @@ class StockCalculations
                 continue;
             }
 
-            if ($item['quantity'] > 0) {
-                if ($item['quantity'] > 1) {
-                    $item['avgBuy'] = $item['total'] / $item['quantity'];
-                } else {
-                    $item['avgBuy'] = $item['total'] * $item['quantity'];
-                }
-            } else {
-                $item['avgBuy'] = 0;
-            }
-
+            $item['avgBuy'] = $item['quantity'] > 0 ? $item['total'] / $item['quantity'] : 0;
             if ($item['spent'] > 0) {
-                $item['avgBuy'] = $item['avgBuy'] * -1;
+                $item['avgBuy'] *= -1;
             }
 
             // Calculate diff as net return - total spent
@@ -369,13 +294,7 @@ class StockCalculations
                 );
 
                 if ($item['quantity'] > 0) {
-                    if ($item['quantity'] < 1) {
-                        $avgCurrent = ($item['current'] * $item['quantity']);
-                    } else {
-                        $avgCurrent = ($item['current'] * $item['quantity']) / $item['quantity'];
-                    }
-
-                    $item['avgCurrent'] = $avgCurrent;
+                    $item['avgCurrent'] = $item['current'];
                 }
             }
 
@@ -394,7 +313,6 @@ class StockCalculations
         return $stock;
     }
 
-
     public function getTickersList(bool $all = false)
     {
         $tickersTable = (new StockTicker())->getTable();
@@ -405,15 +323,13 @@ class StockCalculations
             ->distinct()
             ->leftJoin($tickersTable, $tickersTable . '.ticker', $stockTransactions . '.ticker');
 
-        if (false === $all) {
+        if (!$all) {
             $query->where($tickersTable . '.disabled', 0);
         }
         $query->orderBy('ticker');
 
-        $tickers = $query->get()
+        return $query->get()
             ->pluck('ticker')
             ->toArray();
-
-        return $tickers;
     }
 }
