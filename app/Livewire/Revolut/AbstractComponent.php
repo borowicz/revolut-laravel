@@ -8,7 +8,7 @@ abstract class AbstractComponent extends Component
 {
     public $showAll = false;
 
-    protected $paginationTheme = 'tailwind';
+    public $paginationTheme = 'tailwind';
 
     public $showButtons = true;
 
@@ -17,9 +17,7 @@ abstract class AbstractComponent extends Component
     public $search = '';
 
     public $perPage = 10; // Number of items per page
-
     public $sortField = 'date';
-
     public $sortDirection = 'DESC';
 
     public $selectedTicker = null;
@@ -27,7 +25,6 @@ abstract class AbstractComponent extends Component
     public $ticker;
 
     public $types;
-
     public $itemStatus = [];
 
     public $selectedType = null;

@@ -11,24 +11,9 @@ class Transactions extends AbstractComponent
 {
     use WithPagination;
 
-    public $sortField = 'date';
-    public $sortDirection = 'DESC';
-
-    protected $paginationTheme = 'tailwind';
-
     public function updatingSearch()
     {
         $this->resetPage();
-    }
-
-    public function sortBy($field)
-    {
-        if ($this->sortField === $field) {
-            $this->sortDirection = $this->sortDirection === 'ASC' ? 'DESC' : 'ASC';
-        } else {
-            $this->sortField = $field;
-            $this->sortDirection = 'DESC';
-        }
     }
 
     private function getItems()

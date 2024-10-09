@@ -12,12 +12,6 @@ class Details extends Transactions
     use WithPagination;
 
     public $search = '';
-    public $perPage = 10; // Number of items per page
-    public $sortField = 'date';
-    public $sortDirection = 'DESC';
-    public $selectedTicker = null;
-
-    protected $paginationTheme = 'tailwind';
 
     public function updatingSearch()
     {

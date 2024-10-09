@@ -21,54 +21,31 @@ class CommoditiesTransactionsImport extends AbstractImport
         $importStats['total']++;
 
         $hash = AbstractRevolutController::setHash($row);
-        $check = CommoditiesTransaction::where('hash', $hash)->first();
-        if ($check) {
+        if (CommoditiesTransaction::where('hash', $hash)->exists()) {
             $importStats['skipped']++;
             Session::put('importStats', $importStats);
-
             return null;
         }
 
-//        Type,Product,Started Date,Completed Date,Description,Amount,Fee,Currency,State,Balance
-        $symbol = $row[0] ?? '';
-        if (empty($symbol)) {
+        if (empty($row[0])) {
             return null;
         }
-
-        $type = $row[0] ?? '';
-        $product = $row[1] ?? '';
-        $dateStarted = $row[2] ?? '';
-        $dateCompleted = $row[3] ?? '';
-        $description = $row[4] ?? '';
-        $amount = $row[5] ?? 0;
-        $fees = $row[6] ?? 0;
-        $currency = $row[7] ?? '';
-        $state = $row[8] ?? '';
-        $balance = $row[9] ?? 0;
-
-        $dateStarted = Carbon::parse($dateStarted)->format('Y-m-d H:i:s');
-        $dateCompleted = Carbon::parse($dateCompleted)->format('Y-m-d H:i:s');
-
-        $amount = $this->cleanValue($amount);
-        $balance = $this->cleanValue($balance);
-        $fees = $this->cleanValue($fees);
 
         $entry = [
             'hash'           => $hash,
-            'type'           => $type,
-            'product'        => $product,
-            'started_date'   => $dateStarted,
-            'completed_date' => $dateCompleted,
-            'description'    => $description,
-            'amount'         => $amount,
-            'fee'            => $fees,
-            'currency'       => $currency,
-            'state'          => $state,
-            'balance'        => $balance,
+            'type'           => $row[0] ?? '',
+            'product'        => $row[1] ?? '',
+            'started_date'   => Carbon::parse($row[2] ?? '')->format('Y-m-d H:i:s'),
+            'completed_date' => Carbon::parse($row[3] ?? '')->format('Y-m-d H:i:s'),
+            'description'    => $row[4] ?? '',
+            'amount'         => $this->cleanValue($row[5] ?? 0),
+            'fee'            => $this->cleanValue($row[6] ?? 0),
+            'currency'       => $row[7] ?? '',
+            'state'          => $row[8] ?? '',
+            'balance'        => $this->cleanValue($row[9] ?? 0),
         ];
 
         $importStats['inserted']++;
-
         Session::put('importStats', $importStats);
 
         $results = CommoditiesTransaction::create($entry);

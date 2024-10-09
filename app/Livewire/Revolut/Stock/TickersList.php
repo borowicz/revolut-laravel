@@ -35,7 +35,6 @@ class TickersList extends AbstractComponent
 
             $this->itemStatus[$itemId] = $newStatus;
 
-//            $this->emit('updateStatus'); // Emit the statusUpdated event
             session()->flash('message', 'Status updated successfully.');
         } catch (\Exception $e) {
             session()->flash('error', 'Failed to update status: ' . $e->getMessage());
@@ -44,7 +43,6 @@ class TickersList extends AbstractComponent
 
     public function render(Request $request)
     {
-//        debugbar()->info('$this->perPage: ' . $this->showButtons);
         $query = StockTicker::query();
         if ($query->count() < 1) {
             $this->getAndSetTickersFromStockTransactions();
@@ -90,11 +88,9 @@ class TickersList extends AbstractComponent
 
     public function edit(string $ticker)
     {
-//        dd($ticker);
     }
 
     public function details(string $ticker)
     {
-//        dd($ticker);
     }
 }

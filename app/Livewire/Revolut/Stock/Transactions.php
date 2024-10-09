@@ -11,49 +11,16 @@ class Transactions extends AbstractComponent
 {
     use WithPagination;
 
-    public $sortField = 'date';
-    public $sortDirection = 'DESC';
-
-    protected $paginationTheme = 'tailwind';
-
     public function updatingSearch()
     {
         $this->resetPage();
     }
 
-//    public function sortBy($field)
-//    {
-//        if ($this->sortField === $field) {
-//            $this->sortDirection = $this->sortDirection === 'ASC' ? 'DESC' : 'ASC';
-//        } else {
-//            $this->sortField = $field;
-//            $this->sortDirection = 'DESC';
-//        }
-//    }
-
     private function getItems()
     {
-        $ticker = '';
-//        if (!empty($this->selectedTicker)) {
-//            $ticker = $this->selectedTicker;
-//        }
-////        if (!empty($this->ticker)) {
-////            $ticker = $this->ticker;
-////        }
-
         $query = StockTransaction::query()
-//            ->search($this->search)
-            ->where(function ($query) use ($ticker){
-                if (!empty($this->selectedTicker)) {
-                    $query->where('ticker', $this->selectedTicker);
-                }
-//                if (!empty($ticker)) {
-//                    $query->where('ticker', $this->ticker);
-//                }
-                if (!empty($this->selectedType)) {
-                    $query->where('type', $this->selectedType);
-                }
-            })
+            ->when($this->selectedTicker, fn($query) => $query->where('ticker', $this->selectedTicker))
+            ->when($this->selectedType, fn($query) => $query->where('type', $this->selectedType))
             ->orderBy($this->sortField, $this->sortDirection);
 
         $items = $this->setPagination($query);
@@ -67,7 +34,6 @@ class Transactions extends AbstractComponent
         debugbar()->info('$this->perPage: ' . $this->perPage);
 
         $results = $this->getItems();
-
         $this->types = StockTransaction::getTypes();
         $this->tickers = StockTransaction::getTickers();
 
