@@ -14,7 +14,7 @@ class Summary extends AbstractComponent
         if ($request->get('all') > 0) {
             $this->showAll = true;
         }
-
+        debugbar()->info('$this->showAll: ' . (int)$this->showAll);
         $this->tickers = $calculations->getTickersList($this->showAll);
 
         $items = $calculations->getData(showAll: $this->showAll, tickers: $this->tickers);

@@ -32,5 +32,10 @@ storage/*.key
 /tmp/
 public/vendor/
 storage/debugbar/
-/resources/views/livewire/pages/upload.blade.phps
 storage/uploads/
+
+### remove after deploy
+composer.json
+composer.lock
+/resources/views/livewire/pages/upload.blade.phps
+/resources/views/livewire/partials/button-disable.blade.phps

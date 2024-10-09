@@ -20,7 +20,7 @@ class StockCalculations
     const TYPE_FEE        = 'fee'; // CUSTODY FEE
 
     protected $latestStockPrices = [];
-    protected $disabledTickers = [];
+    protected $disabledTickers = null;
     protected $showAll = false;
     protected $tickers = [];
 
@@ -88,7 +88,6 @@ class StockCalculations
     {
         if (null === $this->disabledTickers) {
             $results = StockPrices::getTickersDisabled() ?? [];
-
             $this->disabledTickers = $results;
         }
 
@@ -105,8 +104,7 @@ class StockCalculations
 
     public function getData(bool $showAll = false, array $tickers = [])
     {
-//        $this->showAll = $request->get('showAll', false);
-        $this->showAll = false;
+        $this->showAll = $showAll;
         $this->latestStockPrices = StockPrices::getLatestStockPricesList();
 
         $transactions = $this->processTransactions($tickers);
@@ -153,6 +151,10 @@ class StockCalculations
         $previousYear = 0;
 
         foreach ($transactions as $transaction) {
+            if (empty($transaction['ticker']) || $this->checkIfTickerDisabled($transaction['ticker'])) {
+                continue;
+            }
+
             $dateTime = new DateTime($transaction->date);
             $currentYear = $dateTime->format('Y');
             if ($previousYear === 0) {
@@ -316,15 +318,8 @@ class StockCalculations
             $stock['quantity'] += $quantity;
         }
 
-////        $results['yearly'][$ticker][$currentYear]['profit_loss'] =
-////            $results['yearly'][$ticker][$currentYear]['return'] - $results['yearly'][$ticker][$currentYear]['spent'];
-//
-
-//        if ($ticker == 'AAPL') {
-//            dump($stock);
-//            dump(gettype($quantity));
-////           dump($quantity, 'price: ' . $price, 'total: ' . $total);
-//        }
+//        $results['yearly'][$ticker][$currentYear]['profit_loss'] =
+//            $results['yearly'][$ticker][$currentYear]['return'] - $results['yearly'][$ticker][$currentYear]['spent'];
     }
 
     protected function recalculateTransactions(array $stock): array
@@ -413,5 +408,4 @@ class StockCalculations
 
         return $tickers;
     }
-
 }

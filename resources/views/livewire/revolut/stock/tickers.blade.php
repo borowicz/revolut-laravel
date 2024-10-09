@@ -30,10 +30,27 @@
         </div>
 
         <div class="px-4 sm:px-6 lg:px-8">
+            <div>
+                @if (session()->has('message'))
+                    <div class="alert alert-success">{{ session('message') }}</div>
+                @elseif (session()->has('error'))
+                    <div class="alert alert-danger">{{ session('error') }}</div>
+                @endif
+
+            </div>
+
             @include('livewire.revolut.stock.tickers-table')
 
             @include('livewire.partials.pagination')
         </div>
         <br class="clearfix"/>
     </div>
+
+{{--    <script>--}}
+{{--        // Livewire.on('updateStatus', () => {--}}
+{{--        //     location.reload();--}}
+{{--        //     Livewire.emit('refreshComponent');--}}
+{{--        // });--}}
+{{--    </script>--}}
+
 </div>

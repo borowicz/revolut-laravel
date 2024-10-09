@@ -12,10 +12,6 @@ abstract class AbstractComponent extends Component
 
     public $showButtons = true;
 
-    public $tickers = [];
-
-    public $ticker; // Add this if you need to use $ticker
-
     public $searchBox = false;
 
     public $search = '';
@@ -27,13 +23,14 @@ abstract class AbstractComponent extends Component
     public $sortDirection = 'DESC';
 
     public $selectedTicker = null;
-//    public $tickers = null;
+    public $tickers;
+    public $ticker;
 
     public $types;
 
     public $selectedType = null;
 
-    public function mount($ticker = null, $perPage = 10) // initialize $ticker
+    public function mount($ticker = null, $perPage = 10)
     {
         $this->ticker = $ticker;
         $this->perPage = $perPage;

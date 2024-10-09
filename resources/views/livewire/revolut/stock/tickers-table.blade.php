@@ -61,10 +61,7 @@
                 ])
             </td>
             <td class="px-3 py-2 text-right text-sm text-gray-500">
-                @include('livewire.partials.button-disable', [
-                    'itemId' => $item->id,
-                    'status' => $item->disabled,
-                ])
+                @include('livewire.partials.button-disable')
             </td>
         </tr>
     @empty

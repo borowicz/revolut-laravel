@@ -14,30 +14,43 @@ class TickersList extends AbstractComponent
 {
     use WithPagination;
 
+    use WithPagination;
+
     public $sortField = 'ticker';
-
     public $sortDirection = 'ASC';
+    public $itemStatus = [];
 
-    public $status = 0; // Initial status
-    public $itemStatus = []; // To track status for each item
+    protected $listeners = ['refreshComponent' => '$refresh'];
 
-    public function updateStatus($itemId, $status)
+    public function mount($ticker = null, $perPage = 10)
     {
-        $this->itemStatus[$itemId] = (int)$status === 1 ? 0 : 1;
+        parent::mount($ticker, $perPage);
 
-        debugbar()->info('$status: ' . $status);
-        debugbar()->info('$statusNEW: ' . $this->itemStatus[$itemId]);
-        debugbar()->info('$status: ' . date('Y-m-d H:i:s') . ' - ' . uniqid('true', true));
+        // Initialize item status
+        $this->itemStatus = StockTicker::pluck('disabled', 'id')->toArray();
+    }
 
-        $model = StockTicker::find($itemId);
-        $model->disabled = $this->itemStatus[$itemId];
-        $model->save();
+    public function updateStatus($itemId)
+    {
+        try {
+            $model = StockTicker::findOrFail($itemId);
+            $newStatus = $model->disabled ? 0 : 1; // Toggle status
+            $model->disabled = $newStatus;
+            $model->save();
+
+            // Update the status in the local itemStatus array
+            $this->itemStatus[$itemId] = $newStatus;
+
+//            $this->emit('updateStatus'); // Emit the statusUpdated event
+            session()->flash('message', 'Status updated successfully.');
+        } catch (\Exception $e) {
+            session()->flash('error', 'Failed to update status: ' . $e->getMessage());
+        }
     }
 
     public function render(Request $request)
     {
-        debugbar()->info('$this->perPage: ' . $this->showButtons);
-
+//        debugbar()->info('$this->perPage: ' . $this->showButtons);
         $query = StockTicker::query();
         if ($query->count() < 1) {
             $this->getAndSetTickersFromStockTransactions();
@@ -58,9 +71,9 @@ class TickersList extends AbstractComponent
         $this->tickers = null;
 
         return view(
-                'livewire.revolut.stock.tickers',
-                compact('items', 'hasPages')
-            )
+            'livewire.revolut.stock.tickers',
+            compact('items', 'hasPages')
+        )
             ->layout('layouts.app');
     }
 
