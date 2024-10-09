@@ -84,6 +84,6 @@ class TickersList extends AbstractComponent
 
     public function details(string $ticker)
     {
-        dd($ticker);
+//        dd($ticker);
     }
 }

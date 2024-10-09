@@ -21,15 +21,15 @@ class Transactions extends AbstractComponent
         $this->resetPage();
     }
 
-    public function sortBy($field)
-    {
-        if ($this->sortField === $field) {
-            $this->sortDirection = $this->sortDirection === 'ASC' ? 'DESC' : 'ASC';
-        } else {
-            $this->sortField = $field;
-            $this->sortDirection = 'DESC';
-        }
-    }
+//    public function sortBy($field)
+//    {
+//        if ($this->sortField === $field) {
+//            $this->sortDirection = $this->sortDirection === 'ASC' ? 'DESC' : 'ASC';
+//        } else {
+//            $this->sortField = $field;
+//            $this->sortDirection = 'DESC';
+//        }
+//    }
 
     private function getItems()
     {
@@ -67,7 +67,7 @@ class Transactions extends AbstractComponent
         debugbar()->info('$this->perPage: ' . $this->perPage);
 
         $results = $this->getItems();
-//dd($this->ticker);
+
         $this->types = StockTransaction::getTypes();
         $this->tickers = StockTransaction::getTickers();
 

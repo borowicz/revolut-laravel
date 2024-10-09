@@ -15,7 +15,7 @@
         {{ __('Currency') }}
     </x-nav-link>
     <x-nav-link :href="route('money.index')" :active="request()->routeIs('money.*')">
-        {{ __('Cash') }}
+        {{ __('Money') }}
     </x-nav-link>
     <x-nav-link :href="route('cron.index')" :active="request()->routeIs('cron.*')">
         {{ __('Cron') }}

@@ -25,15 +25,15 @@ class Dividends extends Transactions
         $this->resetPage();
     }
 
-    public function sortBy($field)
-    {
-        if ($this->sortField === $field) {
-            $this->sortDirection = $this->sortDirection === 'ASC' ? 'DESC' : 'ASC';
-        } else {
-            $this->sortField = $field;
-            $this->sortDirection = 'DESC';
-        }
-    }
+//    public function sortBy($field)
+//    {
+//        if ($this->sortField === $field) {
+//            $this->sortDirection = $this->sortDirection === 'ASC' ? 'DESC' : 'ASC';
+//        } else {
+//            $this->sortField = $field;
+//            $this->sortDirection = 'DESC';
+//        }
+//    }
 
     public function render(Request $request, string $ticker = null)
     {

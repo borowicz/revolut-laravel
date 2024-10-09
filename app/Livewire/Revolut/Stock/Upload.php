@@ -11,7 +11,7 @@ class Upload extends UploadForm
 {
     public function render()
     {
-        return view('livewire.revolut.crypto.upload')->layout('layouts.app');
+        return view('livewire.revolut.stock.upload')->layout('layouts.app');
     }
     public function uploadCsv()
     {

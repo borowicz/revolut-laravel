@@ -55,7 +55,6 @@ class ProfitLossOtherImport extends AbstractImport
             'currency'       => $row[10], //Currencys
         ];
 
-        dd($item);
         $importStats['inserted']++;
 
         Session::put('importStats', $importStats);

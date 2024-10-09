@@ -18,6 +18,14 @@ class CurrencyExchanges extends AbstractRevolutModel
         'exchange_rate',
     ];
 
+    public static function getExchangeRateToday()
+    {
+        return (new self())->query()
+            ->select('exchange_rate as today')
+            ->where('code', '=', 'USDEUR')
+            ->orderBy('date', 'desc');
+    }
+
     public function getExchangeCurrenciesToday()
     {
         $tableName = $this->getTable();

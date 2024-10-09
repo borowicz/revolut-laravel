@@ -37,8 +37,7 @@ class Details extends Transactions
     public function render(Request $request, string $ticker = null)
     {
         debugbar()->info('$this->perPage: ' . $this->perPage);
-//        dd($ticker);
-//        dd($request->all());
+
         $items = StockTransaction::query()
 //            ->search($this->search)
 //            ->where(function ($query) {

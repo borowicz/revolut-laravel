@@ -81,9 +81,7 @@ class Dashboard extends AbstractComponent
             }
         }
         ksort($results);
-//        if (isset($models)) {
-//            dd($results);
-//        }
+
         return $results;
     }
 
@@ -205,14 +203,7 @@ class Dashboard extends AbstractComponent
 
     public static function getTransactionsCash(mixed $model): string
     {
-        $cash = \DB::table($model->getTable())
-            ->select(
-                \DB::raw(
-                    '(SUM(CASE WHEN type LIKE "%cash top%" THEN total_amount ELSE 0 END)
-                - SUM(CASE WHEN type LIKE "%with%" THEN total_amount ELSE 0 END)) AS total_difference'
-                )
-            )
-            ->value('total_difference');
+        $cash = StockTransaction::getTransactionsCash();
 
         return numberFormat($cash);
     }

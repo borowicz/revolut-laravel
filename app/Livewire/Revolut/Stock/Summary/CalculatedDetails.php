@@ -9,7 +9,6 @@ class CalculatedDetails extends AbstractComponent
 {
     public function render(Calculations $calculations)
     {
-dd($calculations);
         $items = $calculations->getData([$this->ticker]);
 
         return view('livewire.pages.stock.calculated', ['items' => $items,])

@@ -82,7 +82,7 @@
                 {{ numberFormat($item['avgCurrent']) }}
             </td>
             <td class="px-3 py-2 whitespace-nowrap">
-                <a href="{{ route('stock.details', [$item['ticker'] ?? '']) }}"
+                <a href="{{ route('stock.transactions.details', [$item['ticker'] ?? '']) }}"
                    title="{{ $item['latestDate'] ?? 'latestDate' }}"
                 >
                     <svg class="w-6 h-6 text-gray-800 dark:text-white"

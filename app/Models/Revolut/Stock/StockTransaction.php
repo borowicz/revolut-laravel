@@ -2,11 +2,12 @@
 
 namespace App\Models\Revolut\Stock;
 
-use App\Models\Revolut\CurrencyExchanges;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use App\Models\Revolut\AbstractRevolutModel;
 use Illuminate\Support\Facades\DB;
+use App\Models\Revolut\AbstractRevolutModel;
+use App\Models\Revolut\CurrencyExchanges;
+use App\Livewire\Revolut\Stock\Summary\StockCalculations;
 
 class StockTransaction extends AbstractRevolutModel
 {
@@ -39,21 +40,38 @@ class StockTransaction extends AbstractRevolutModel
         return $results;
     }
 
-    public static function getCashTopUp(string $currencyTo = 'USDEUR')
+    public static function getTransactionsCash()
     {
+        $cash =DB::table((new self())->getTable())
+            ->select(
+                DB::raw(
+                    '(SUM(CASE WHEN type LIKE "%cash top%" THEN total_amount ELSE 0 END)
+                - SUM(CASE WHEN type LIKE "%with%" THEN total_amount ELSE 0 END)) AS total'
+                )
+            )
+            ->value('total');
+
+        return $cash;
+    }
+
+    public function getCashTopUp(string $currencyTo = 'USDEUR')
+    {
+        $cash = StockCalculations::TYPE_CASH;
+        $withdrawal = StockCalculations::TYPE_WITHDRAWAL;
+
         $tableCurrency = (new CurrencyExchanges)->getTable();
         $tableStock = (new self)->getTable();
 
         $query = self::query()
             ->addSelect($tableStock . '.*')
-            ->addSelect($tableCurrency . '.*')
-            ->join(
+            ->addSelect($tableCurrency . '.code', $tableCurrency . '.exchange_rate')
+            ->leftJoin(
                 $tableCurrency,
                 DB::raw('(DATE_FORMAT(' . $tableStock . '.date, "%Y-%m-%d"))'),
                 '=',
-                DB::raw('(DATE_FORMAT(' . $tableCurrency . '.when, "%Y-%m-%d"))')
+                DB::raw('(DATE_FORMAT(' . $tableCurrency . '.date, "%Y-%m-%d"))')
             )
-            ->where($tableStock . '.type', 'LIKE', '%cash%')
+            ->where($tableStock . '.type', 'LIKE', '%' . $cash . '%')
             ->where($tableCurrency . '.code', '=', $currencyTo);
 
         return $query;

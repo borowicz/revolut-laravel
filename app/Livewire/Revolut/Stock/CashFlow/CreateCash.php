@@ -5,7 +5,7 @@ namespace App\Livewire\Revolut\Stock\CashFlow;
 use Livewire\Component;
 use App\Livewire\Revolut\AbstractComponent;
 //use App\Http\Controllers\Revolut\AbstractRevolut;
-//use App\Models\Revolut\Stock\CashCurrent;
+use App\Models\Revolut\Stock\CashCurrent;
 
 class CreateCash extends AbstractComponent
 {

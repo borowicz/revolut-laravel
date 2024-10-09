@@ -44,6 +44,7 @@
     </thead>
     <tbody class="bg-white divide-y divide-gray-200">
     @forelse ($items as $key => $item)
+{{--        @dd($item)--}}
         <tr class="even:bg-gray-50 odd:bg-white">
             <td title="{{ $item->hash }}">&nbsp;{{ (int)$key+1 }}&nbsp;</td>
             <td class="px-3 py-2">

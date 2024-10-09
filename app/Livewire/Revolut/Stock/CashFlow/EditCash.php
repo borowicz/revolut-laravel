@@ -5,8 +5,8 @@ namespace App\Livewire\Revolut\Stock\CashFlow;
 //use App\Models\Revolut\StockMarket;
 //use App\Models\Revolut\StockTicker;
 //use Livewire\Component;
-use App\Models\Revolut\Stock\CashCurrent;
 use App\Livewire\Revolut\AbstractComponent;
+use App\Models\Revolut\Stock\CashCurrent;
 
 class EditCash extends AbstractComponent
 {

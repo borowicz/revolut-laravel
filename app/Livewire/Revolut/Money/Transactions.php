@@ -67,7 +67,6 @@ class Transactions extends AbstractComponent
         debugbar()->info('$this->perPage: ' . $this->perPage);
 
         $results = $this->getItems();
-//dd($this->ticker);
         $this->types = StockTransaction::getTypes();
         $this->tickers = StockTransaction::getTickers();
 
