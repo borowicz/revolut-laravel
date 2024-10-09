@@ -13,39 +13,25 @@ class CryptoTransaction extends AbstractRevolutModel
     use HasFactory, SoftDeletes;
 
     protected $fillable = [
-        'hash',
-        'date',
-        'symbol',
-        'type',
-        'currency',
-        'quantity',
-
-        'price',
-        'price_raw',
-        'value',
-        'value_raw',
-        'fees',
-        'fees_raw',
+        'hash', 'date', 'symbol', 'type', 'currency', 'quantity',
+        'price', 'price_raw', 'value', 'value_raw', 'fees', 'fees_raw',
     ];
 
     public static function getTickersList()
     {
-        $results = self::query();
-
-        return $results;
+        return self::query();
     }
 
     public static function getSummary(bool $all = true)
     {
         $query = DB::table((new self())->getTable())
-            ->select(DB::raw('
-(
-  SUM(CASE WHEN type NOT LIKE "%sell%" THEN quantity ELSE 0 END)
-  -
-  SUM(CASE WHEN type LIKE "%sell%" THEN quantity ELSE 0 END)
-) AS total
-            '))
-            ->addSelect('symbol')
+            ->selectRaw('
+                symbol,
+                (
+                    SUM(CASE WHEN type NOT LIKE "%sell%" THEN quantity ELSE 0 END)
+                    - SUM(CASE WHEN type LIKE "%sell%" THEN quantity ELSE 0 END)
+                ) AS total
+            ')
             ->groupBy('symbol')
             ->orderBy('total', 'DESC')
             ->orderBy('symbol');
@@ -59,17 +45,13 @@ class CryptoTransaction extends AbstractRevolutModel
 
     public static function getTickers(bool $all = false)
     {
-        $results = self::query()
+        return self::query()
             ->select('symbol')
-            ->distinct()
             ->where('symbol', '!=', '')
             ->whereNotNull('symbol')
             ->orderBy('symbol')
-            ->get()
             ->pluck('symbol')
             ->toArray();
-
-        return $results;
     }
 
     public static function getTypes()
@@ -78,7 +60,6 @@ class CryptoTransaction extends AbstractRevolutModel
             ->select('type')
             ->distinct()
             ->orderBy('type')
-            ->get()
             ->pluck('type')
             ->toArray();
     }

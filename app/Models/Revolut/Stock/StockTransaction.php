@@ -27,7 +27,7 @@ class StockTransaction extends AbstractRevolutModel
 
     public static function getTickers(bool $all = false)
     {
-        $results = self::query()
+        return self::query()
             ->select('ticker')
             ->distinct()
             ->where('ticker', '!=', '')
@@ -36,23 +36,16 @@ class StockTransaction extends AbstractRevolutModel
             ->get()
             ->pluck('ticker')
             ->toArray();
-
-        return $results;
     }
 
     public static function getTransactionsCash()
     {
-        $cash =DB::table((new self())->getTable())
-            ->select(
-                DB::raw(
-                    '(SUM(CASE WHEN type LIKE "%cash top%" THEN total_amount ELSE 0 END)
+        return DB::table((new self())->getTable())
+            ->select(DB::raw(
+                '(SUM(CASE WHEN type LIKE "%cash top%" THEN total_amount ELSE 0 END)
                 - SUM(CASE WHEN type LIKE "%with%" THEN total_amount ELSE 0 END)) AS total'
-                )
-            )
-            ->value('total')
-        ;
-
-        return $cash;
+            ))
+            ->value('total');
     }
 
     public function getCashTopUp(string $currencyTo = 'USDEUR')
@@ -63,7 +56,7 @@ class StockTransaction extends AbstractRevolutModel
         $tableCurrency = (new CurrencyExchanges)->getTable();
         $tableStock = (new self)->getTable();
 
-        $query = self::query()
+        return self::query()
             ->addSelect($tableStock . '.*')
             ->addSelect($tableCurrency . '.code', $tableCurrency . '.exchange_rate')
             ->leftJoin(
@@ -74,8 +67,6 @@ class StockTransaction extends AbstractRevolutModel
             )
             ->where($tableStock . '.type', 'LIKE', '%' . $cash . '%')
             ->where($tableCurrency . '.code', '=', $currencyTo);
-
-        return $query;
     }
 
     public static function getTypes()
