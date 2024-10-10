@@ -103,7 +103,8 @@ Route::prefix('revolut')
             Route::get('/', CryptoSummary::class)->name('crypto.index');
 
             Route::get('/transactions', CryptoTransactions::class)->name('crypto.transactions');
-            Route::get('/transaction/details/{ticker}', CryptoTransactions::class)->name('crypto.transactions.details');
+            Route::get('/transaction/details/{id}', CryptoTransactions::class)
+                ->name('crypto.transactions.details');
 
             Route::get('/tickers', CryptoTickersList::class)->name('crypto.tickers');
 
@@ -114,9 +115,8 @@ Route::prefix('revolut')
             Route::get('/', CommoditiesSummary::class)->name('commodities.index');
 
             Route::get('/transactions', CommoditiesTransactions::class)->name('commodities.transactions');
-            Route::get('/transaction/details/{ticker}', CommoditiesTransactions::class)->name(
-                'commodities.transactions.details'
-            );
+            Route::get('/transaction/details/{id}', CommoditiesTransactions::class)
+                ->name('commodities.transactions.details');
 
             Route::get('/tickers', CommoditiesTickersList::class)->name('commodities.tickers');
 

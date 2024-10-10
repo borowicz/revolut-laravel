@@ -16,15 +16,15 @@ class Transactions extends AbstractComponent
         $this->resetPage();
     }
 
-    public function sortBy($field)
-    {
-        if ($this->sortField === $field) {
-            $this->sortDirection = $this->sortDirection === 'ASC' ? 'DESC' : 'ASC';
-        } else {
-            $this->sortField = $field;
-            $this->sortDirection = 'DESC';
-        }
-    }
+//    public function sortBy($field)
+//    {
+//        if ($this->sortField === $field) {
+//            $this->sortDirection = $this->sortDirection === 'ASC' ? 'DESC' : 'ASC';
+//        } else {
+//            $this->sortField = $field;
+//            $this->sortDirection = 'DESC';
+//        }
+//    }
 
     private function getItems()
     {

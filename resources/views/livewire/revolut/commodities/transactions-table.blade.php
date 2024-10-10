@@ -47,36 +47,25 @@
         <tr class="even:bg-gray-50 odd:bg-white">
             <td title="{{ $item->hash }}">&nbsp;{{ (int)$key+1 }}&nbsp;</td>
             <td class="px-3 py-2">
-                {{ dateISO8601($item->date) }}
+                {{ dateISO8601($item->completed_date) }}
+            </td>
+            <td class="px-3 py-2 text-sm">
+                {{ shorted($item->currency) }}
             </td>
             <td class="px-3 py-2 text-sm">
                 {{ shorted($item->type) }}
             </td>
-            <td class="px-3 py-2">
-                {{ $item->ticker }}
+            <td class="px-3 py-2 text-sm">
+                {{ shorted($item->description) }}
             </td>
-            <td class="px-3 py-2 text-right text-sm">
-                {{ numberFormat($item->quantity, 3) }}
+            <td class="px-3 py-2 text-sm">
+                {{ shorted($item->amount) }}
             </td>
-            <td class="px-3 py-2 text-right text-sm">
-                ${{ numberFormat($item->price_per_share) }}
+            <td class="px-3 py-2 text-sm">
+                {{ shorted($item->fee) }}
             </td>
-            <td class="px-3 py-2 text-right">
-                {{ numberFormat($item->total_amount) }}
-            </td>
-            <td class="text-right">
-                @if($showButtons)
-                    <a href="{{ route('stock.transactions.details', [$item->ticker]) }}"
-                       title="{{ $item->created_at }} | {{ $item->updated_at }}"
-                       class="inline-flex items-center px-2 py-2 bg-gray-800
-border border-transparent rounded-md
-font-semibold text-xs text-white
-uppercase tracking-widest
-hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900
-focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2
-transition ease-in-out duration-150"
-                    >{{ __('details') }}</a>
-                @endif
+            <td class="px-3 py-2 text-sm">
+                {{ shorted($item->balance) }}
             </td>
         </tr>
     @empty

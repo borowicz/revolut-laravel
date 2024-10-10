@@ -69,7 +69,7 @@
             </td>
             <td class="text-right">
                 @if($showButtons)
-                    <a href="{{ route('crypto.transactions.details', [$item->symbol]) }}"
+                    <a href="{{ route('crypto.transactions.details', ['id' => $item->id]) }}"
                        title="{{ $item->created_at }} | {{ $item->updated_at }}"
                        class="inline-flex items-center px-2 py-2 bg-gray-800
 border border-transparent rounded-md

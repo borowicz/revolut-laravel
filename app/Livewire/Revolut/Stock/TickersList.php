@@ -46,11 +46,8 @@ class TickersList extends AbstractComponent
     {
         $query = StockTicker::query();
         $stockTickers = StockTransaction::getTickers();
-//        dd($stockTickers);
         if ($query->count() < count($stockTickers)) {
             $this->getAndSetTickersFromStockTransactions($stockTickers);
-
-//            $query = StockTicker::query();
         }
 
         $query->orderBy($this->sortField, $this->sortDirection);

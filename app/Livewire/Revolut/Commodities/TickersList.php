@@ -2,20 +2,21 @@
 
 namespace App\Livewire\Revolut\Commodities;
 
-use App\Livewire\Revolut\Stock\AbstractRevolut;
+use App\Console\Commands\Import\Commodity;
+use App\Livewire\Revolut\AbstractComponent;
+use App\Models\Revolut\Commodities\CommoditiesTransaction;
+use App\Models\Revolut\Commodities\Ticker;
+use App\Livewire\Revolut\Commodities\Transactions;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
-use Livewire\WithPagination;
 use Livewire\Component;
-use App\Models\Revolut\Stock\StockTicker;
-use App\Models\Revolut\Stock\StockTransaction;
-use App\Livewire\Revolut\AbstractComponent;
+use Livewire\WithPagination;
 
 class TickersList extends AbstractComponent
 {
     use WithPagination;
 
-    public $sortField = 'ticker';
+    public $sortField = 'currency';
 
     public $sortDirection = 'ASC';
 
@@ -24,27 +25,25 @@ class TickersList extends AbstractComponent
 
     public function updateStatus($itemId, $status)
     {
-        $this->itemStatus[$itemId] = (int)$status === 1 ? 0 : 1;
-
-        debugbar()->info('$status: ' . $status);
-        debugbar()->info('$statusNEW: ' . $this->itemStatus[$itemId]);
-        debugbar()->info('$status: ' . date('Y-m-d H:i:s') . ' - ' . uniqid('true', true));
-
-        $model = StockTicker::find($itemId);
-        $model->disabled = $this->itemStatus[$itemId];
-        $model->save();
+//        $this->itemStatus[$itemId] = (int)$status === 1 ? 0 : 1;
+//
+//        debugbar()->info('$status: ' . $status);
+//        debugbar()->info('$statusNEW: ' . $this->itemStatus[$itemId]);
+//        debugbar()->info('$status: ' . date('Y-m-d H:i:s') . ' - ' . uniqid('true', true));
+//
+//        $model = StockTicker::find($itemId);
+//        $model->disabled = $this->itemStatus[$itemId];
+//        $model->save();
     }
 
     public function render(Request $request)
     {
         debugbar()->info('$this->perPage: ' . $this->showButtons);
 
-        $query = StockTicker::query();
-        if ($query->count() < 1) {
-            $this->getAndSetTickersFromStockTransactions();
-
-            $query = StockTicker::query();
-        }
+        $query = CommoditiesTransaction::query();
+//        if ($query->count() < 1) {
+////            $this->getAndSetTickersFromStockTransactions();
+//        }
 
         $query->orderBy($this->sortField, $this->sortDirection);
 
@@ -58,10 +57,8 @@ class TickersList extends AbstractComponent
         $this->showButtons = false;
         $this->tickers = null;
 
-        return view(
-                'livewire.revolut.commodities.tickers',
-                compact('items', 'hasPages')
-            )
+        return view('livewire.revolut.commodities.tickers',
+                compact('items', 'hasPages'))
             ->layout('layouts.app');
     }
 

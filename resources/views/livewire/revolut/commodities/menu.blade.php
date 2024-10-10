@@ -3,8 +3,8 @@
 $menuItems = [
     // 'name' => 'route.name',
     'commodities' => 'commodities.index',
-//    'transactions' => 'commodities.transactions',
-//    'tickers' => 'commodities.tickers',
+    'transactions' => 'commodities.transactions',
+    'tickers' => 'commodities.tickers',
     'upload' => 'commodities.upload',
 ];
 @endphp
