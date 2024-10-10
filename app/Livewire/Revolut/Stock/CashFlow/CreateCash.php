@@ -14,13 +14,24 @@ class CreateCash extends AbstractComponent
     public $date = '';
 
     #[Rule('required')]
-    public $total = 0;
+    public $total = null;
+
     public $note = '';
 
     public $redirectRoute = 'stock.cash.flow';
 
+    public function rules()
+    {
+        return [
+            'date' => 'required|date',
+            'total' => 'required|numeric',
+        ];
+    }
+
     public function save()
     {
+        $this->validate();
+
         Money::create($this->only(['date', 'total', 'note']));
 
         return redirect()->to(route($this->redirectRoute));
@@ -33,8 +44,6 @@ class CreateCash extends AbstractComponent
 
     public function render()
     {
-        $this->date = date('Y-m-d');
-
         return view('livewire.revolut.stock.cash-flow-form')
             ->layout('layouts.app');
     }

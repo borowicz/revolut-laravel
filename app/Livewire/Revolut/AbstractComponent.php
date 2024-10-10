@@ -29,12 +29,6 @@ abstract class AbstractComponent extends Component
 
     public $selectedType = null;
 
-//    public function mount($ticker = null, $perPage = 10)
-//    {
-//        $this->ticker = $ticker;
-//        $this->perPage = $perPage;
-//    }
-
     public function setPagination($query)
     {
         if (empty($this->perPage)) {

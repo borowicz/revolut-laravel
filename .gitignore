@@ -43,3 +43,4 @@ storage/uploads/
 /resources/views/livewire/partials/button-disable.blade.phps
 bootstrap/providers.php
 composer.json
+/README.2do.md
