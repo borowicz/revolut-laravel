@@ -5,11 +5,14 @@
         <th class="px-6 py-3 text-left text-sm font-semibold text-gray-900 hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900">
             @include('livewire.partials.button-sort-field', [
                 'label' => 'ticker',
-                'field' => 'ticker',
+                'field' => 'symbol',
             ])
         </th>
         <th class="px-6 py-3 text-left lowercase">
-            {{ __('market') }}
+            @include('livewire.partials.button-sort-field', [
+                'label' => 'currency',
+                'field' => 'currency',
+            ])
         </th>
         <th class="px-6 py-3 text-left lowercase">
             {{ __('news services') }}
@@ -18,10 +21,7 @@
             &nbsp;
         </th>
         <th class="px-6 py-3 text-right text-sm font-semibold text-gray-900 hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900">
-            @include('livewire.partials.button-sort-field', [
-                'label' => 'status',
-                'field' => 'disabled',
-            ])
+            &nbsp;
         </th>
     </tr>
     </thead>
@@ -30,27 +30,24 @@
         <tr class="even:bg-gray-50 odd:bg-white">
             <td title="{{ $item->hash }}">&nbsp;{{ (int)$key+1 }}&nbsp;</td>
             <td class="px-3 py-2" title="{{ $item->notes }}">
-                {{ $item->ticker }}
+                {{ $item->symbol }}
             </td>
             <td class="px-3 py-2 text-left">
-                {{ $item->market ?? '' }}
+                {{ $item->currency ?? '' }}
             </td>
             <td class="px-3 py-2 text-left text-sm text-gray-500">
 
                 [<a target="_blank"
-                    href="https://finance.yahoo.com/quote/{{ $item->ticker }}/?.tsrc={{ config('revolut.source') }}"
+                    href="https://finance.yahoo.com/quote/{{ $item->symbol }}-{{ $item->currency }}/?.tsrc={{ config('revolut.source') }}"
                 >{{ __('financeYahoo') }}</a>],&nbsp;
                 [<a target="_blank"
-                    href="https://www.google.com/finance/quote/{{ $item->ticker }}:{{ $item->suffix_gf ?? 'NASDAQ' }}{{ config('revolut.source') }}"
+                    href="https://www.google.com/finance/quote/{{ $item->symbol }}-{{ $item->currency }}{{ config('revolut.source') }}"
                 >{{ __('gFinance') }}</a>],&nbsp;
                 [<a target="_blank"
-                    href="https://markets.ft.com/data/equities/tearsheet/summary?s={{ $item->suffix_ft }}{{ config('revolut.source') }}"
-                >{{ __('FT') }}</a>],&nbsp;
-                [<a target="_blank"
-                    href="https://edition.cnn.com/markets/stocks/{{ $item->ticker }}{{ config('revolut.source') }}"
+                    href="https://edition.cnn.com/markets/stocks/{{ $item->symbol }}{{ config('revolut.source') }}"
                 >{{ __('CNN') }}</a>],&nbsp;
                 [<a target="_blank"
-                    href="https://www.bloomberg.com/quote/{{ $item->ticker }}:{{ $item->suffix_bb ?? 'US' }}{{ config('revolut.source') }}"
+                    href="https://www.bloomberg.com/quote/{{ $item->symbol }}:{{ $item->suffix_bb ?? 'US' }}{{ config('revolut.source') }}"
                 >{{ __('BB') }}</a>]
             </td>
             <td class="px-3 py-2 text-center text-sm text-gray-500">

@@ -18,13 +18,34 @@
                 </div>
             </div>
         </div>
-
-        <div class="px-4 sm:px-6 lg:px-8">
-{{--            @include('livewire.revolut.stock.summarized')--}}
+        <div class="py-3">
+            <div class="grid grid-cols-2 gap-1">
+                <div>
+                    @if (isset($items['types']))
+                        @foreach($items['types'] as $type)
+                            {{ $type['type'] }}: {{ numberFormat($type['cnt'], 0) }}<br>
+                        @endforeach
+                    @endif
+                </div>
+                <div>
+                    <div class="grid grid-cols-2 gap-1 w-96">
+                        @if (isset($items['crypto']))
+                            @foreach($items['crypto'] as $crypto)
+                                <div class="text-right w-24">{{ $crypto->symbol }}: </div>
+                                <div class="text-right w-48">{{ numberFormat($crypto->total, 6) }}</div>
+                            @endforeach
+                        @endif
+                    </div>
+                </div>
+            </div>
         </div>
 
         <div class="px-4 sm:px-6 lg:px-8">
-{{--            @include('livewire.revolut.stock.summary-table')--}}
+
+        </div>
+
+        <div class="px-4 py-4 sm:px-6 lg:px-8">
+
         </div>
         <br class="clearfix"/>
     </div>

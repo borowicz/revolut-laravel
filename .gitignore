@@ -41,4 +41,5 @@ storage/uploads/
 /composer.lock
 /resources/views/livewire/pages/upload.blade.phps
 /resources/views/livewire/partials/button-disable.blade.phps
-
+bootstrap/providers.php
+composer.json

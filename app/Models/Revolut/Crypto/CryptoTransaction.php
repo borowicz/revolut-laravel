@@ -19,7 +19,13 @@ class CryptoTransaction extends AbstractRevolutModel
 
     public static function getTickersList()
     {
-        return self::query();
+        return self::query()
+            ->select('symbol', 'currency')
+            ->distinct('symbol')
+            ->where('symbol', '!=', '')
+            ->where('currency', '!=', '')
+            ->whereNotNull('symbol');
+        ;
     }
 
     public static function getSummary(bool $all = true)
@@ -43,6 +49,17 @@ class CryptoTransaction extends AbstractRevolutModel
         return $query;
     }
 
+//    public static function getTickersList(bool $all = false)
+//    {
+//        return self::query()
+//            ->select('symbol')
+//            ->where('symbol', '!=', '')
+//            ->whereNotNull('symbol')
+//            ->orderBy('symbol')
+//            ->pluck('symbol')
+//            ->toArray();
+//    }
+
     public static function getTickers(bool $all = false)
     {
         return self::query()
@@ -51,6 +68,16 @@ class CryptoTransaction extends AbstractRevolutModel
             ->whereNotNull('symbol')
             ->orderBy('symbol')
             ->pluck('symbol')
+            ->toArray();
+    }
+
+    public static function getTypesSummary()
+    {
+        return self::query()
+            ->selectRaw('type, COUNT(id) as cnt')
+            ->groupBy('type')
+            ->orderBy('type')
+            ->get()
             ->toArray();
     }
 

@@ -11,9 +11,7 @@ class Summary extends AbstractComponent
     public function render(Request $request)
     {
         $items = [];
-
-//        $items['tickers'] = CryptoTransaction::getTickers($this->showAll);
-//        $items['types'] = CryptoTransaction::getTypes();
+        $items['types'] = CryptoTransaction::getTypesSummary();
         $items['crypto'] = CryptoTransaction::getSummary($this->showAll)->get();
 
         return view('livewire.revolut.crypto.summary', ['items' => $items])
