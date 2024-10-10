@@ -9,7 +9,6 @@ use Livewire\Attributes\Rule;
 class CreateCash extends AbstractComponent
 {
     public $buttonAction = 'Create';
-//    public Money $item;
 
     #[Rule('required')]
     public $date = '';
@@ -22,7 +21,6 @@ class CreateCash extends AbstractComponent
 
     public function save()
     {
-//        dd($this->all());
         Money::create($this->only(['date', 'total', 'note']));
 
         return redirect()->to(route($this->redirectRoute));
