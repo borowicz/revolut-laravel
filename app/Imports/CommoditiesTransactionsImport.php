@@ -16,7 +16,7 @@ class CommoditiesTransactionsImport extends AbstractImport
         if (stristr($row[0], 'type')) {
             return null;
         }
-
+//dd($row);
         $importStats = Session::get('importStats');
         $importStats['total']++;
 
@@ -24,6 +24,7 @@ class CommoditiesTransactionsImport extends AbstractImport
         if (CommoditiesTransaction::where('hash', $hash)->exists()) {
             $importStats['skipped']++;
             Session::put('importStats', $importStats);
+
             return null;
         }
 
@@ -31,6 +32,7 @@ class CommoditiesTransactionsImport extends AbstractImport
             return null;
         }
 
+        //Type,Product,Started Date,Completed Date,Description,Amount,Fee,Currency,State,Balance
         $entry = [
             'hash'           => $hash,
             'type'           => $row[0] ?? '',

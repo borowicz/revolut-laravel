@@ -15,10 +15,15 @@ return new class extends Migration {
 
     public function up(): void
     {
+//        $table->foreignId('stock_markets_id')->constrained()->default(null);
+//            $table->foreign('stock_markets_id')
+//                ->references('id')
+//                ->on(self::TABLE_RELATED)
+//                ->onDelete('cascade');
         Schema::create(self::TABLE_NAME, function (Blueprint $table) {
             $table->id();
-//            $table->foreignId('stock_markets_id')->constrained();
-            $table->foreign('id')
+            $table->unsignedBigInteger('stock_markets_id')->nullable();
+            $table->foreign('stock_markets_id')
                 ->references('id')
                 ->on(self::TABLE_RELATED)
                 ->onDelete('cascade');
@@ -27,7 +32,7 @@ return new class extends Migration {
 
             $table->string('ticker')->unique();
             $table->string('url')->default('');
-            $table->text('notes')->default('');
+            $table->text('notes')->nullable();
 
             $table->timestamps();
             $table->softDeletes();

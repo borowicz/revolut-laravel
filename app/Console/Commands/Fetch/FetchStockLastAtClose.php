@@ -165,7 +165,7 @@ class FetchStockLastAtClose  extends AbstractCommand implements FetchDataInterfa
         }
 
         $apiData = $this->apiService->getStockPriceData($ticker, $transactionsDate, $this->force);
-dump($apiData);
+
         if (!$apiData) {
             Log::error($ticker . ' - NO data ');
 

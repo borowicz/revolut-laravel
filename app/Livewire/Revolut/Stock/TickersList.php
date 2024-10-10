@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Livewire\WithPagination;
 use Livewire\Component;
+use App\Http\Controllers\Revolut\AbstractRevolutController;
 use App\Models\Revolut\Stock\StockTicker;
 use App\Models\Revolut\Stock\StockTransaction;
 use App\Livewire\Revolut\AbstractComponent;
@@ -44,10 +45,12 @@ class TickersList extends AbstractComponent
     public function render(Request $request)
     {
         $query = StockTicker::query();
-        if ($query->count() < 1) {
-            $this->getAndSetTickersFromStockTransactions();
+        $stockTickers = StockTransaction::getTickers();
+//        dd($stockTickers);
+        if ($query->count() < count($stockTickers)) {
+            $this->getAndSetTickersFromStockTransactions($stockTickers);
 
-            $query = StockTicker::query();
+//            $query = StockTicker::query();
         }
 
         $query->orderBy($this->sortField, $this->sortDirection);
@@ -69,15 +72,18 @@ class TickersList extends AbstractComponent
             ->layout('layouts.app');
     }
 
-    private function getAndSetTickersFromStockTransactions(): void
+    private function getAndSetTickersFromStockTransactions(array $tickers): void
     {
-        $tickers = StockTransaction::getTickers();
-
         $new = 0;
         foreach ($tickers as $ticker) {
-            $hash = AbstractRevolut::setHash([$ticker]);
+            $check = StockTicker::where('ticker', $ticker)->first();
+            if ($check) {
+                continue;
+            }
 
-            $result = StockTicker::firstOrCreate(['hash' => $hash, 'ticker' => $ticker,]);
+            $hash = AbstractRevolutController::setHash([$ticker]);
+            $result = StockTicker::firstOrCreate(['ticker' => $ticker], ['hash' => $hash, 'ticker' => $ticker]);
+
             if (!$result) {
                 $new++;
             }

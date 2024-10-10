@@ -30,6 +30,12 @@ return new class extends Migration {
             $table->string('state')->default('');
             $table->string('balance')->default('');
 
+            // Additional columns for price and traded value editable by user
+            $table->string('note')->nullable();
+            $table->decimal('price', 14, 6)->nullable();
+            $table->decimal('traded_value', 14, 6)->nullable();
+            $table->string('currency_exchange')->nullable();
+
             $table->timestamps();
             $table->softDeletes();
         });
