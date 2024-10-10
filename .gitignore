@@ -34,7 +34,9 @@ public/vendor/
 storage/debugbar/
 storage/uploads/
 /env.local
+/.env.testing
 /vendorLocal/
+/*.sql
 
 ### remove after deploy
 /composer.json
@@ -44,3 +46,11 @@ storage/uploads/
 bootstrap/providers.php
 composer.json
 /README.2do.md
+/storage/
+/storage/app/
+/storage/debugbar/
+/storage/framework/
+/storage/logs/
+/storage/sql/
+/storage/uploads/
+

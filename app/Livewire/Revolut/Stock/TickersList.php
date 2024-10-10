@@ -18,9 +18,9 @@ class TickersList extends AbstractComponent
     public $sortDirection = 'ASC';
     protected $listeners = ['refreshComponent' => '$refresh'];
 
-    public function mount($ticker = null, $perPage = 10)
+    public function mount()
     {
-        parent::mount($ticker, $perPage);
+//        parent::mount($ticker, $perPage);
 
         $this->itemStatus = StockTicker::pluck('disabled', 'id')->toArray();
     }
