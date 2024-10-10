@@ -106,7 +106,11 @@ Route::prefix('revolut')
             Route::get('/transaction/details/{id}', CryptoTransactions::class)
                 ->name('crypto.transactions.details');
 
-            Route::get('/tickers', CryptoTickersList::class)->name('crypto.tickers');
+            Route::prefix('tickers')->group(function () {
+                Route::get('/', CryptoTickersList::class)->name('crypto.tickers');
+                Route::get('/create', CryptoTickersList::class)->name('crypto.tickers.create');
+                Route::get('/edit/{id}', CryptoTickersList::class)->name('crypto.tickers.edit');
+            });
 
             Route::get('/upload', CryptoUpload::class)->name('crypto.upload');
         });
@@ -118,7 +122,11 @@ Route::prefix('revolut')
             Route::get('/transaction/details/{id}', CommoditiesTransactions::class)
                 ->name('commodities.transactions.details');
 
-            Route::get('/tickers', CommoditiesTickersList::class)->name('commodities.tickers');
+            Route::prefix('tickers')->group(function () {
+                Route::get('/', CommoditiesTickersList::class)->name('commodities.tickers');
+                Route::get('/create', CommoditiesTickersList::class)->name('commodities.tickers.create');
+                Route::get('/edit/{id}', CommoditiesTickersList::class)->name('commodities.tickers.edit');
+            });
 
             Route::get('/upload', CommoditiesUpload::class)->name('commodities.upload');
         });

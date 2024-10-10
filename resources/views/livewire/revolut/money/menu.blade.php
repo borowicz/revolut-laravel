@@ -3,7 +3,7 @@
 $menuItems = [
     // 'name' => 'route.name',
     'money' => 'money.index',
-//    'transactions' => 'money.transactions',
+    'transactions' => 'money.transactions',
 //    'tickers' => 'money.tickers',
     'upload' => 'money.upload',
 ];

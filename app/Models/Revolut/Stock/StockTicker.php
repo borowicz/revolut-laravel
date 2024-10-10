@@ -11,10 +11,11 @@ class StockTicker extends AbstractRevolutModel
     use HasFactory, SoftDeletes;
 
     protected $fillable = [
-            'hash',
-            'disabled',
-            'ticker',
-            'url',
-            'notes',
-        ];
+        'disabled',
+        'hash',
+
+        'ticker',
+        'url',
+        'notes',
+    ];
 }

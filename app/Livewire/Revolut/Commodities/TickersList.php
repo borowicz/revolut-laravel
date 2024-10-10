@@ -5,7 +5,7 @@ namespace App\Livewire\Revolut\Commodities;
 use App\Console\Commands\Import\Commodity;
 use App\Livewire\Revolut\AbstractComponent;
 use App\Models\Revolut\Commodities\CommoditiesTransaction;
-use App\Models\Revolut\Commodities\Ticker;
+use App\Models\Revolut\Commodities\CommoditiesTicker;
 use App\Livewire\Revolut\Commodities\Transactions;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -23,18 +23,18 @@ class TickersList extends AbstractComponent
     public $status = 0; // Initial status
     public $itemStatus = []; // To track status for each item
 
-    public function updateStatus($itemId, $status)
-    {
-//        $this->itemStatus[$itemId] = (int)$status === 1 ? 0 : 1;
-//
-//        debugbar()->info('$status: ' . $status);
-//        debugbar()->info('$statusNEW: ' . $this->itemStatus[$itemId]);
-//        debugbar()->info('$status: ' . date('Y-m-d H:i:s') . ' - ' . uniqid('true', true));
-//
-//        $model = StockTicker::find($itemId);
-//        $model->disabled = $this->itemStatus[$itemId];
-//        $model->save();
-    }
+//    public function updateStatus($itemId, $status)
+//    {
+////        $this->itemStatus[$itemId] = (int)$status === 1 ? 0 : 1;
+////
+////        debugbar()->info('$status: ' . $status);
+////        debugbar()->info('$statusNEW: ' . $this->itemStatus[$itemId]);
+////        debugbar()->info('$status: ' . date('Y-m-d H:i:s') . ' - ' . uniqid('true', true));
+////
+////        $model = StockTicker::find($itemId);
+////        $model->disabled = $this->itemStatus[$itemId];
+////        $model->save();
+//    }
 
     public function render(Request $request)
     {

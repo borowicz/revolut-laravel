@@ -37,6 +37,11 @@ storage/uploads/
 /.env.testing
 /vendorLocal/
 /*.sql
+/app/Providers/TelescopeServiceProvider.php
+/config/telescope.php
+/database/migrations/2024_10_10_151626_create_telescope_entries_table.php
+run.sh
+
 
 ### remove after deploy
 /composer.json
