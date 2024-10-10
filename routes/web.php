@@ -82,7 +82,8 @@ Route::prefix('revolut')
             });
 
             Route::get('/transactions', Transactions::class)->name('stock.transactions');
-            Route::get('/transaction/details/{ticker}', Transactions::class)->name('stock.transactions.details');
+            Route::get('/transaction/details/{ticker}', Transactions::class)
+                ->name('stock.transactions.details');
 
             Route::prefix('markets')->group(function () {
                 Route::get('/', Markets::class)->name('stock.markets');
@@ -118,14 +119,17 @@ Route::prefix('revolut')
         Route::prefix('commodities')->group(function () {
             Route::get('/', CommoditiesSummary::class)->name('commodities.index');
 
-            Route::get('/transactions', CommoditiesTransactions::class)->name('commodities.transactions');
+            Route::get('/transactions', CommoditiesTransactions::class)
+                ->name('commodities.transactions');
             Route::get('/transaction/details/{id}', CommoditiesTransactions::class)
                 ->name('commodities.transactions.details');
 
             Route::prefix('tickers')->group(function () {
                 Route::get('/', CommoditiesTickersList::class)->name('commodities.tickers');
-                Route::get('/create', CommoditiesTickersList::class)->name('commodities.tickers.create');
-                Route::get('/edit/{id}', CommoditiesTickersList::class)->name('commodities.tickers.edit');
+                Route::get('/create', CommoditiesTickersList::class)
+                    ->name('commodities.tickers.create');
+                Route::get('/edit/{id}', CommoditiesTickersList::class)
+                    ->name('commodities.tickers.edit');
             });
 
             Route::get('/upload', CommoditiesUpload::class)->name('commodities.upload');
@@ -135,7 +139,8 @@ Route::prefix('revolut')
             Route::get('/', MoneySummary::class)->name('money.index');
 
             Route::get('/transactions', MoneyTransactions::class)->name('money.transactions');
-            Route::get('/transaction/details/{ticker}', MoneyTransactions::class)->name('money.transactions.details');
+            Route::get('/transaction/details/{ticker}', MoneyTransactions::class)
+                ->name('money.transactions.details');
 
             Route::get('/tickers', MoneyTickersList::class)->name('money.tickers');
 
