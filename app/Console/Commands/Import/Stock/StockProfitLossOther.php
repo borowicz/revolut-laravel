@@ -2,7 +2,7 @@
 
 namespace App\Console\Commands\Import\Stock;
 
-use App\Console\Commands\Import\AbstractImportCommand;
+use App\Console\AbstractImportCommand;
 use App\Console\FetchDataInterface;
 use Illuminate\Console\Command;
 use Illuminate\Console\Scheduling\Schedule;

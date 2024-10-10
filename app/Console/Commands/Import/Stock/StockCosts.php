@@ -2,15 +2,13 @@
 
 namespace App\Console\Commands\Import\Stock;
 
-use Symfony\Component\Console\Output\OutputInterface;
-use Maatwebsite\Excel\Facades\Excel;
-use Smalot\PdfParser\Parser;
+use App\Console\AbstractImportCommand;
+use App\Console\FetchDataInterface;
 use Illuminate\Console\Command;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Support\Facades\File;
-use App\Imports\Stock\CostsImport;
-use App\Console\Commands\Import\AbstractImportCommand;
-use App\Console\FetchDataInterface;
+use Smalot\PdfParser\Parser;
+use Symfony\Component\Console\Output\OutputInterface;
 
 
 /**

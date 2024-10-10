@@ -1,11 +1,10 @@
 <?php
 
-namespace App\Console\Commands\Import;
+namespace App\Console;
 
+use App\Imports\AbstractImport;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\File;
-use App\Imports\AbstractImport;
-use App\Console\AbstractCommand;
 
 /**
  *- -***

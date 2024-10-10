@@ -18,18 +18,23 @@ return new class extends Migration {
             $table->id();
             $table->string('hash');
 
-            // Type,Product,Started Date,Completed Date,Description,Amount,Fee,Currency,State,Balance
             $table->string('date');
-            $table->string('type')->default('');
-            $table->string('product')->default('');
-            $table->string('started_date')->default('');
-            $table->string('completed_date')->default('');
-            $table->string('description')->default('');
+
+            // Type,Product,Started Date,Completed Date,Description,Amount,Fee,Currency,State,Balance
+            $table->string('type')->nullable();
+            $table->string('product')->nullable();
+            $table->string('started_date')->nullable();
+            $table->string('completed_date')->nullable();
+            $table->string('description')->nullable();
+
+            $table->string('amount_raw')->nullable();
             $table->decimal('amount', 14, 6)->nullable();
+            $table->string('fee_raw')->nullable();
             $table->decimal('fee', 14, 6)->nullable();
-            $table->decimal('currency', 14, 6)->nullable();
-            $table->string('state')->default('');
-            $table->string('balance')->default('');
+            $table->string('currency')->nullable();
+
+            $table->string('state')->nullable();
+            $table->string('balance')->nullable();
 
             $table->timestamps();
             $table->softDeletes();

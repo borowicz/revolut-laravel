@@ -2,15 +2,15 @@
 
 namespace App\Console\Commands\Import\Stock;
 
+use App\Console\AbstractImportCommand;
+use App\Console\FetchDataInterface;
+use App\Http\Controllers\Revolut\AbstractRevolutController;
 use App\Imports\AbstractImport;
+use App\Models\Revolut\Stock\StockTicker;
+use App\Models\Revolut\Stock\StockTransaction;
 use Illuminate\Console\Command;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Support\Facades\Session;
-use App\Console\Commands\Import\AbstractImportCommand;
-use App\Console\FetchDataInterface;
-use App\Http\Controllers\Revolut\AbstractRevolutController;
-use App\Models\Revolut\Stock\StockTicker;
-use App\Models\Revolut\Stock\StockTransaction;
 
 /**
  * @see /revolut/stock/tickers

@@ -2,11 +2,10 @@
 
 namespace App\Console\Commands\Import;
 
-use Illuminate\Console\Command;
 use Illuminate\Console\Scheduling\Schedule;
 use Maatwebsite\Excel\Facades\Excel;
-use Symfony\Component\Console\Output\OutputInterface;
 use App\Console\FetchDataInterface;
+use App\Console\AbstractCsvImport;
 use App\Imports\Crypto\CryptoTransactionsImport;
 
 /**
@@ -14,33 +13,15 @@ use App\Imports\Crypto\CryptoTransactionsImport;
  *  records c.a.
  *- -***
  *
- * ./artisan revolut:import:crypto storage/app/revolut/crypt0–account-statement.csv
+ * ./artisan revolut:import:crypto storage/app/revolut/crypto–account-statement.csv
  *
  * Class StockProfitLossOther
  */
-class Crypto extends AbstractImportCommand implements FetchDataInterface
+class Crypto extends AbstractCsvImport implements FetchDataInterface
 {
     protected $signature = 'revolut:import:crypto {file}';
-
     protected $description = 'Import crypto transactions';
-
-    public function handle()
-    {
-        $this->init();
-        $this->info(' >> CSV: ' . $this->sourceFile, OutputInterface::VERBOSITY_VERBOSE);
-
-        if (!$this->isValidCsv()) {
-            $this->error(' >> Invalid CSV: ' . $this->sourceFile);
-
-            return Command::FAILURE;
-        }
-
-        $this->getData();
-
-        $this->getSummary();
-
-        return Command::SUCCESS;
-    }
+    public $sourceFile;
 
     public function getData()
     {
@@ -52,4 +33,3 @@ class Crypto extends AbstractImportCommand implements FetchDataInterface
         $schedule->command(__CLASS__, [])->daily()->at('1:47');
     }
 }
-

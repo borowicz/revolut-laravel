@@ -12,8 +12,8 @@ class CashTransaction extends AbstractRevolutModel
 
     protected $fillable = [
         'hash',
-
         'date',
+
         'type',
         'product',
         'started_date',

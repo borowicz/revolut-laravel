@@ -2,11 +2,10 @@
 
 namespace App\Console\Commands\Import;
 
-use Illuminate\Console\Command;
 use Illuminate\Console\Scheduling\Schedule;
 use Maatwebsite\Excel\Facades\Excel;
-use Symfony\Component\Console\Output\OutputInterface;
 use App\Console\FetchDataInterface;
+use App\Console\AbstractCsvImport;
 use App\Imports\CommoditiesTransactionsImport;
 
 /**
@@ -16,29 +15,11 @@ use App\Imports\CommoditiesTransactionsImport;
  *
  * Class Commodity
  */
-class Commodity extends AbstractImportCommand implements FetchDataInterface
+class Commodity extends AbstractCsvImport implements FetchDataInterface
 {
     protected $signature = 'revolut:import:commodity {file}';
 
     protected $description = 'Import commodity transactions';
-
-    public function handle()
-    {
-        $this->init();
-        $this->info(' >> CSV: ' . $this->sourceFile, OutputInterface::VERBOSITY_VERBOSE);
-
-        if (!$this->isValidCsv()) {
-            $this->error(' >> Invalid CSV: ' . $this->sourceFile);
-
-            return Command::FAILURE;
-        }
-
-        $this->getData();
-
-        $this->getSummary();
-
-        return Command::SUCCESS;
-    }
 
     public function getData()
     {
