@@ -78,7 +78,7 @@ Route::prefix('revolut')
                 Route::get('/', Cash::class)->name('stock.cash');
                 Route::get('/flow', CashFlow::class)->name('stock.cash.flow');
                 Route::get('/flow/create', CreateCash::class)->name('stock.cash.flow.create');
-                Route::get('/flow/edit/{id}', EditCash::class)->name('stock.cash.flow.edit');
+                Route::get('/flow/edit/{item}', EditCash::class)->name('stock.cash.flow.edit');
             });
 
             Route::get('/transactions', Transactions::class)->name('stock.transactions');

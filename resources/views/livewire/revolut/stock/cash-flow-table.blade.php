@@ -24,10 +24,10 @@
             <td class="px-3 py-2">{{ $item->date ?? '' }}</td>
             <td class="px-3 py-2">{{ numberFormat($item->total ?? 0) }}</td>
             <td class="px-3 py-2 text-center text-sm text-gray-500">
-                @include('livewire.partials.button-action', [
-                    'label' => 'edit',
-                    'routeName' =>'stock.cash.flow.edit',
-                    'itemId' => $item->id,
+                @include('livewire.partials.button-edit', [
+                         'label' => 'edit',
+                         'routeName' =>'stock.cash.flow.edit',
+                         'item' => $item
                 ])
             </td>
         </tr>

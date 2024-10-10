@@ -17,9 +17,21 @@ class EditCash extends CreateCash
 
         $this->date = $item->date;
 
-        $this->total = $item->total;
+        $this->total = numberFormat($item->total, 2, '.', '');
 
         $this->note = $item->note;
+    }
+
+    public function save()
+    {
+        $this->total = numberFormat($this->total, 2, '.', '');
+        $this->total = trim($this->total);
+
+        $this->item->update(
+            $this->all()
+        );
+
+        return redirect()->to(route($this->redirectRoute));
     }
 
 
