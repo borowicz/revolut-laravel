@@ -35,7 +35,7 @@ class TickersList extends AbstractComponent
         $this->showButtons = false;
         $this->tickers = null;
 
-        return view(compact('items', 'hasPages'))
+        return view('livewire.revolut.crypto.tickers', ['items' => $items, 'hasPages' => $hasPages])
             ->layout('layouts.app');
     }
 }
