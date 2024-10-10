@@ -16,12 +16,6 @@ class CreateMarket extends Component
 
     public function save()
     {
-//        $this->validate();
-//
-////        Auth::user()->notes()->create(
-////            $this->only(['title', 'content'])
-////        );
-
         return redirect()->to(route('markets.index'));
     }
 
