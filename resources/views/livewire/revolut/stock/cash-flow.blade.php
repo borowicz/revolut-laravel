@@ -14,6 +14,9 @@
                     <p class="mt-2 text-sm text-gray-700">...</p>
                 </div>
                 <div class="mt-4 sm:ml-16 sm:mt-0 sm:flex-none">
+                    @include('livewire.partials.button-create',
+                            ['label' => 'money', 'routeName'=> 'stock.cash.flow.create']
+                    )
                     @include('livewire.revolut.stock.menu')
                 </div>
             </div>
@@ -26,7 +29,7 @@
         </div>
 
         <div class="px-4 sm:px-6 lg:px-8">
-            @include('livewire.revolut.stock.cash-table')
+            @include('livewire.revolut.stock.cash-flow-table')
         </div>
         @include('livewire.partials.pagination')
         <br class="clearfix"/>

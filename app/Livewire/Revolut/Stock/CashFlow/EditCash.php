@@ -2,21 +2,30 @@
 
 namespace App\Livewire\Revolut\Stock\CashFlow;
 
-//use App\Models\Revolut\StockMarket;
-//use App\Models\Revolut\StockTicker;
-//use Livewire\Component;
 use App\Livewire\Revolut\AbstractComponent;
-use App\Models\Revolut\Stock\CashCurrent;
+use App\Models\Revolut\Stock\CashCurrent as Money;
+use Livewire\Attributes\Rule;
 
-class EditCash extends AbstractComponent
+class EditCash extends CreateCash
 {
-    public $buttonAction = 'Edit';
+    public Money $item;
+    public $buttonAction = 'Save';
+
+    public function mount(Money $item)
+    {
+        $this->item = $item;
+
+        $this->date = $item->date;
+
+        $this->total = $item->total;
+
+        $this->note = $item->note;
+    }
+
 
     public function render()
     {
-        $item = CashCurrent::find($this->id);
-
-        return view('livewire.pages.stock.cash.show', ['item' => $item,])
+        return view('livewire.revolut.stock.cash-flow-form')
             ->layout('layouts.app');
     }
 }

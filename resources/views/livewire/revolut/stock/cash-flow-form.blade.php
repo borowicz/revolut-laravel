@@ -20,14 +20,15 @@
 
                 <form wire:submit.prevent="save" class="mt-6 space-y-6">
                     <div>
-                        <x-input-label for="when" :value="__('when')" />
-                        <x-text-input wire:model="when"
-                                      id="when"
-                                      name="when"
+                        <x-input-label for="date" :value="__('when')" />
+                        <x-text-input wire:model="date"
+                                      id="date"
+                                      name="date"
                                       type="text"
+                                      value="{{ $date }}"
                                       readonly="readonly"
                                       class="mt-1 block w-full bg-gray-100 text-black"/>
-                        <x-input-error class="mt-2" :messages="$errors->get('cash')" />
+                        <x-input-error class="mt-2" :messages="$errors->get('date')" />
                     </div>
                     <div>
                         <x-input-label for="title" :value="__('cash value')" />

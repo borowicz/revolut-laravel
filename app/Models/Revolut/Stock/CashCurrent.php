@@ -14,10 +14,8 @@ class CashCurrent extends AbstractRevolutModel
     protected $table = 'stock_cash';
 
     protected $fillable = [
-        'hash',
-        'source',
-        'when',
-        'currency',
-        'cash',
+        'date',
+        'total',
+        'note',
     ];
 }
