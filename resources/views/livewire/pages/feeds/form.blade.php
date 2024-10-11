@@ -10,7 +10,7 @@
             <div class="p-6 text-gray-900">
                 <header>
                     <h2 class="text-lg font-medium text-gray-900">
-                        {{ __('Create new news feed') }}
+                        {{ __('Feed') }}: {{ __($buttonAction) }}
                     </h2>
 
                     <p class="mt-1 text-sm text-gray-600">
@@ -41,6 +41,19 @@
                                   class="mt-1 block w-full"
                                   required></textarea>
                         <x-input-error class="mt-2" :messages="$errors->get('feed_url')"/>
+                    </div>
+
+                    <div>
+                        <x-input-label for="disabled" :value="__('Disabled')"/>
+                        <input wire:model="disabled"
+                               id="disabled"
+                               name="disabled"
+                               type="checkbox"
+                               value="1"
+                               x-data="{{ $disabled == 1 ? 'true' : 'false' }}"
+                               @if($disabled > 0) checked @endif
+                               class="mt-1"/>
+                        <x-input-error class="mt-2" :messages="$errors->get('disabled')"/>
                     </div>
 
                     <div class="flex items-center gap-4">

@@ -2,8 +2,6 @@
 
 namespace App\Livewire\Feed;
 
-use App\Models\Revolut\Stock\StockTicker;
-use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 use App\Models\NewsFeed;
 

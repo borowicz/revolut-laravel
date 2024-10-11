@@ -3,47 +3,57 @@
 namespace App\Livewire\Feed;
 
 use Livewire\Attributes\Rule;
-use Livewire\Component;
+use App\Http\Controllers\Revolut\AbstractRevolutController;
 use App\Models\NewsFeed;
 
-class EditFeed extends Component
+class EditFeed extends ShowFeeds
 {
-    public NewsFeed $item;
-
+    public NewsFeed $feed;
     public $buttonAction = 'Save';
+    public $id; // Added property
+    public $disabled;
 
     #[Rule('required')]
     public $title = '';
 
     #[Rule('required')]
-    public $content = '';
+    public $feed_url = '';
 
-    public function mount(NewsFeed $item)
+    public function mount()
     {
-        $this->item = $item;
+        $this->feed = NewsFeed::find($this->id);
+        $this->title = $this->feed->title;
+        $this->feed_url = $this->feed->feed_url;
+        $this->disabled = (int)$this->feed->disabled;
+    }
 
-        $this->title = $item->title;
-
-        $this->content = $item->content;
+    public function rules()
+    {
+        return [
+            'title'    => 'required|string',
+            'feed_url' => 'required|url',
+            'disabled' => 'boolean',
+        ];
     }
 
     public function save()
     {
-        $this->item->update(
-            $this->all()
-        );
+        $this->validate();
+        $this->disabled = $this->disabled ?? 0;
 
-        return redirect()->to(route('feed.index'));
+        $this->feed->update($this->all());
+
+        return redirect()->to(route('feeds.index'));
     }
 
     public function cancel()
     {
-        return redirect()->to(route('feed.index'));
+        return redirect()->to(route('feeds.index'));
     }
 
     public function render()
     {
-        return view('livewire.pages.feed.form-note')
+        return view('livewire.pages.feeds.form')
             ->layout('layouts.app');
     }
 }

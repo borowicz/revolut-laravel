@@ -19,9 +19,6 @@ return new class extends Migration {
             $table->integer('disabled')->default(0);
             $table->string('hash')->unique();
             $table->string('date')->nullable();
-//            $table->integer('keep')->default(0);
-//            $table->string('ticker')->nullable();
-//            $table->string('type')->nullable();
             $table->string('title')->nullable();
             $table->text('feed_url')->unique();
             $table->text('comment')->nullable();

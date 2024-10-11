@@ -1,26 +1,26 @@
-<table class="min-w-full divide-y divide-gray-300 table-fixed">
+<table class="min-w-full divide-y divide-gray-300">
     <thead class="font-medium uppercase text-gray-500 tracking-wider text-center">
     <tr>
-        <th>&nbsp;</th>
-        <th class="px-6 py-3">
+        <th class="w-[30px]">&nbsp;</th>
+        <th class="px-6 py-3 w-[250px]">
             @include('livewire.partials.button-sort-field', [
                 'label' => 'title',
                 'field' => 'title',
             ])
         </th>
-        <th class="px-6 py-3">
+        <th class="px-6 py-3 text-left">
             @include('livewire.partials.button-sort-field', [
                 'label' => 'url',
                 'field' => 'feed_url',
             ])
         </th>
-        <th class="px-6 py-3">
+        <th class="px-6 py-3 w-[200px]">
             @include('livewire.partials.button-sort-field', [
                 'label' => 'status',
                 'field' => 'disabled',
             ])
         </th>
-        <th>&nbsp;</th>
+        <th class="w-1">&nbsp;</th>
     </tr>
     </thead>
     <tbody class="bg-white divide-y divide-gray-200">
@@ -33,8 +33,14 @@
             <td class="px-3 py-2 text-left">
                 {{ $item->feed_url ?? '' }}
             </td>
-            <td class="px-3 py-2 text-right text-sm text-gray-500">
+            <td class="px-3 py-2">
                 @include('livewire.partials.button-disable')
+
+                @include('livewire.partials.button-action', [
+                        'label' => 'edit',
+                        'routeName' =>'feeds.edit',
+                        'itemId' => $item->id,
+                    ])
             </td>
         </tr>
     @empty

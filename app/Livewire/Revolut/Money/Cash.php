@@ -23,9 +23,7 @@ class Cash extends AbstractComponent
         $items = [];
         $hasPages = false;
 
-        return view('livewire.revolut.money.cash', [
-            'items'      => $items,
-            'hasPages' => $hasPages,
-        ])->layout('layouts.app');
+        return view('livewire.revolut.money.cash', ['items'    => $items, 'hasPages' => $hasPages,])
+            ->layout('layouts.app');
     }
 }
