@@ -16,6 +16,7 @@ class StockCalculations
     const TYPE_SELL       = 'sell';
     const TYPE_SPLIT      = 'split';
     const TYPE_CASH       = 'cash';
+    const TYPE_TOP_UP     = 'cash';
     const TYPE_DIVIDEND   = 'dividend';
     const TYPE_WITHDRAWAL = 'withdrawal';
     const TYPE_FEE        = 'fee'; // CUSTODY FEE

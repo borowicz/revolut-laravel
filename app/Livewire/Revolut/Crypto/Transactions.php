@@ -11,30 +11,15 @@ class Transactions extends AbstractComponent
 {
     use WithPagination;
 
-    public function updatingSearch()
-    {
-        $this->resetPage();
-    }
-
-//    public function sortBy($field)
-//    {
-//        if ($this->sortField === $field) {
-//            $this->sortDirection = $this->sortDirection === 'ASC' ? 'DESC' : 'ASC';
-//        } else {
-//            $this->sortField = $field;
-//            $this->sortDirection = 'DESC';
-//        }
-//    }
-
     private function getItems()
     {
         $ticker = '';
 //        if (!empty($this->selectedTicker)) {
 //            $ticker = $this->selectedTicker;
 //        }
-////        if (!empty($this->ticker)) {
-////            $ticker = $this->ticker;
-////        }
+//        if (!empty($this->ticker)) {
+//            $ticker = $this->ticker;
+//        }
 
         $query = CryptoTransaction::query()
 //            ->search($this->search)

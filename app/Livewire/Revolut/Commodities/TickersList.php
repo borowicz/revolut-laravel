@@ -2,15 +2,10 @@
 
 namespace App\Livewire\Revolut\Commodities;
 
-use App\Console\Commands\Import\Commodity;
+use Illuminate\Http\Request;
+use Livewire\WithPagination;
 use App\Livewire\Revolut\AbstractComponent;
 use App\Models\Revolut\Commodities\CommoditiesTransaction;
-use App\Models\Revolut\Commodities\CommoditiesTicker;
-use App\Livewire\Revolut\Commodities\Transactions;
-use Carbon\Carbon;
-use Illuminate\Http\Request;
-use Livewire\Component;
-use Livewire\WithPagination;
 
 class TickersList extends AbstractComponent
 {
@@ -23,28 +18,9 @@ class TickersList extends AbstractComponent
     public $status = 0; // Initial status
     public $itemStatus = []; // To track status for each item
 
-//    public function updateStatus($itemId, $status)
-//    {
-////        $this->itemStatus[$itemId] = (int)$status === 1 ? 0 : 1;
-////
-////        debugbar()->info('$status: ' . $status);
-////        debugbar()->info('$statusNEW: ' . $this->itemStatus[$itemId]);
-////        debugbar()->info('$status: ' . date('Y-m-d H:i:s') . ' - ' . uniqid('true', true));
-////
-////        $model = StockTicker::find($itemId);
-////        $model->disabled = $this->itemStatus[$itemId];
-////        $model->save();
-//    }
-
     public function render(Request $request)
     {
-        debugbar()->info('$this->perPage: ' . $this->showButtons);
-
-        $query = CommoditiesTransaction::query();
-//        if ($query->count() < 1) {
-////            $this->getAndSetTickersFromStockTransactions();
-//        }
-
+        $query = CommoditiesTransaction::getTickersList();
         $query->orderBy($this->sortField, $this->sortDirection);
 
         $items = $this->setPagination($query);
@@ -57,13 +33,7 @@ class TickersList extends AbstractComponent
         $this->showButtons = false;
         $this->tickers = null;
 
-        return view('livewire.revolut.commodities.tickers',
-                compact('items', 'hasPages'))
+        return view('livewire.revolut.commodities.tickers', ['items' => $items, 'hasPages' => $hasPages])
             ->layout('layouts.app');
-    }
-
-    public function details(string $ticker)
-    {
-//        dd($ticker);
     }
 }

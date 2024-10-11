@@ -2,6 +2,7 @@
 
 namespace App\Models\Revolut\Crypto;
 
+use App\Livewire\Revolut\Stock\Summary\StockCalculations;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -12,10 +13,22 @@ class CryptoTransaction extends AbstractRevolutModel
 {
     use HasFactory, SoftDeletes;
 
-    protected $fillable = [
-        'hash', 'date', 'symbol', 'type', 'currency', 'quantity', 'quantity_raw',
-        'price', 'price_raw', 'value', 'value_raw', 'fees', 'fees_raw',
-    ];
+    protected $fillable
+        = [
+            'hash',
+            'date',
+            'symbol',
+            'type',
+            'currency',
+            'quantity',
+            'quantity_raw',
+            'price',
+            'price_raw',
+            'value',
+            'value_raw',
+            'fees',
+            'fees_raw',
+        ];
 
     public static function getTickersList()
     {
@@ -24,20 +37,22 @@ class CryptoTransaction extends AbstractRevolutModel
             ->distinct('symbol')
             ->where('symbol', '!=', '')
             ->where('currency', '!=', '')
-            ->whereNotNull('symbol');
-        ;
+            ->whereNotNull('symbol');;
     }
 
     public static function getSummary(bool $all = true)
     {
+        $sell = $withdrawal = StockCalculations::TYPE_SELL;
         $query = DB::table((new self())->getTable())
-            ->selectRaw('
+            ->selectRaw(
+                '
                 symbol,
                 (
-                    SUM(CASE WHEN type NOT LIKE "%sell%" THEN quantity ELSE 0 END)
-                    - SUM(CASE WHEN type LIKE "%sell%" THEN quantity ELSE 0 END)
+                    SUM(CASE WHEN type NOT LIKE "%' . $sell . '%" THEN quantity ELSE 0 END)
+                    - SUM(CASE WHEN type LIKE "%' . $sell . '%" THEN quantity ELSE 0 END)
                 ) AS total
-            ')
+            '
+            )
             ->groupBy('symbol')
             ->orderBy('total', 'DESC')
             ->orderBy('symbol');
@@ -48,17 +63,6 @@ class CryptoTransaction extends AbstractRevolutModel
 
         return $query;
     }
-
-//    public static function getTickersList(bool $all = false)
-//    {
-//        return self::query()
-//            ->select('symbol')
-//            ->where('symbol', '!=', '')
-//            ->whereNotNull('symbol')
-//            ->orderBy('symbol')
-//            ->pluck('symbol')
-//            ->toArray();
-//    }
 
     public static function getTickers(bool $all = false)
     {

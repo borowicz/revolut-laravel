@@ -2,12 +2,10 @@
 
 namespace App\Livewire\Revolut\Crypto;
 
-
 use Illuminate\Http\Request;
 use Livewire\WithPagination;
-use App\Livewire\Revolut\Stock\AbstractRevolut;
-use App\Models\Revolut\Crypto\CryptoTransaction;
 use App\Livewire\Revolut\AbstractComponent;
+use App\Models\Revolut\Crypto\CryptoTransaction;
 
 class TickersList extends AbstractComponent
 {

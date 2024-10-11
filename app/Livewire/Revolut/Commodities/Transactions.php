@@ -2,7 +2,6 @@
 
 namespace App\Livewire\Revolut\Commodities;
 
-use Livewire\Component;
 use App\Models\Revolut\Commodities\CommoditiesTransaction;
 use App\Livewire\Revolut\AbstractComponent;
 

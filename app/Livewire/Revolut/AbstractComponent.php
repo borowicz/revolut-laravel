@@ -61,4 +61,9 @@ abstract class AbstractComponent extends Component
             $this->sortDirection = 'DESC';
         }
     }
+
+    public function updatingSearch()
+    {
+        $this->resetPage();
+    }
 }
