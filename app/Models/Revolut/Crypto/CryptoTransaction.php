@@ -42,7 +42,7 @@ class CryptoTransaction extends AbstractRevolutModel
 
     public static function getSummary(bool $all = true)
     {
-        $sell = $withdrawal = StockCalculations::TYPE_SELL;
+        $sell = StockCalculations::TYPE_SELL;
         $query = DB::table((new self())->getTable())
             ->selectRaw(
                 '
