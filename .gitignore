@@ -34,3 +34,5 @@ storage/*.key
 /tmp/
 /*.sql
 run.sh
+/composer.sh
+/public/vendor/telescope/
