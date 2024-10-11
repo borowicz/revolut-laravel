@@ -70,6 +70,7 @@ Route::prefix('revolut')
     ->group(function () {
         Route::prefix('stock')->group(function () {
             Route::get('/', Summary::class)->name('stock.index');
+            Route::get('/details/{ticker}', Summary::class)->name('stock.details');
 
             Route::get('/prices', Prices::class)->name('stock.prices');
             Route::get('/prices/detail', Prices::class)->name('stock.prices.details');

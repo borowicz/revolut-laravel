@@ -326,10 +326,12 @@ class StockCalculations
         if (!$all) {
             $query->where($tickersTable . '.disabled', 0);
         }
+        $query->where($tickersTable . '.ticker', '!=', '')
+            ->whereNotNull($tickersTable . '.ticker');
+
+
         $query->orderBy('ticker');
 
-        return $query->get()
-            ->pluck('ticker')
-            ->toArray();
+        return $query;
     }
 }

@@ -15,7 +15,17 @@ class Summary extends AbstractComponent
             $this->showAll = true;
         }
         debugbar()->info('$this->showAll: ' . (int)$this->showAll);
-        $this->tickers = $calculations->getTickersList($this->showAll);
+        $this->tickers = $calculations->getTickersList($this->showAll)
+            ->get()->pluck('ticker')->toArray();
+
+        if (null !== $this->ticker) {
+            if(in_array($this->ticker, $this->tickers)) {
+                $this->tickers = [$this->ticker];
+                $this->selectedTicker = $this->ticker;
+            } else {
+                $this->selectedTicker = null;
+            }
+        }
 
         $items = $calculations->getData(showAll: $this->showAll, tickers: $this->tickers);
 

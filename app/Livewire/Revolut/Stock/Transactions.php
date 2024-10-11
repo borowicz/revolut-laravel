@@ -18,6 +18,10 @@ class Transactions extends AbstractComponent
 
     private function getItems()
     {
+        if (null !== $this->ticker) {
+            $this->selectedTicker = $this->ticker;
+        }
+
         $query = StockTransaction::query()
             ->when($this->selectedTicker, fn($query) => $query->where('ticker', $this->selectedTicker))
             ->when($this->selectedType, fn($query) => $query->where('type', $this->selectedType))

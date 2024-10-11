@@ -46,8 +46,7 @@
 
         <tr class="even:bg-gray-50 odd:bg-white">
             <td class="px-3 py-2 whitespace-nowrap">
-                <a href="https://finance.yahoo.com/quote/{{ $item['ticker'] }}/?.tsrc=myForksFiles/revolut-laravel"
-                   target="_blank">{{ $item['ticker'] }}</a>
+                <a href="{{ route('stock.details', ['ticker' => $item['ticker']]) }}" >{{ $item['ticker'] }}</a>
             </td>
             <td class="px-3 py-2 whitespace-nowrap text-right">
                 {{ numberFormat($item['quantity']) }}
