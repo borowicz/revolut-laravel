@@ -59,3 +59,4 @@ composer.json
 /storage/sql/
 /storage/uploads/
 
+/composer.local.json

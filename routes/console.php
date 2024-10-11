@@ -5,8 +5,8 @@ use Illuminate\Console\Scheduling\Schedule;
 $schedule = app(Schedule::class);
 foreach (
     [
-        App\Console\Commands\Fetch\FetchCurrencyExchangesGoogleDrive::class,
-        App\Console\Commands\Fetch\FetchStockLastAtClose::class,
+        App\Console\Commands\Fetch\CurrencyExchangesGoogleDrive::class,
+        App\Console\Commands\Fetch\StockLastAtClose::class,
 
         App\Console\Commands\Import\Commodity::class,
         App\Console\Commands\Import\Crypto::class,

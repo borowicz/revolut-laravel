@@ -8,7 +8,7 @@ use Illuminate\Console\Scheduling\Schedule;
 /**
  *- -***
  */
-class FetchCryptoExchangesGoogleDrive extends AbstractFetchCurrencyGoogleDrive
+class CryptoExchangesGoogleDrive extends AbstractFetchCurrencyGoogleDrive
 {
     protected $signature = 'revolut:fetch:cryptos';
 

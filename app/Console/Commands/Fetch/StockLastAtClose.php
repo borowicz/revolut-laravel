@@ -25,7 +25,7 @@ use App\Http\Services\{
  *
  *- -***
  */
-class FetchStockLastAtClose  extends AbstractCommand implements FetchDataInterface
+class StockLastAtClose  extends AbstractCommand implements FetchDataInterface
 {
     protected $signature = 'revolut:fetch:stock {ticker?} {service?} {--f|force=0}';
 
