@@ -27,7 +27,7 @@
         </div>
 
         <div class="px-4 sm:px-6 lg:px-8">
-            @include('livewire.revolut.stock.transactions-table')
+            @include('livewire.revolut.money.transactions-table')
 
             @include('livewire.partials.pagination')
         </div>

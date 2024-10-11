@@ -42,9 +42,9 @@ class Transactions extends AbstractComponent
                 if (!empty($this->selectedTicker)) {
                     $query->where('symbol', $this->selectedTicker);
                 }
-//                if (!empty($ticker)) {
-//                    $query->where('ticker', $this->ticker);
-//                }
+                if (!empty($ticker)) {
+                    $query->where('symbol', $this->ticker);
+                }
                 if (!empty($this->selectedType)) {
                     $query->where('type', $this->selectedType);
                 }

@@ -13,7 +13,7 @@ class CryptoTransaction extends AbstractRevolutModel
     use HasFactory, SoftDeletes;
 
     protected $fillable = [
-        'hash', 'date', 'symbol', 'type', 'currency', 'quantity',
+        'hash', 'date', 'symbol', 'type', 'currency', 'quantity', 'quantity_raw',
         'price', 'price_raw', 'value', 'value_raw', 'fees', 'fees_raw',
     ];
 
@@ -64,6 +64,7 @@ class CryptoTransaction extends AbstractRevolutModel
     {
         return self::query()
             ->select('symbol')
+            ->distinct()
             ->where('symbol', '!=', '')
             ->whereNotNull('symbol')
             ->orderBy('symbol')

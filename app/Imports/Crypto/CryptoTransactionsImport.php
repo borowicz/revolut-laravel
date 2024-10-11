@@ -51,7 +51,8 @@ class CryptoTransactionsImport extends AbstractImport
 
         $price = $this->cleanValue($price);
 
-        $quantity = $this->cleanValue($quantity);
+//        $quantity = $this->cleanValue($quantity);
+        $quantity = (float)$quantity;
         $value = $this->cleanValue($value);
         $fees = $this->cleanValue($fees);
 
@@ -60,9 +61,11 @@ class CryptoTransactionsImport extends AbstractImport
             'date'     => $when,
             'symbol'   => $symbol,
             'type'     => $type,
-            'quantity' => $quantity,
 
             'currency' => $currency,
+
+            'quantity'     => $quantity,
+            'quantity_raw' => $row[2] ?? 0,
 
             'price'     => $price,
             'price_raw' => $row[3] ?? 0,

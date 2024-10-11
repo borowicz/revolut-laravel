@@ -65,6 +65,14 @@ Route::prefix('notes')
         Route::get('/edit/{note}', EditNote::class)->name('notes.edit');
     });
 
+Route::prefix('notes')
+    ->middleware(['auth', 'verified'])
+    ->group(function () {
+        Route::get('/', ShowNotes::class)->name('notes.index');
+        Route::get('/create', CreateNote::class)->name('notes.create');
+        Route::get('/edit/{note}', EditNote::class)->name('notes.edit');
+    });
+
 Route::prefix('revolut')
     ->middleware(['auth', 'verified'])
     ->group(function () {
@@ -139,8 +147,9 @@ Route::prefix('revolut')
         Route::prefix('money')->group(function () {
             Route::get('/', MoneySummary::class)->name('money.index');
 
-            Route::get('/transactions', MoneyTransactions::class)->name('money.transactions');
-            Route::get('/transaction/details/{ticker}', MoneyTransactions::class)
+            Route::get('/transactions', MoneyTransactions::class)
+                ->name('money.transactions');
+            Route::get('/transaction/details/{id}', MoneyTransactions::class)
                 ->name('money.transactions.details');
 
             Route::get('/tickers', MoneyTickersList::class)->name('money.tickers');

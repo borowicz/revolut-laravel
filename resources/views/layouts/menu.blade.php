@@ -14,15 +14,6 @@
     <x-nav-link :href="route('money.index')" :active="request()->routeIs('money.*')">
         {{ __('Money') }}
     </x-nav-link>
-    <x-nav-link :href="route('currency.index')" :active="request()->routeIs('currency.*')">
-        {{ __('Currency') }}
-    </x-nav-link>
-    <x-nav-link :href="route('cron.index')" :active="request()->routeIs('cron.*')">
-        {{ __('Cron') }}
-    </x-nav-link>
-    <x-nav-link :href="route('notes.index')" :active="request()->routeIs('notes.*')">
-        {{ __('Notes') }}
-    </x-nav-link>
     <x-nav-link href="https://app.revolut.com/start" target="_blank">
         {{ __('Revolut') }}
     </x-nav-link>

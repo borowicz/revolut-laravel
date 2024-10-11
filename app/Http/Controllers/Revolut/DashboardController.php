@@ -54,17 +54,16 @@ class DashboardController extends AbstractRevolutController
 
         foreach ($models as $model => $name) {
             $current = [];
-
             $current['model'] = $model;
             $current['name'] = $name;
 
+            $currentModel = null;
             try {
                 $currentModel = new $model();
+                $current['info'] = self::getModelInfo($currentModel);
             } catch (\Exception $e) {
                 continue;
             }
-
-            $current['info'] = self::getModelInfo($model);
 
             $result[$model] = $current;
         }
@@ -74,10 +73,12 @@ class DashboardController extends AbstractRevolutController
 
     public static function getModelInfo(mixed $model): array
     {
-        $result['count'] = $model::count();
-        if (0 === $result['count']) {
+        $count = $model::count();
+        if (0 === $count) {
             return [];
         }
+
+        $result['count'] = $count;
 
         if (in_array(SoftDeletes::class, class_uses($model))) {
             $result['total'] = $model::withTrashed()->count();

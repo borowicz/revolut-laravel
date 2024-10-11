@@ -2,43 +2,41 @@
     <thead class="font-medium text-gray-500 uppercase tracking-wider text-center">
     <tr>
         <th>&nbsp;</th>
-        <th class="px-6 py-3 text-left text-sm font-semibold text-gray-900 hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900">
-            {{ __('When') }}
+        <th class="text-center">
+            @include('livewire.partials.text-sort-field', [
+                'label' => 'when',
+                'field' => 'date',
+            ])
         </th>
-        <th class="px-6 py-3 text-center text-sm font-semibold text-gray-900 hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900">
-            @if(isset($sortField))
-                <button wire:click="sortBy('type')"
-                        class="flex items-center space-x-1">
-                    <span>{{ __('Type') }}</span>
-                    @if ($sortField === 'type')
-                        @if ($sortDirection === 'asc')
-                            <!-- Up Arrow Icon -->
-                            <svg class="w-4 h-4 text-gray-600" fill="currentColor"
-                                 viewBox="0 0 20 20">
-                                <path d="M5 10l5-5 5 5H5z"/>
-                            </svg>
-                        @else
-                            <!-- Down Arrow Icon -->
-                            <svg class="w-4 h-4 text-gray-600" fill="currentColor"
-                                 viewBox="0 0 20 20">
-                                <path d="M15 10l-5 5-5-5h10z"/>
-                            </svg>
-                        @endif
-                    @endif
-                </button>
-            @endif
+        <th class="text-left">
+            @include('livewire.partials.text-sort-field', [
+                'label' => 'type',
+                'field' => 'type',
+            ])
         </th>
-        <th class="px-6 py-3 text-left text-sm font-semibold text-gray-900 hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900">
-            {{ __('Ticker') }}
+        <th class="text-left">
+            @include('livewire.partials.text-sort-field', [
+                'label' => 'ticker',
+                'field' => 'symbol',
+            ])
         </th>
-        <th class="px-6 py-3 text-right text-sm font-semibold text-gray-900 hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900">
-            {{ __('Quantity') }}
+        <th class="text-right">
+            @include('livewire.partials.text-sort-field', [
+                'label' => 'quantity',
+                'field' => 'quantity',
+            ])
         </th>
-        <th class="px-6 py-3 text-right text-sm font-semibold text-gray-900 hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900">
-            {{ __('Price') }}
+        <th class="text-right">
+            @include('livewire.partials.text-sort-field', [
+                'label' => 'price',
+                'field' => 'price',
+            ])
         </th>
-        <th class="px-6 py-3 text-right text-sm font-semibold text-gray-900 hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900">
-            {{ __('Total') }}
+        <th class="text-right">
+            @include('livewire.partials.text-sort-field', [
+                'label' => 'value',
+                'field' => 'value',
+            ])
         </th>
     </tr>
     </thead>
@@ -46,27 +44,17 @@
     @forelse ($items as $key => $item)
         <tr class="even:bg-gray-50 odd:bg-white">
             <td title="{{ $item->hash }}">&nbsp;{{ (int)$key+1 }}&nbsp;</td>
-            <td class="px-3 py-2">
-                {{ dateISO8601($item->date) }}
-            </td>
-            <td class="px-3 py-2 text-sm">
-                {{ shorted($item->type) }}
-            </td>
-            <td class="px-3 py-2">
-                {{ $item->symbol }}
-            </td>
+            <td class="px-3 py-2">{{ dateISO8601($item->date) }}</td>
+            <td class="px-3 py-2 text-sm">{{ shorted($item->type) }}</td>
+            <td class="px-3 py-2">{{ $item->symbol }}</td>
             <td class="px-3 py-2 text-right text-sm">
-                {{ $item->quantity }}
-            </td>
-            <td class="px-3 py-2 text-right text-sm">
-                {{ $item->price }}
-            </td>
-            <td class="px-3 py-2 text-right">
-                {{ $item->value }}
-            </td>
-            <td class="px-3 py-2 text-right">
-                {{ $item->fees }}
-            </td>
+                @include('revolutPartials::tooltip', [
+                         'ttTxt' => $item->quantity ,
+                         'ttComment' => $item->symbol . ' - ' . $item->quantity_raw . ' &nbsp; ' . $item->currency
+                         ])</td>
+            <td class="px-3 py-2 text-right text-sm">{{ $item->price }}</td>
+            <td class="px-3 py-2 text-right">{{ $item->value }}</td>
+            <td class="px-3 py-2 text-right">{{ $item->fees }}</td>
             <td class="text-right">
                 @if($showButtons)
                     <a href="{{ route('crypto.transactions.details', ['id' => $item->id]) }}"
@@ -84,7 +72,7 @@ transition ease-in-out duration-150"
         </tr>
     @empty
         <tr>
-            <td colspan="3" class="px-3 py-2 text-center">
+            <td colspan="9" class="px-6 py-6 text-center">
                 {{ __('No items found') }}.
             </td>
         </tr>

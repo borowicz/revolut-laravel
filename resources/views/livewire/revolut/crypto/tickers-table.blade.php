@@ -2,13 +2,13 @@
     <thead class="font-medium uppercase text-gray-500 tracking-wider text-center">
     <tr>
         <th>&nbsp;</th>
-        <th class="px-6 py-3 text-left text-sm font-semibold text-gray-900 hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900">
+        <th class="px-6 py-3 text-left text-sm font-semibold text-gray-900 hover:bg-gray-300">
             @include('livewire.partials.button-sort-field', [
                 'label' => 'ticker',
                 'field' => 'symbol',
             ])
         </th>
-        <th class="px-6 py-3 text-left lowercase">
+        <th class="px-6 py-3 text-left text-sm font-semibold text-gray-900 hover:bg-gray-300">
             @include('livewire.partials.button-sort-field', [
                 'label' => 'currency',
                 'field' => 'currency',
@@ -20,7 +20,7 @@
         <th class="px-6 py-3 text-center lowercase">
             &nbsp;
         </th>
-        <th class="px-6 py-3 text-right text-sm font-semibold text-gray-900 hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900">
+        <th class="px-6 py-3">
             &nbsp;
         </th>
     </tr>

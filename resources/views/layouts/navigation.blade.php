@@ -32,6 +32,16 @@
                     </x-slot>
 
                     <x-slot name="content">
+                        <x-dropdown-link :href="route('currency.index')">
+                            {{ __('Currency') }}
+                        </x-dropdown-link>
+                        <x-dropdown-link :href="route('cron.index')">
+                            {{ __('Cron') }}
+                        </x-dropdown-link>
+                        <x-dropdown-link :href="route('notes.index')">
+                            {{ __('Notes') }}
+                        </x-dropdown-link>
+
                         <x-dropdown-link :href="route('profile.edit')">
                             {{ __('Profile') }}
                         </x-dropdown-link>

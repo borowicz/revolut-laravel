@@ -2,10 +2,10 @@
     <thead class="font-medium text-gray-500 uppercase tracking-wider text-center">
     <tr>
         <th>&nbsp;</th>
-        <th class="px-6 py-3 text-left text-sm font-semibold text-gray-900 hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900">
+        <th class="px-6 py-3 text-left text-sm font-semibold text-gray-900 hover:bg-gray-300">
             {{ __('When') }}
         </th>
-        <th class="px-6 py-3 text-center text-sm font-semibold text-gray-900 hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900">
+        <th class="px-6 py-3 text-center text-sm font-semibold text-gray-900 hover:bg-gray-300">
             @if(isset($sortField))
                 <button wire:click="sortBy('type')"
                         class="flex items-center space-x-1">
@@ -28,16 +28,16 @@
                 </button>
             @endif
         </th>
-        <th class="px-6 py-3 text-left text-sm font-semibold text-gray-900 hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900">
+        <th class="px-6 py-3 text-left text-sm font-semibold text-gray-900 hover:bg-gray-300">
             {{ __('Ticker') }}
         </th>
-        <th class="px-6 py-3 text-right text-sm font-semibold text-gray-900 hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900">
+        <th class="px-6 py-3 text-right text-sm font-semibold text-gray-900 hover:bg-gray-300">
             {{ __('Quantity') }}
         </th>
-        <th class="px-6 py-3 text-right text-sm font-semibold text-gray-900 hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900">
+        <th class="px-6 py-3 text-right text-sm font-semibold text-gray-900 hover:bg-gray-300">
             {{ __('Price') }}
         </th>
-        <th class="px-6 py-3 text-right text-sm font-semibold text-gray-900 hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900">
+        <th class="px-6 py-3 text-right text-sm font-semibold text-gray-900 hover:bg-gray-300">
             {{ __('Total') }}
         </th>
     </tr>

@@ -24,6 +24,7 @@ return new class extends Migration {
 
             $table->string('currency')->default('');
 
+            $table->string('quantity_raw')->nullable();
             $table->decimal('quantity', 20, 9)->nullable();
 
             $table->string('price_raw')->nullable();

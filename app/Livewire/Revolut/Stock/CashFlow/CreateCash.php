@@ -44,6 +44,8 @@ class CreateCash extends AbstractComponent
 
     public function render()
     {
+        $this->date = date('Y-m-d');
+
         return view('livewire.revolut.stock.cash-flow-form')
             ->layout('layouts.app');
     }
