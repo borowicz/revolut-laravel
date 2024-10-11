@@ -1,6 +1,6 @@
 <x-slot name="header">
     <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-        {{ __('Dashboard') }}
+        {{ __('News feeds') }}
     </h2>
 </x-slot>
 
@@ -10,11 +10,11 @@
             <div class="p-6 text-gray-900">
                 <header>
                     <h2 class="text-lg font-medium text-gray-900">
-                        {{ __('Create Note') }}
+                        {{ __('Create new news feed') }}
                     </h2>
 
                     <p class="mt-1 text-sm text-gray-600">
-                        {{ __("Add a note and it will be saved for you.") }}
+                        {{ __("Add url to feed or xml") }}
                     </p>
                 </header>
 
@@ -33,15 +33,14 @@
                     </div>
 
                     <div>
-                        <x-input-label for="content" :value="__('Content')"/>
-                        <textarea wire:model="content"
-                                  id="content"
-                                  name="content"
+                        <x-input-label for="content" :value="__('Feed url')"/>
+                        <textarea wire:model="feed_url"
+                                  id="feed_url"
+                                  name="feed_url"
                                   type="text"
                                   class="mt-1 block w-full"
-                                  required
-                                  autocomplete="content"></textarea>
-                        <x-input-error class="mt-2" :messages="$errors->get('content')"/>
+                                  required></textarea>
+                        <x-input-error class="mt-2" :messages="$errors->get('feed_url')"/>
                     </div>
 
                     <div class="flex items-center gap-4">

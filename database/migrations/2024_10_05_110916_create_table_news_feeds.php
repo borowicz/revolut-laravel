@@ -16,15 +16,13 @@ return new class extends Migration {
     {
         Schema::create(self::TABLE_NAME, function (Blueprint $table) {
             $table->id();
-
             $table->integer('disabled')->default(0);
-            $table->integer('keep')->default(0);
             $table->string('hash')->unique();
             $table->string('date')->nullable();
+//            $table->integer('keep')->default(0);
+//            $table->string('ticker')->nullable();
+//            $table->string('type')->nullable();
             $table->string('title')->nullable();
-            $table->string('ticker')->default('');
-            $table->string('type')->default('');
-            $table->string('note')->nullable();
             $table->text('feed_url')->unique();
             $table->text('comment')->nullable();
 

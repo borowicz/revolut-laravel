@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Models\Revolut;
+namespace App\Models;
 
+use App\Models\Revolut\AbstractRevolutModel;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class NewsFeed extends AbstractRevolutModel
@@ -10,13 +11,13 @@ class NewsFeed extends AbstractRevolutModel
 
     protected $fillable = [
         'disabled',
-        'keep',
         'hash',
         'date',
+//        'keep',
+//        'ticker',
+//        'type',
         'title',
-        'ticker',
-        'type',
         'feed_url',
-        'note',
+        'comment',
     ];
 }

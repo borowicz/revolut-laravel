@@ -14,9 +14,9 @@ class Prices  extends AbstractComponent
 
     public $sortField = 'day';
 
-    public function updatingSearch()
+    public function updateStatus($itemId)
     {
-        $this->resetPage();
+        $this->setStatusDisabled(StockPrice::class, $itemId);
     }
 
     public function render(Request $request)

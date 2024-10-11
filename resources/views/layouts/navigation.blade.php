@@ -38,6 +38,9 @@
                         <x-dropdown-link :href="route('cron.index')">
                             {{ __('Cron') }}
                         </x-dropdown-link>
+                        <x-dropdown-link :href="route('feeds.index')">
+                            {{ __('News feeds RSS/XMLs') }}
+                        </x-dropdown-link>
                         <x-dropdown-link :href="route('notes.index')">
                             {{ __('Notes') }}
                         </x-dropdown-link>

@@ -66,4 +66,21 @@ abstract class AbstractComponent extends Component
     {
         $this->resetPage();
     }
+
+    public function setStatusDisabled(mixed $modelClass, int $itemId): void
+    {
+        try {
+            $model = new $modelClass();
+            $model = $model->find($itemId);
+            $newStatus = $model->disabled ? 0 : 1; // Toggle status
+            $model->disabled = $newStatus;
+            $model->save();
+
+            $this->itemStatus[$itemId] = $newStatus;
+
+            session()->flash('message', 'Status updated successfully.');
+        } catch (\Exception $e) {
+            session()->flash('error', 'Failed to update status: ' . $e->getMessage());
+        }
+    }
 }

@@ -26,10 +26,6 @@ class TickersList extends AbstractComponent
     {
         $this->itemStatus[$itemId] = (int)$status === 1 ? 0 : 1;
 
-        debugbar()->info('$status: ' . $status);
-        debugbar()->info('$statusNEW: ' . $this->itemStatus[$itemId]);
-        debugbar()->info('$status: ' . date('Y-m-d H:i:s') . ' - ' . uniqid('true', true));
-
         $model = StockTicker::find($itemId);
         $model->disabled = $this->itemStatus[$itemId];
         $model->save();

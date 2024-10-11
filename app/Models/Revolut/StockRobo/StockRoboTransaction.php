@@ -4,12 +4,12 @@ namespace App\Models\Revolut\StockRobo;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use App\Models\Revolut\AbstractRevolutModel;
+use App\Models\Revolut\AbstractTransactions;
 
 /**
  *- -***
  */
-class StockRoboTransaction extends AbstractRevolutModel
+class StockRoboTransaction extends AbstractTransactions
 {
     use HasFactory, SoftDeletes;
 

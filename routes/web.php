@@ -5,6 +5,7 @@ use App\Http\Controllers\ProfileController;
 use App\Livewire\Revolut\Dashboard;
 use App\Livewire\Revolut\CurrencyToday;
 use App\Livewire\Note\{CreateNote, EditNote, ShowNotes,};
+use App\Livewire\Feed\{CreateFeed, EditFeed, ShowFeeds,};
 use App\Livewire\Revolut\Money\{
     Summary as MoneySummary,
     Transactions as MoneyTransactions,
@@ -71,6 +72,14 @@ Route::prefix('notes')
         Route::get('/', ShowNotes::class)->name('notes.index');
         Route::get('/create', CreateNote::class)->name('notes.create');
         Route::get('/edit/{note}', EditNote::class)->name('notes.edit');
+    });
+
+Route::prefix('feeds')
+    ->middleware(['auth', 'verified'])
+    ->group(function () {
+        Route::get('/', ShowFeeds::class)->name('feeds.index');
+        Route::get('/create', CreateFeed::class)->name('feeds.create');
+        Route::get('/edit/{id}', EditFeed::class)->name('feeds.edit');
     });
 
 Route::prefix('revolut')

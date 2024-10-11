@@ -28,18 +28,7 @@ class TickersList extends AbstractComponent
 
     public function updateStatus($itemId)
     {
-        try {
-            $model = StockTicker::findOrFail($itemId);
-            $newStatus = $model->disabled ? 0 : 1; // Toggle status
-            $model->disabled = $newStatus;
-            $model->save();
-
-            $this->itemStatus[$itemId] = $newStatus;
-
-            session()->flash('message', 'Status updated successfully.');
-        } catch (\Exception $e) {
-            session()->flash('error', 'Failed to update status: ' . $e->getMessage());
-        }
+        $this->setStatusDisabled(StockTicker::class, $itemId);
     }
 
     public function render(Request $request)

@@ -2,13 +2,14 @@
 
 namespace App\Livewire\Feed;
 
-use App\Models\Note;
 use Livewire\Attributes\Rule;
 use Livewire\Component;
+use App\Models\NewsFeed;
 
 class EditFeed extends Component
 {
-    public Note $note;
+    public NewsFeed $item;
+
     public $buttonAction = 'Save';
 
     #[Rule('required')]
@@ -17,18 +18,18 @@ class EditFeed extends Component
     #[Rule('required')]
     public $content = '';
 
-    public function mount(Note $note)
+    public function mount(NewsFeed $item)
     {
-        $this->note = $note;
+        $this->item = $item;
 
-        $this->title = $note->title;
+        $this->title = $item->title;
 
-        $this->content = $note->content;
+        $this->content = $item->content;
     }
 
     public function save()
     {
-        $this->note->update(
+        $this->item->update(
             $this->all()
         );
 
