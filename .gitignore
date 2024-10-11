@@ -36,3 +36,4 @@ storage/*.key
 run.sh
 /composer.sh
 /public/vendor/telescope/
+/database/migrations/*_create_telescope_entries_table.php
