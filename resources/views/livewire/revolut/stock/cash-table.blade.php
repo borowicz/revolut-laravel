@@ -15,7 +15,8 @@
     <tbody class="divide-y divide-gray-200">
     @foreach($items as $key => $item)
         <tr class="even:bg-gray-50 odd:bg-white">
-            <td title="{{ $item->id }}">&nbsp;{{ (int)$key+1 }}&nbsp;</td>
+            <td title="{{ $item->id }}">
+                @include('revolutPartials::tooltip', ['ttTxt' => ((int)$key+1), 'ttComment' => $item->hash])</td>
             <td class="px-3 py-2">{{ $item->when ?? '' }}</td>
             <td class="px-3 py-2 text-sm text-gray-500">{{ $item->currency ?? '' }}</td>
             <td class="px-3 py-2">{{ numberFormat($item->total_amount ?? 0) }}</td>

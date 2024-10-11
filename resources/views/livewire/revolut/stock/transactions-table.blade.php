@@ -2,10 +2,10 @@
     <thead class="font-medium text-gray-500 uppercase tracking-wider text-center">
     <tr>
         <th>&nbsp;</th>
-        <th class="px-6 py-3 text-left text-sm font-semibold text-gray-900 hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900">
+        <th class="px-6 py-3 text-left text-sm font-semibold text-gray-900 hover:bg-gray-300 focus:bg-gray-900 active:bg-gray-900">
             {{ __('When') }}
         </th>
-        <th class="px-6 py-3 text-center text-sm font-semibold text-gray-900 hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900">
+        <th class="px-6 py-3 text-center text-sm font-semibold text-gray-900 hover:bg-gray-300 focus:bg-gray-700 active:bg-gray-900">
             @if(isset($sortField))
                 <button wire:click="sortBy('type')"
                         class="flex items-center space-x-1">
@@ -28,16 +28,16 @@
                 </button>
             @endif
         </th>
-        <th class="px-6 py-3 text-left text-sm font-semibold text-gray-900 hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900">
+        <th class="px-6 py-3 text-left text-sm font-semibold text-gray-900 hover:bg-gray-300 focus:bg-gray-900 active:bg-gray-900">
             {{ __('Ticker') }}
         </th>
-        <th class="px-6 py-3 text-right text-sm font-semibold text-gray-900 hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900">
+        <th class="px-6 py-3 text-left text-sm font-semibold text-gray-900 hover:bg-gray-300 focus:bg-gray-900 active:bg-gray-900">
             {{ __('Quantity') }}
         </th>
-        <th class="px-6 py-3 text-right text-sm font-semibold text-gray-900 hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900">
+        <th class="px-6 py-3 text-left text-sm font-semibold text-gray-900 hover:bg-gray-300 focus:bg-gray-900 active:bg-gray-900">
             {{ __('Price') }}
         </th>
-        <th class="px-6 py-3 text-right text-sm font-semibold text-gray-900 hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900">
+        <th class="px-6 py-3 text-left text-sm font-semibold text-gray-900 hover:bg-gray-300 focus:bg-gray-900 active:bg-gray-900">
             {{ __('Total') }}
         </th>
     </tr>
@@ -46,7 +46,8 @@
     @forelse ($items as $key => $item)
 {{--        @dd($item)--}}
         <tr class="even:bg-gray-50 odd:bg-white">
-            <td title="{{ $item->hash }}">&nbsp;{{ (int)$key+1 }}&nbsp;</td>
+            <td title="{{ $item->hash }}">&nbsp;
+                @include('revolutPartials::tooltip', ['ttTxt' => ((int)$key+1), 'ttComment' => $item->hash])</td>
             <td class="px-3 py-2">
                 {{ dateISO8601($item->date) }}
             </td>

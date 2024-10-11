@@ -26,7 +26,7 @@ class CreateMarket extends Component
 
     public function render()
     {
-        return view('livewire.pages.stock.markets.form')
+        return view('livewire.revolut.stock.markets-form')
             ->layout('layouts.app');
     }
 }

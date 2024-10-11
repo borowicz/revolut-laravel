@@ -15,9 +15,9 @@
                 </div>
                 <div class="mt-4 sm:ml-16 sm:mt-0 sm:flex-none">
                     @include('livewire.partials.button-create',
-                            ['label' => 'market', 'routeName'=> 'stock.markets.create']
+                            ['label' => 'market', 'routeName'=> 'stock.tickers.create']
                     )
-                    @include('livewire.revolut.stock.menu')
+                    @include('revolut::stock.menu')
                 </div>
             </div>
             <div class="items-center">

@@ -2,19 +2,19 @@
     <thead class="font-medium uppercase text-gray-500 tracking-wider text-center">
     <tr>
         <th>&nbsp;</th>
-        <th class="px-6 py-3 text-left text-sm font-semibold text-gray-900 hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900">
+        <th class="px-6 py-3 text-left text-sm font-semibold text-gray-900 hover:bg-gray-300">
             @include('livewire.partials.button-sort-field', [
                 'label' => 'market',
                 'field' => 'name',
             ])
         </th>
-        <th class="px-6 py-3 text-left text-sm font-semibold text-gray-900 hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900">
+        <th class="px-6 py-3 text-left text-sm font-semibold text-gray-900 hover:bg-gray-300">
             @include('livewire.partials.button-sort-field', [
                 'label' => 'symbol',
                 'field' => 'symbol',
             ])
         </th>
-        <th class="px-6 py-3 text-center lowercase hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900">
+        <th class="px-6 py-3 text-center text-sm font-semibold text-gray-900 hover:bg-gray-300">
             @include('livewire.partials.button-sort-field', [
                 'label' => 'country',
                 'field' => 'country',
@@ -26,7 +26,7 @@
         <th class="px-6 py-3 text-center text-sm font-semibold text-gray-900">
             {{ __('actions') }}
         </th>
-        <th class="px-6 py-3 text-right lowercase hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900">
+        <th class="px-6 py-3 text-right text-sm lowercase hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900">
             @include('livewire.partials.button-sort-field', [
                 'label' => 'status',
                 'field' => 'disabled',
@@ -37,7 +37,8 @@
     <tbody class="bg-white divide-y divide-gray-200">
     @forelse ($items as $key => $item)
         <tr class="even:bg-gray-50 odd:bg-white">
-            <td title="{{ $item->hash }}">&nbsp;{{ (int)$key+1 }}&nbsp;</td>
+            <td title="{{ $item->hash }}">
+                @include('revolutPartials::tooltip', ['ttTxt' => ((int)$key+1), 'ttComment' => $item->hash])</td>
             <td class="px-3 py-2" title="{{ $item->name }}">
                 @if(empty($item->short_name))
                     {{ shorted($item->name ?? '') }}

@@ -2,7 +2,7 @@
 <table class="min-w-full divide-gray-200">
     <thead class="font-medium text-gray-500 uppercase tracking-wider text-center">
     <tr>
-        <th class="px-6 py-3 text-xs hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900">
+        <th class="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider">
             {{ __('Ticker') }}
         </th>
         <th class="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider">

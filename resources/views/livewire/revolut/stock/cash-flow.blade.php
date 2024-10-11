@@ -17,7 +17,7 @@
                     @include('livewire.partials.button-create',
                             ['label' => 'money', 'routeName'=> 'stock.cash.flow.create']
                     )
-                    @include('livewire.revolut.stock.menu')
+                    @include('revolut::stock.menu')
                 </div>
             </div>
             <div class="items-center">

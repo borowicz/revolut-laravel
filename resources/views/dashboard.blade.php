@@ -12,13 +12,13 @@
                     <div class="font-semibold text-xl leading-tight">
                         {{ __("Revolut DB summary") }}:
                     </div>
+
                     @if ($user ?? false)
                         {{ __('user') }}: <span title="{{ $user['email'] }}">{{ $user['name'] ?? '' }}</span>
                         {{ __('logged') }}: <span>{{ $user['sessionTime'] ?? '' }}</span>
                     @endif
 
                     <div class="py-3">
-
                         <div class="grid grid-cols-2 gap-1">
                             <div>
 
