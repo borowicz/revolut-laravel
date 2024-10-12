@@ -22,10 +22,18 @@
         <div class="px-4 sm:px-6 lg:px-8">
             @include('livewire.revolut.stock.summarized')
         </div>
-
-        <div class="px-4 sm:px-6 lg:px-8">
+        <div class="px-4">
+{{--            @include('livewire.partials.accordion-modal') --}}
+            @include('livewire.revolut.stock.form-calculator')
+        </div>
+        <div class="px-4">
             @include('livewire.revolut.stock.summary-table')
         </div>
+        @if($detailsView)
+            <div class="px-6 py-10">
+                @include('trading-view-widget')
+            </div>
+        @endif
         <br class="clearfix"/>
     </div>
 </div>
