@@ -60,6 +60,15 @@ return [
         'CHF',
         'JPY',
     ]),
+    'news' => [
+        'yf' => env('NEWS_YF_URL', 'https://finance.yahoo.com/quote/%s/?.tsrc=&'),
+        'gf' => env('NEWS_GF_URL', 'https://www.google.com/finance/quote/%s:%s/?'),
+        'ft' => env('NEWS_FT_URL', 'https://markets.ft.com/data/equities/tearsheet/summary?s=%s:%s&'),
+        'bb' => env('NEWS_BB_URL', 'https://www.bloomberg.com/quote/%s:%s?'),
+        'cn' => env('NEWS_CN_URL', 'https://edition.cnn.com/markets/stocks/%s?'),
+
+    ],
+];
 
 //    'currencyList' => function () {
 //        $currenciesList = env('CURRENCIES_LIST') ?? 'EUR';
@@ -69,4 +78,3 @@ return [
 //
 //        return [$currenciesList];
 //    },
-];

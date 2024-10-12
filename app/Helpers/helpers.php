@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Number;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Str;
 
 if (!function_exists('dateFormatISO')) {
     function dateISO8601(string $value = null, string $format = 'Y-m-d'): string
@@ -35,6 +36,22 @@ if (!function_exists('shorted')) {
     function shorted(string $value, $maxLength = 20)
     {
         return Str::limit($value, $maxLength);
+    }
+}
+
+
+if (!function_exists('newsUrl')) {
+    function newsUrl(string $news, string $ticker, string $suffix)
+    {
+        $url = config('revolut.news.' . $news);
+        if (empty($url)) {
+            return '';
+        }
+
+        $url = sprintf($url, $ticker, $suffix);
+        $url.= config('revolut.source');
+
+        return Str::replaceArray('%', [$ticker, $suffix], $url);
     }
 }
 

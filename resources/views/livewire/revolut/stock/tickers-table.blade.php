@@ -3,10 +3,10 @@
     <tr>
         <th>&nbsp;</th>
         <th class="px-6 py-3 text-left text-sm font-semibold text-gray-900 hover:bg-gray-300 focus:bg-gray-700 active:bg-gray-900">
-            @include('livewire.partials.button-sort-field', [
-                'label' => 'ticker',
-                'field' => 'ticker',
-            ])
+{{--            @include('livewire.partials.button-sort-field', [--}}
+{{--                'label' => 'ticker',--}}
+{{--                'field' => 'ticker',--}}
+{{--            ])--}}
         </th>
         <th class="px-6 py-3 text-left lowercase">
             {{ __('market') }}
@@ -38,21 +38,37 @@
             </td>
             <td class="px-3 py-2 text-left text-sm text-gray-500">
 
-                [<a target="_blank"
-                    href="https://finance.yahoo.com/quote/{{ $item->ticker }}/?.tsrc={{ config('revolut.source') }}"
-                >{{ __('financeYahoo') }}</a>],&nbsp;
-                [<a target="_blank"
-                    href="https://www.google.com/finance/quote/{{ $item->ticker }}:{{ $item->suffix_gf ?? 'NASDAQ' }}{{ config('revolut.source') }}"
-                >{{ __('gFinance') }}</a>],&nbsp;
-                [<a target="_blank"
-                    href="https://markets.ft.com/data/equities/tearsheet/summary?s={{ $item->suffix_ft }}{{ config('revolut.source') }}"
-                >{{ __('FT') }}</a>],&nbsp;
-                [<a target="_blank"
-                    href="https://edition.cnn.com/markets/stocks/{{ $item->ticker }}{{ config('revolut.source') }}"
-                >{{ __('CNN') }}</a>],&nbsp;
-                [<a target="_blank"
-                    href="https://www.bloomberg.com/quote/{{ $item->ticker }}:{{ $item->suffix_bb ?? 'US' }}{{ config('revolut.source') }}"
-                >{{ __('BB') }}</a>]
+                @include('livewire.partials.tooltip-href', [
+                    'url' => newsUrl('yf', $item->ticker, ''),
+                    'urlTxt' => '[yF]',
+                    'urlCmt' => ' Yahoo Finance - ' . $item->ticker,
+                ])
+
+                @include('livewire.partials.tooltip-href', [
+                    'url' => newsUrl('gf', $item->ticker, $item->suffix_gf ?? 'NASDAQ'),
+                    'urlTxt' => '[gF]',
+                    'urlCmt' => ' GooGle Finance - ' . $item->ticker,
+                ])
+
+                @include('livewire.partials.tooltip-href', [
+                    'url' => newsUrl('ft', $item->ticker, $item->suffix_ft ?? 'NSQ'),
+                    'urlTxt' => '[FT]',
+                    'urlCmt' => ' ft.com - ' . $item->ticker,
+                ])
+
+                @include('livewire.partials.tooltip-href', [
+                    'url' => newsUrl('cn', $item->ticker, ''),
+                    'urlTxt' => '[CNN]',
+                    'urlCmt' => ' cnn.com - ' . $item->ticker,
+                ])
+
+                @include('livewire.partials.tooltip-href', [
+                    'url' => newsUrl('bb', $item->ticker, $item->suffix_gf ?? 'US'),
+                    'urlTxt' => '[BB]',
+                    'urlCmt' => ' bloomberg.com - ' . $item->ticker,
+                ])
+
+
             </td>
             <td class="px-3 py-2 text-center text-sm text-gray-500">
                 @include('livewire.partials.button-action', [

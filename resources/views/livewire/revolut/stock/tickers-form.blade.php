@@ -13,7 +13,7 @@
                         {{ __($buttonAction) }}
                     </h2>
                     <div class="mt-1 text-sm text-gray-600">
-                        @include('livewire.partials.sub-menu-button', ['menuRoute' => '$menuRoute', 'menuText' => 'tickers'])
+                        @include('livewire.partials.sub-menu-button', ['menuRoute' => 'stock.tickers', 'menuText' => 'back'])
                     </div>
                 </header>
 

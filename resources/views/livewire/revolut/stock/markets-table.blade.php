@@ -52,23 +52,12 @@
             <td class="px-3 py-2 text-left text-sm">
                 {{ $item->country ?? '' }}
             </td>
-            <td class="px-3 py-2 text-right text-sm text-gray-500">
-
-                [<a target="_blank"
-                    href="https://finance.yahoo.com/quote/{{ $item->ticker }}/?.tsrc={{ config('revolut.source') }}"
-                >{{ __('financeYahoo') }}</a>],&nbsp;
-                [<a target="_blank"
-                    href="https://www.google.com/finance/quote/{{ $item->ticker }}:{{ $item->suffix_gf ?? 'NASDAQ' }}{{ config('revolut.source') }}"
-                >{{ __('gFinance') }}</a>],&nbsp;
-                [<a target="_blank"
-                    href="https://markets.ft.com/data/equities/tearsheet/summary?s={{ $item->suffix_ft }}{{ config('revolut.source') }}"
-                >{{ __('FT') }}</a>],&nbsp;
-                [<a target="_blank"
-                    href="https://edition.cnn.com/markets/stocks/{{ $item->ticker }}{{ config('revolut.source') }}"
-                >{{ __('CNN') }}</a>],&nbsp;
-                [<a target="_blank"
-                    href="https://www.bloomberg.com/quote/{{ $item->ticker }}:{{ $item->suffix_bb ?? 'US' }}{{ config('revolut.source') }}"
-                >{{ __('BB') }}</a>]
+            <td class="px-3 py-2 text-left text-sm text-gray-500">&nbsp;
+            <td class="px-3 py-2 text-left text-sm text-gray-500">&nbsp;
+[&nbsp;yF: {{ $item->suffix_yf ?? '' }}&nbsp;]&nbsp;
+[&nbsp;gF: {{ $item->suffix_gf ?? ''  }}&nbsp;]&nbsp;
+[&nbsp;FT: {{ $item->suffix_ft ?? ''  }}&nbsp;]&nbsp;
+[&nbsp;BB: {{ $item->suffix_bb ?? ''  }}&nbsp;]&nbsp;
             </td>
             <td class="px-3 py-2 text-center text-sm text-gray-500">
                 @include('livewire.partials.button-action', [
