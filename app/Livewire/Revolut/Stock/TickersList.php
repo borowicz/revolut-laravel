@@ -77,12 +77,4 @@ class TickersList extends AbstractComponent
 
         session('message', 'new entries: ' . $new);
     }
-
-    public function edit(string $ticker)
-    {
-    }
-
-    public function details(string $ticker)
-    {
-    }
 }

@@ -3,25 +3,47 @@
 namespace App\Livewire\Revolut\Stock\Markets;
 
 use Livewire\Component;
+use App\Models\Revolut\Stock\StockTicker;
 
 class CreateMarket extends Component
 {
     public $buttonAction = 'Create';
 
-    #[Rule('required')]
-    public $title = '';
+    public StockTicker $item;
 
-    #[Rule('required')]
-    public $content = '';
+    public $id;
+    public $name = '';
+    public $disabled = '';
+    public $short_name = '';
+    public $symbol = '';
+    public $suffix = '';
+    public $suffix_ft = '';
+    public $suffix_bb = '';
+    public $suffix_gf = '';
+    public $country = '';
+    public $currency = '';
+    public $description = '';
 
-    public function save()
+    public function rules()
     {
-        return redirect()->to(route('markets.index'));
+        return [
+            'name' => 'required',
+            'disabled' => 'required',
+        ];
     }
 
     public function cancel()
     {
-        return redirect()->to(route('markets.index'));
+        return redirect()->to(route('stock.markets'));
+    }
+
+    public function save()
+    {
+        $this->validate();
+
+        StockMarket::create($this->all());
+
+        return redirect()->to(route('stock.markets'));
     }
 
     public function render()

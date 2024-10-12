@@ -1,3 +1,4 @@
+@php $activeIndex = 0 @endphp
 <div class="w-full">
     @foreach (['Section 1', 'Section 2', 'Section 3'] as $index => $section)
         <div class="border-b">

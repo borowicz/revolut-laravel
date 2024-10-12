@@ -9,6 +9,8 @@ use Illuminate\Http\Request;
 
 class Summary extends AbstractComponent
 {
+    public $detailsView = false;
+
     public function render(StockCalculations $calculations, Request $request)
     {
         if ($request->get('all') > 0) {
@@ -22,6 +24,7 @@ class Summary extends AbstractComponent
             if(in_array($this->ticker, $this->tickers)) {
                 $this->tickers = [$this->ticker];
                 $this->selectedTicker = $this->ticker;
+                $this->detailsView = true;
             } else {
                 $this->selectedTicker = null;
             }
@@ -29,7 +32,9 @@ class Summary extends AbstractComponent
 
         $items = $calculations->getData(showAll: $this->showAll, tickers: $this->tickers);
 
-        return view('livewire.revolut.stock.summary', ['items' => $items])
-            ->layout('layouts.app');
+        return view('livewire.revolut.stock.summary', [
+            'detailsView' => $this->detailsView,
+            'items' => $items
+        ])->layout('layouts.app');
     }
 }

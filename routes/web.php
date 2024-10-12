@@ -6,6 +6,8 @@ use App\Livewire\Revolut\Dashboard;
 use App\Livewire\Revolut\CurrencyToday;
 use App\Livewire\Note\{CreateNote, EditNote, ShowNotes,};
 use App\Livewire\Feed\{CreateFeed, EditFeed, ShowFeeds,};
+use App\Livewire\Revolut\Stock\Tickers\EditTicker;
+use App\Livewire\Revolut\Stock\Tickers\CreateTicker;
 use App\Livewire\Revolut\Money\{
     Summary as MoneySummary,
     Transactions as MoneyTransactions,
@@ -66,20 +68,19 @@ Route::prefix('notes')
         Route::get('/edit/{note}', EditNote::class)->name('notes.edit');
     });
 
-Route::prefix('notes')
-    ->middleware(['auth', 'verified'])
-    ->group(function () {
-        Route::get('/', ShowNotes::class)->name('notes.index');
-        Route::get('/create', CreateNote::class)->name('notes.create');
-        Route::get('/edit/{note}', EditNote::class)->name('notes.edit');
-    });
-
 Route::prefix('feeds')
     ->middleware(['auth', 'verified'])
     ->group(function () {
         Route::get('/', ShowFeeds::class)->name('feeds.index');
         Route::get('/create', CreateFeed::class)->name('feeds.create');
         Route::get('/edit/{id}', EditFeed::class)->name('feeds.edit');
+    });
+
+Route::prefix('cron')
+    ->middleware(['auth', 'verified'])
+    ->group(function () {
+        Route::get('/', ShowFeeds::class)->name('cron.index');
+        Route::get('/logs', ShowFeeds::class)->name('cron.logs');
     });
 
 Route::prefix('revolut')
@@ -111,8 +112,8 @@ Route::prefix('revolut')
 
             Route::prefix('tickers')->group(function () {
                 Route::get('/', TickersList::class)->name('stock.tickers');
-                Route::get('/create', TickersList::class)->name('stock.tickers.create');
-                Route::get('/edit/{id}', TickersList::class)->name('stock.tickers.edit');
+                Route::get('/create', CreateTicker::class)->name('stock.tickers.create');
+                Route::get('/edit/{id}', EditTicker::class)->name('stock.tickers.edit');
             });
 
             Route::get('/upload', StockUpload::class)->name('stock.upload');
@@ -167,10 +168,6 @@ Route::prefix('revolut')
         });
 
         Route::get('currency', CurrencyToday::class)->name('currency.index');
-
-        Route::prefix('cron')->group(function () {
-            Route::get('/', ShowNotes::class)->name('cron.index');
-        });
     });
 
 require __DIR__ . '/auth.php';

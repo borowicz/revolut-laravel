@@ -1,6 +1,9 @@
 
 @if(isset($tickers))
     <div class="flex justify-between items-center mb-4 mt-4 float-left">
+        @if(isset($tickersName))
+            <x-input-label for="selectedTicker" :value="__('when')"/>
+        @endif
         <select wire:model.live="selectedTicker"
                 name="selectedTicker"
                 class="mt-1 block py-2 px-3
