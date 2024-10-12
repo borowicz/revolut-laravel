@@ -26,9 +26,11 @@ return new class extends Migration {
             $table->foreign('stock_markets_id')
                 ->references('id')
                 ->on(self::TABLE_RELATED)
-                ->onDelete('cascade');
+                ->onDelete('cascade')
+                ->nullable();
+
             $table->integer('disabled')->default(0);
-            $table->string('hash');
+            $table->string('hash')->unique();
 
             $table->string('ticker')->unique();
             $table->string('url')->default('');
