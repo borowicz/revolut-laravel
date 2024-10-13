@@ -44,7 +44,9 @@ class CryptoTransactionsImport extends AbstractImport
         $fees = $row[5] ?? 0;
 
         $when = $row[6] ?? '';
-        $when = Carbon::parse($when)->format('Y-m-d H:i:s');
+        if (!empty($when)) {
+            $when = Carbon::parse($when)->format('Y-m-d H:i:s');
+        }
 
         $currency = $this->getCurrency($price);
         $currency = htmlspecialchars_decode($currency);

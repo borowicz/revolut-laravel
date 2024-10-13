@@ -32,13 +32,22 @@ class CommoditiesTransactionsImport extends AbstractImport
             return null;
         }
 
+        $dateStarted = $row[2] ?? '';
+        if (!empty($dateStarted)) {
+            $dateStarted = Carbon::parse($dateStarted)->format('Y-m-d H:i:s');
+        }
+        $dateCompleted = $row[3] ?? '';
+        if (!empty($dateCompleted)) {
+            $dateCompleted = Carbon::parse($dateCompleted)->format('Y-m-d H:i:s');
+        }
+
         //Type,Product,Started Date,Completed Date,Description,Amount,Fee,Currency,State,Balance
         $entry = [
             'hash'           => $hash,
             'type'           => $row[0] ?? '',
             'product'        => $row[1] ?? '',
-            'started_date'   => Carbon::parse($row[2] ?? '')->format('Y-m-d H:i:s'),
-            'completed_date' => Carbon::parse($row[3] ?? '')->format('Y-m-d H:i:s'),
+            'started_date'   => $dateStarted,
+            'completed_date' => $dateCompleted,
             'description'    => $row[4] ?? '',
             'amount'         => $this->cleanValue($row[5] ?? 0),
             'fee'            => $this->cleanValue($row[6] ?? 0),
