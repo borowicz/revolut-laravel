@@ -2,9 +2,22 @@
 	"name": "revolut/laravel",
 	"type": "project",
 	"description": "Revolut.com user csv data browser / analytics with Laravel framework.",
+	"website": "https://github.com/borowicz/revolut-laravel",
+	"authors": [
+		{
+			"name": "borowicz",
+			"email": "find.me@borowicz",
+			"homepage": "https://borowicz.info"
+		}
+	],
+	"version": "0.9.1",
 	"keywords": [
 		"revolut",
 		"revolut.com",
+		"borowicz",
+		"stock",
+		"market",
+		"panel",
 		"laravel",
 		"framework"
 	],

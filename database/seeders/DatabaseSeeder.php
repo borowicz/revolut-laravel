@@ -27,6 +27,8 @@ class DatabaseSeeder extends Seeder
         }
 
         $this->call(NoteSeeder::class);
+        $this->call(CurrenciesSeeder::class);
         $this->call(StockMarketSeeder::class);
+        $this->call(TickersSeeder::class);
     }
 }
