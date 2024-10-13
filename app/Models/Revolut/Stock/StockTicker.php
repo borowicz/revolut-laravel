@@ -13,7 +13,7 @@ class StockTicker extends AbstractRevolutModel
     protected $fillable = [
         'disabled',
         'hash',
-
+        'stock_markets_id',
         'ticker',
         'url',
         'notes',

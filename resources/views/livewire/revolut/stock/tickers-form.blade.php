@@ -18,13 +18,19 @@
                 </header>
 
                 <form wire:submit.prevent="save" class="mt-6 space-y-6">
+                    @csrf
                     <div>
                         <x-input-label for="disabled" :value="__('Disabled')" />
-                        <x-text-input wire:model="disabled"
-                                      id="disabled"
-                                      name="disabled"
-                                      type="text"
-                                      class="mt-1 block w-full" required autofocus autocomplete="disabled" />
+                        <label for="disabled" class="flex items-center cursor-pointer">
+                            <div class="relative">
+                                <input type="checkbox" id="disabled" wire:model="disabled" class="sr-only">
+                                <div class="block bg-gray-600 w-14 h-8 rounded-full"></div>
+                                <div class="dot absolute left-1 top-1 bg-white w-6 h-6 rounded-full transition"></div>
+                            </div>
+                            <div class="ml-3 text-gray-700 font-medium">
+                                {{ __('Disabled') }}
+                            </div>
+                        </label>
                         <x-input-error class="mt-2" :messages="$errors->get('disabled')" />
                     </div>
 
@@ -66,6 +72,19 @@
                                       type="text"
                                       class="mt-1 block w-full" required autocomplete="notes" />
                         <x-input-error class="mt-2" :messages="$errors->get('notes')" />
+                    </div>
+
+                    <div>
+                        <x-input-label for="stock_markets_id" :value="__('Stock Market')" />
+                        <select wire:model="stock_markets_id" id="stock_markets_id" name="stock_markets_id" class="mt-1 block w-full">
+                            <option value="">{{ __('Select Stock Market') }}</option>
+                            @foreach($stockMarkets as $stockMarket)
+                                <option value="{{ $stockMarket->id }}" {{ $stockMarket->id == $stock_markets_id ? 'selected' : '' }}>
+                                    {{ $stockMarket->name }}
+                                </option>
+                            @endforeach
+                        </select>
+                        <x-input-error class="mt-2" :messages="$errors->get('stock_markets_id')" />
                     </div>
 
                     <div class="flex items-center gap-4">
