@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 
@@ -14,16 +15,27 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         $userData = [
-            'name' => 'revolut',
-            'email' => 'revolut@rl.local',
-            'password' => Hash::make('csv'),
+            [
+                'name' => 'cli',
+                'email' => 'cli@r.local',
+                'password' => Hash::make(uniqid('cli', true)),
+            ],
+            [
+                'name' => 'revolut',
+                'email' => 'revolut@r.local',
+                'password' => Hash::make('csv'),
+            ]
         ];
-        $userCheck = User::select()
-            ->where('name', $userData['name'])
-            ->where('email', $userData['email'])
-            ->first();
-        if (!$userCheck) {
-            User::factory()->create($userData);
+
+        $userTable = (new User())->getTable();
+        foreach ($userData as $user) {
+            $userCheck = User::select()
+                ->where('email', $user['email'])
+                ->first();
+            if (!$userCheck) {
+//                User::factory()->create($user);
+                DB::table($userTable)->insert($user);
+            }
         }
 
         $this->call(NoteSeeder::class);

@@ -16,7 +16,7 @@ class CommoditiesTransactionsImport extends AbstractImport
         if (stristr($row[0], 'type')) {
             return null;
         }
-//dd($row);
+
         $importStats = Session::get('importStats');
         $importStats['total']++;
 
