@@ -4,9 +4,9 @@ namespace App\Models\Revolut\Money;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use App\Models\Revolut\AbstractRevolutModel;
+use App\Models\Revolut\AbstractTransactions;
 
-class CashTransaction extends AbstractRevolutModel
+class CashTransaction extends AbstractTransactions
 {
     use HasFactory, SoftDeletes;
 

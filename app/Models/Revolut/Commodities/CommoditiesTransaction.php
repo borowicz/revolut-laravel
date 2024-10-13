@@ -2,12 +2,11 @@
 
 namespace App\Models\Revolut\Commodities;
 
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use App\Models\Revolut\AbstractRevolutModel;
+use App\Models\Revolut\AbstractTransactions;
 
-class CommoditiesTransaction extends AbstractRevolutModel
+class CommoditiesTransaction extends AbstractTransactions
 {
     use HasFactory, SoftDeletes;
 
@@ -25,26 +24,12 @@ class CommoditiesTransaction extends AbstractRevolutModel
             'balance',
         ];
 
-    public static function getTickers()
+    public static function getTickersList()
     {
         return self::query()
             ->select('currency')
             ->distinct('currency')
             ->where('currency', '!=', '')
-//            ->where('currency', '!=', '')
-            ->whereNotNull('currency')
-            ->orderBy('currency')
-            ->pluck('currency')
-            ->toArray();
-    }
-
-    public static function getTypes()
-    {
-        return self::query()
-            ->select('type')
-            ->distinct()
-            ->orderBy('type')
-            ->pluck('type')
-            ->toArray();
+            ->whereNotNull('currency');
     }
 }

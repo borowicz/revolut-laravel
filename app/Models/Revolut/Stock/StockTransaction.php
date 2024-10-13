@@ -5,11 +5,11 @@ namespace App\Models\Revolut\Stock;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\DB;
-use App\Models\Revolut\AbstractRevolutModel;
+use App\Models\Revolut\AbstractTransactions;
 use App\Models\Revolut\CurrencyExchanges;
 use App\Livewire\Revolut\Stock\Summary\StockCalculations;
 
-class StockTransaction extends AbstractRevolutModel
+class StockTransaction extends AbstractTransactions
 {
     use HasFactory, SoftDeletes;
 
@@ -40,10 +40,13 @@ class StockTransaction extends AbstractRevolutModel
 
     public static function getTransactionsCash()
     {
+        $topUp = StockCalculations::TYPE_TOP_UP;
+        $withdrawal = StockCalculations::TYPE_WITHDRAWAL;
+
         return DB::table((new self())->getTable())
             ->select(DB::raw(
-                '(SUM(CASE WHEN type LIKE "%cash top%" THEN total_amount ELSE 0 END)
-                - SUM(CASE WHEN type LIKE "%with%" THEN total_amount ELSE 0 END)) AS total'
+                '(SUM(CASE WHEN type LIKE "%' . $topUp . '%" THEN total_amount ELSE 0 END)
+                - SUM(CASE WHEN type LIKE "%' . $withdrawal . '%" THEN total_amount ELSE 0 END)) AS total'
             ))
             ->value('total');
     }
@@ -51,7 +54,6 @@ class StockTransaction extends AbstractRevolutModel
     public function getCashTopUp(string $currencyTo = 'USDEUR')
     {
         $cash = StockCalculations::TYPE_CASH;
-        $withdrawal = StockCalculations::TYPE_WITHDRAWAL;
 
         $tableCurrency = (new CurrencyExchanges)->getTable();
         $tableStock = (new self)->getTable();
@@ -67,17 +69,6 @@ class StockTransaction extends AbstractRevolutModel
             )
             ->where($tableStock . '.type', 'LIKE', '%' . $cash . '%')
             ->where($tableCurrency . '.code', '=', $currencyTo);
-    }
-
-    public static function getTypes()
-    {
-        return self::query()
-            ->select('type')
-            ->distinct()
-            ->orderBy('type')
-            ->get()
-            ->pluck('type')
-            ->toArray();
     }
 
     public function scopeSearch($query, $term)

@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Schema;
 /**
  *- -***
  * @example
- * php artisan migrate:refresh --path=./database/migrations/2024_10_04_092015_create_index_stock_transactions.php
+ * php artisan migrate:refresh --path=./database/migrations/2024_10_04_091019_create_notes_table.php
  */
 return new class extends Migration {
     private const TABLE_NAME = 'stock_transactions';

@@ -9,8 +9,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 abstract class AbstractRevolutModel extends Model
 {
 //    use HasFactory, SoftDeletes;
-//    use Searchable;
-
+//    use Searchable, HasFactory, SoftDeletes;
+//
 //    protected static function booted()
 //    {
 //        static::addGlobalScope('active', function (Builder $builder) {

@@ -13,26 +13,17 @@ class DatabaseSeeder extends Seeder
 {
     public function run(): void
     {
-        $usersData = [
-            [
-                'name'     => 'cli',
-                'email'    => 'cli@rl.local',
-                'password' => Hash::make(Str::random(256)),
-            ],
-            [
-                'name'     => 'revolut',
-                'email'    => 'revolut@rl.local',
-                'password' => Hash::make('csv'),
-            ],
+        $userData = [
+            'name' => 'revolut',
+            'email' => 'revolut@rl.local',
+            'password' => Hash::make('csv'),
         ];
-        foreach ($usersData as $user) {
-            $userCheck = User::select()
-                ->where('name', $user['name'])
-                ->where('email', $user['email'])
-                ->first();
-            if (!$userCheck) {
-                User::factory()->create($user);
-            }
+        $userCheck = User::select()
+            ->where('name', $userData['name'])
+            ->where('email', $userData['email'])
+            ->first();
+        if (!$userCheck) {
+            User::factory()->create($userData);
         }
 
         $this->call(NoteSeeder::class);

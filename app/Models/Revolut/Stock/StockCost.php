@@ -9,7 +9,7 @@ class StockCost extends AbstractRevolutModel
 {
     use HasFactory;
 
-    protected $fillable = [ // @todo: add fillable fields migrations/2024_10_01_090916_create_table_stock_costs.php
+    protected $fillable = [
 
         ];
 }
