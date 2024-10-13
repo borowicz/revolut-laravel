@@ -27,7 +27,9 @@
 
                     <div>
                         <x-input-label for="disabled" :value="__('Disabled')" />
-                        <select wire:model="disabled" id="disabled" name="disabled" class="mt-1 block w-full" required>
+                        <select wire:model="disabled" id="disabled" name="disabled"
+
+                                class="mt-1 block w-full" required>
                             <option value="0">{{ __('No') }}</option>
                             <option value="1">{{ __('Yes') }}</option>
                         </select>
@@ -105,7 +107,9 @@
                     </div>
 
                     <div class="flex items-center gap-4">
-                        <x-primary-button>{{ __('Save') }}</x-primary-button>
+                        @if (!empty($buttonAction))
+                            <x-primary-button>{{ __($buttonAction) }}</x-primary-button>
+                        @endif
                         <button type="button" class="inline-flex items-center px-4 py-2 rounded-md" wire:click="cancel">{{ __('Cancel') }}</button>
                     </div>
                 </form>

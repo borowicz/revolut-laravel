@@ -6,8 +6,7 @@ use App\Livewire\Revolut\Dashboard;
 use App\Livewire\Revolut\CurrencyToday;
 use App\Livewire\Note\{CreateNote, EditNote, ShowNotes,};
 use App\Livewire\Feed\{CreateFeed, EditFeed, ShowFeeds,};
-use App\Livewire\Revolut\Stock\Tickers\EditTicker;
-use App\Livewire\Revolut\Stock\Tickers\CreateTicker;
+use App\Livewire\Revolut\Stock\Tickers\{EditTicker, CreateTicker};
 use App\Livewire\Revolut\Money\{
     Summary as MoneySummary,
     Transactions as MoneyTransactions,
@@ -27,7 +26,7 @@ use App\Livewire\Revolut\Crypto\{
     Upload as CryptoUpload,
 };
 use App\Livewire\Revolut\Stock\CashFlow\{CreateCash, EditCash,};
-use App\Livewire\Revolut\Stock\Markets\{CreateMarket, EditMarket};
+use App\Livewire\Revolut\Stock\Markets\{ShowMarket, CreateMarket, EditMarket};
 use App\Livewire\Revolut\Stock\{
     Cash,
     CashFlow,
@@ -108,6 +107,7 @@ Route::prefix('revolut')
                 Route::get('/', Markets::class)->name('stock.markets');
                 Route::get('/create', CreateMarket::class)->name('stock.markets.create');
                 Route::get('/edit/{id}', EditMarket::class)->name('stock.markets.edit');
+                Route::get('/view/{id}', ShowMarket::class)->name('stock.tickers.view');
             });
 
             Route::prefix('tickers')->group(function () {

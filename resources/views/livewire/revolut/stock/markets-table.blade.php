@@ -23,10 +23,7 @@
         <th class="px-6 py-3 text-center text-sm font-semibold text-gray-900">
             {{ __('suffixes') }}
         </th>
-        <th class="px-6 py-3 text-center text-sm font-semibold text-gray-900">
-            {{ __('actions') }}
-        </th>
-        <th class="px-6 py-3 text-right text-sm lowercase hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900">
+        <th class="px-6 py-3 text-center text-sm font-semibold text-gray-900 hover:bg-gray-300">
             @include('livewire.partials.button-sort-field', [
                 'label' => 'status',
                 'field' => 'disabled',
@@ -53,7 +50,6 @@
                 {{ $item->country ?? '' }}
             </td>
             <td class="px-3 py-2 text-left text-sm text-gray-500">&nbsp;
-            <td class="px-3 py-2 text-left text-sm text-gray-500">&nbsp;
 [&nbsp;yF: {{ $item->suffix_yf ?? '' }}&nbsp;]&nbsp;
 [&nbsp;gF: {{ $item->suffix_gf ?? ''  }}&nbsp;]&nbsp;
 [&nbsp;FT: {{ $item->suffix_ft ?? ''  }}&nbsp;]&nbsp;
@@ -65,8 +61,7 @@
                     'routeName' =>'stock.markets.edit',
                     'itemId' => $item->id,
                 ])
-            </td>
-            <td class="px-3 py-2 text-right text-sm text-gray-500">
+&nbsp;
                 @include('livewire.partials.button-disable', [
                     'itemId' => $item->id,
                     'status' => $item->disabled,

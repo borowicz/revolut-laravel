@@ -1,75 +1,117 @@
-<div class="py-12">
-
-    <div class="p-6 text-gray-900 px-4">
-        <header>
-            <p class="mt-1 text-sm text-gray-600">
-                ...
-            </p>
-        </header>
-
+<div class="w-full text-left font-semibold">
+    <div class="p-4">
         <form wire:submit.prevent="submitForm">
-        </form>
-
-        <form wire:submit.prevent="save" class="mt-6 space-y-6">
-
-                <div class="grid grid-cols-4 gap-1">
+            <div style="border: solid 0px red">
+                <div class="grid grid-cols-5 gap-4">
                     <div>
-                        <label for="action">Action:</label>
-                        <select id="action"
-                                wire:model="action"
-                                class="mt-3
-border border-gray-300 bg-white rounded-md shadow-sm
-focus:outline-none focus:ring-blue-500 focus:border-blue-500
-sm:text-sm">
-                            <option value="buy">Buy</option>
-                            <option value="sell">Sell</option>
-                        </select>
+                        @php( $selecAtction = [ __('buy'), __('sell')])
+                        @include('revolutPartials::selected-tickers', ['txtFirst' => 'select action' , 'tickers' => $selecAtction])
                     </div>
                     <div>
-                        <button type="submit">Submit</button>
-                    </div>
-                </div>
-                <div class="grid grid-cols-4 gap-1">
-                    <div><x-input-label for="date" :value="__('when')"/>
-                        <x-text-input wire:model="date"
-                                      id="date"
-                                      name="date"
-                                      type="text"
-                                      value="{{ $date ?? '' }}"
-                                      readonly="readonly"
-                                      class="mt-1 block w-full bg-gray-100 text-black"/>
-                        <x-input-error class="mt-2" :messages="$errors->get('date')"/>
+                        @include('revolutPartials::selected-tickers')
                     </div>
                     <div>
-                        @php($tickersName = 'sadsad')
-                        @include('revolutPartials::select-tickers')
+                        <x-text-input id="cPrice"
+                                      placeholder="{{ __('Price') }}"
+                                      name="cPrice"
+                                      type="number" step="0.1"
+                                      class="w-full block p-3 border border-gray-300 bg-white rounded-md shadow-sm sm:text-sm"/>
                     </div>
-                    <div><x-input-label for="quantity" :value="__('when')"/>
-                        <x-text-input wire:model="quantity"
-                                      id="quantity"
-                                      name="quantity"
-                                      type="text"
-                                      value="{{ $date ?? '' }}"
-                                      class="mt-1 block w-full text-black"/>
-                        <x-input-error class="mt-2" :messages="$errors->get('quantity')"/>
-                    </div>
-                    <div class="text-center px-5"><x-input-label for="quantity" :value="__('when')"/>
-                        <x-text-input wire:model="quantity"
-                                      id="quantity"
-                                      name="quantity"
+                    <div>
+                        <x-text-input id="cPrice"
+                                      placeholder="{{ __('Quantity') }}"
+                                      name="cPrice"
                                       type="number"
-                                      value="{{ $date ?? '' }}"
-                                      class="mt-1 block w-3/4 text-black text-center"/>
-                        <x-input-error class="mt-2" :messages="$errors->get('quantity')"/>
+                                      class="text-right w-full block p-3 border border-gray-300 bg-white rounded-md shadow-sm sm:text-sm"/>
+                    </div>
+                    <div>
+                        <x-text-input id="cPrice"
+                                      placeholder="{{ __('Value') }}"
+                                      name="cPrice"
+                                      readonly
+                                      class="text-right w-full block p-3 border border-gray-300 bg-white rounded-md shadow-sm sm:text-sm"/>
                     </div>
                 </div>
-
-
+                <div class="p-3 col-span-3">
+                    <hr/>
+                </div>
+                <div>
+                    <div class="grid grid-cols-5 gap-4">
+                        <div class="text-right">
+                            {{ __('expected') }}:
+                        </div>
+                        <div>
+                            <x-text-input id="cPrice"
+                                          name="cPrice"
+                                          placeholder="current"
+                                          readonly
+                                          class="bg-gray-200 text-right w-full block p-3 border border-gray-300 bg-white rounded-md shadow-sm sm:text-sm"/>
+                        </div>
+                        <div>
+                            <x-text-input id="cPrice"
+                                          name="cPrice"
+                                          placeholder="current"
+                                          readonly
+                                          class="bg-gray-200 text-right w-full block p-3 border border-gray-300 bg-white rounded-md shadow-sm sm:text-sm"/>
+                        </div>
+                        <div>
+                            <x-text-input id="cPrice"
+                                          name="cPrice"
+                                          placeholder="current"
+                                          readonly
+                                          class="bg-gray-200 text-right w-full block p-3 border border-gray-300 bg-white rounded-md shadow-sm sm:text-sm"/>
+                        </div>
+                        <div>
+                            <x-text-input id="cPrice"
+                                          name="cPrice"
+                                          placeholder="current"
+                                          readonly
+                                          class="bg-gray-200 text-right w-full block p-3 border border-gray-300 bg-white rounded-md shadow-sm sm:text-sm"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="p-3 col-span-3">
+                    <hr/>
+                </div>
+                <div>
+                    <div class="grid grid-cols-5 gap-4">
+                        <div class="text-right">
+                            {{ __('current values') }}:
+                        </div>
+                        <div>
+                            <x-text-input id="cPrice"
+                                          name="cPrice"
+                                          placeholder="current"
+                                          readonly
+                                          class="bg-gray-200 text-right w-full block p-3 border border-gray-300 bg-white rounded-md shadow-sm sm:text-sm"/>
+                        </div>
+                        <div>
+                            <x-text-input id="cPrice"
+                                          name="cPrice"
+                                          placeholder="current"
+                                          readonly
+                                          class="bg-gray-200 text-right w-full block p-3 border border-gray-300 bg-white rounded-md shadow-sm sm:text-sm"/>
+                        </div>
+                        <div>
+                            <x-text-input id="cPrice"
+                                          name="cPrice"
+                                          placeholder="current"
+                                          readonly
+                                          class="bg-gray-200 text-right w-full block p-3 border border-gray-300 bg-white rounded-md shadow-sm sm:text-sm"/>
+                        </div>
+                        <div>
+                            <x-text-input id="cPrice"
+                                          name="cPrice"
+                                          placeholder="current"
+                                          readonly
+                                          class="bg-gray-200 text-right w-full block p-3 border border-gray-300 bg-white rounded-md shadow-sm sm:text-sm"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </form>
     </div>
-
 </div>
-
 
 
 <!-- Include the JavaScript file only for this form -->

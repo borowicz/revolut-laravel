@@ -18,4 +18,9 @@ class StockTicker extends AbstractRevolutModel
         'url',
         'notes',
     ];
+
+    public function stockMarket()
+    {
+        return $this->belongsTo(StockMarket::class, 'stock_markets_id');
+    }
 }

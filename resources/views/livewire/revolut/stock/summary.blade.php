@@ -24,7 +24,8 @@
         </div>
         <div class="px-4">
 {{--            @include('livewire.partials.accordion-modal') --}}
-            @include('livewire.revolut.stock.form-calculator')
+{{--            @include('livewire.revolut.stock.form-calculator')--}}
+            @include('livewire.partials.accordion-calc')
         </div>
         <div class="px-4">
             @include('livewire.revolut.stock.summary-table')

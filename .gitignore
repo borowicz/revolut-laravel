@@ -61,3 +61,5 @@ composer.json
 
 /composer.local.json
 /__RVLTlv/
+/.env.local
+/.env.testing

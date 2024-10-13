@@ -7,6 +7,7 @@ use App\Models\Revolut\Stock\StockMarket;
 
 class EditMarket extends Component
 {
+    public $readOnly = false;
     public $buttonAction = 'Save';
 
     public StockMarket $item;
