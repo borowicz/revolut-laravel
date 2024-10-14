@@ -1,11 +1,12 @@
 # revolut-laravel
 
-* [revolut data](#revolut)
-* [install repository](#install)
-  Laravel [project](https://github.com/borowicz/revolut-laravel/) for [Revolut.com](https://app.revolut.com/start) data browser with [Laravel 11](https://laravel.com/docs/11.x/)
+* [revolut data](#revolut) 
+* [install repository](#install) 
+Laravel [project](https://github.com/borowicz/revolut-laravel/) for [Revolut.com](https://app.revolut.com/start) data browser with [Laravel 11](https://laravel.com/docs/11.x/) 
 
-
-
+## <font color="darkred">Test project in development, may contain errors....</font>
+work in progres, pork in wrongress :-D
+ 
 ## revolut
 ```
  
@@ -21,10 +22,10 @@ go to:
         >>> save csv file
  
 ```
-
-
+ 
+ 
 ## install
-
+ 
 ```shell
 
 git clone git@github.com:borowicz/revolut-laravel.git
@@ -39,6 +40,6 @@ npm run build
 ./artisan db:seed --class=DatabaseSeeder
 
 ```
-
-> *github://borowicz/revolut-laravel* - revolut.com + laravel
+ 
+ > *github://borowicz/revolut-laravel* - revolut.com + laravel
  
