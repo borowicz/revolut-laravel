@@ -2,22 +2,58 @@
 
 namespace Database\Seeders;
 
-use App\Models\User;
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
+use App\Models\User;
 
+/**
+ * ddev exec ./artisan db:seed --class=DatabaseSeeder
+ */
 class DatabaseSeeder extends Seeder
 {
-    /**
-     * Seed the application's database.
-     */
     public function run(): void
     {
-        // User::factory(10)->create();
+        $userData = [
+            [
+                'name' => 'cli',
+                'email' => 'cli@r.local',
+                'password' => Hash::make(uniqid('cli', true)),
+            ],
+            [
+                'name' => 'revolut',
+                'email' => 'revolut@r.local',
+                'password' => Hash::make('csv'),
+            ]
+        ];
 
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
-        ]);
+        $userTable = (new User())->getTable();
+        foreach ($userData as $user) {
+            $userCheck = User::select()
+                ->where('email', $user['email'])
+                ->first();
+            if (!$userCheck) {
+//                User::factory()->create($user);
+                DB::table($userTable)->insert($user);
+            }
+        }
+
+        $this->call(NoteSeeder::class);
+        $this->call(CurrenciesSeeder::class);
+        $this->call(StockMarketSeeder::class);
+        $this->call(TickersSeeder::class);
+
+//        $this->call(CashCurrentFactorySeeder::class);
+//        $this->call(CashTransactionSeeder::class);
+//        $this->call(CommoditiesTickerSeeder::class);
+//        $this->call(CommoditiesTransactionSeeder::class);
+//        $this->call(CryptoTransactionSeeder::class);
+//        $this->call(CurrencyExchangesSeeder::class);
+//        $this->call(StockPricesSeeder::class);
+//        $this->call(StockProfitLossOtherTransactionSeeder::class);
+//        $this->call(StockProfitLossTransactionSeeder::class);
+//        $this->call(StockRoboTransactionSeeder::class);
+//        $this->call(StockTickerSeeder::class);
+//        $this->call(StockTransactionSeeder::class);
     }
 }
