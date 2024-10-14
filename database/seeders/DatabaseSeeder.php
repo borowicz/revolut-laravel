@@ -42,5 +42,18 @@ class DatabaseSeeder extends Seeder
         $this->call(CurrenciesSeeder::class);
         $this->call(StockMarketSeeder::class);
         $this->call(TickersSeeder::class);
+
+//        $this->call(CashCurrentFactorySeeder::class);
+//        $this->call(CashTransactionSeeder::class);
+//        $this->call(CommoditiesTickerSeeder::class);
+//        $this->call(CommoditiesTransactionSeeder::class);
+//        $this->call(CryptoTransactionSeeder::class);
+//        $this->call(CurrencyExchangesSeeder::class);
+//        $this->call(StockPricesSeeder::class);
+//        $this->call(StockProfitLossOtherTransactionSeeder::class);
+//        $this->call(StockProfitLossTransactionSeeder::class);
+//        $this->call(StockRoboTransactionSeeder::class);
+//        $this->call(StockTickerSeeder::class);
+//        $this->call(StockTransactionSeeder::class);
     }
 }
