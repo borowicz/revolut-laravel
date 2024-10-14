@@ -9,8 +9,6 @@ use App\Models\Revolut\AbstractRevolutModel;
 
 class CashCurrent extends AbstractRevolutModel
 {
-    use HasFactory, SoftDeletes, HasTimestamps;
-
     protected $table = 'stock_cash';
 
     protected $fillable = [

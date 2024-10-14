@@ -15,11 +15,6 @@ return new class extends Migration {
 
     public function up(): void
     {
-//        $table->foreignId('stock_markets_id')->constrained()->default(null);
-//            $table->foreign('stock_markets_id')
-//                ->references('id')
-//                ->on(self::TABLE_RELATED)
-//                ->onDelete('cascade');
         Schema::create(self::TABLE_NAME, function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('stock_markets_id')->nullable();

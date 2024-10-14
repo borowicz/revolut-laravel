@@ -8,8 +8,6 @@ use App\Models\Revolut\AbstractRevolutModel;
 
 class StockProfitLossOtherTransaction extends AbstractRevolutModel
 {
-    use HasFactory, SoftDeletes;
-
     protected $fillable = [
             'hash',
             'date',             //Date

@@ -7,8 +7,6 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class NewsFeed extends AbstractRevolutModel
 {
-    use HasFactory;
-
     protected $fillable = [
         'disabled',
         'hash',

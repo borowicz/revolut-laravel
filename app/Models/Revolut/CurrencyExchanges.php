@@ -7,8 +7,6 @@ use Illuminate\Support\Facades\DB;
 
 class CurrencyExchanges extends AbstractRevolutModel
 {
-    use HasFactory;
-
     protected $fillable = [
         'source',
         'hash',

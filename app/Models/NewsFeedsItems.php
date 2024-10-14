@@ -8,8 +8,6 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class NewsFeedsItems extends AbstractRevolutModel
 {
-    use HasFactory, SoftDeletes;
-
     protected $fillable = [
         'hash',
         'title',

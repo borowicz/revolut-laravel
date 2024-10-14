@@ -7,8 +7,6 @@ use App\Models\Revolut\AbstractRevolutModel;
 
 class StockCost extends AbstractRevolutModel
 {
-    use HasFactory;
-
     protected $fillable = [
 
         ];

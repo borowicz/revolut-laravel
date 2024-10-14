@@ -2,15 +2,16 @@
 
 namespace App\Models\Revolut;
 
+use Illuminate\Database\Eloquent\Concerns\HasTimestamps;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 abstract class AbstractRevolutModel extends Model
 {
-//    use HasFactory, SoftDeletes;
-//    use Searchable, HasFactory, SoftDeletes;
-//
+    use HasFactory, HasTimestamps, SoftDeletes;
+//    use Searchable;
+
 //    protected static function booted()
 //    {
 //        static::addGlobalScope('active', function (Builder $builder) {

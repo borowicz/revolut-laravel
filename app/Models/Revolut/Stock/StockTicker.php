@@ -8,8 +8,6 @@ use App\Models\Revolut\AbstractRevolutModel;
 
 class StockTicker extends AbstractRevolutModel
 {
-    use HasFactory, SoftDeletes;
-
     protected $fillable = [
         'disabled',
         'hash',

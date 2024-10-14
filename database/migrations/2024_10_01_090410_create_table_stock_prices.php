@@ -29,6 +29,7 @@ return new class extends Migration {
             $table->string('volume')->default('');
 
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

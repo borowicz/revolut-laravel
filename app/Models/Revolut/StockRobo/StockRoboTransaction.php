@@ -11,8 +11,6 @@ use App\Models\Revolut\AbstractTransactions;
  */
 class StockRoboTransaction extends AbstractTransactions
 {
-    use HasFactory, SoftDeletes;
-
     protected $fillable = [
         'hash',
         'date',

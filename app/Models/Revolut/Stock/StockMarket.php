@@ -10,8 +10,6 @@ use App\Models\Revolut\Stock\StockTicker;
 
 class StockMarket extends AbstractRevolutModel
 {
-    use HasFactory, SoftDeletes;
-
     protected $fillable = [
         'disabled',
         'name',

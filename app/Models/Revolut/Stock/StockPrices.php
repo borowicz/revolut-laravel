@@ -8,8 +8,6 @@ use App\Models\Revolut\AbstractRevolutModel;
 
 class StockPrices extends AbstractRevolutModel
 {
-    use HasFactory;
-
     protected $fillable = [
         'hash', 'source', 'refreshed', 'day', 'ticker', 'open', 'high', 'low', 'close', 'volume',
     ];

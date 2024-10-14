@@ -8,8 +8,6 @@ use App\Models\Revolut\AbstractTransactions;
 
 class CashTransaction extends AbstractTransactions
 {
-    use HasFactory, SoftDeletes;
-
     protected $fillable = [
         'hash',
         'date',

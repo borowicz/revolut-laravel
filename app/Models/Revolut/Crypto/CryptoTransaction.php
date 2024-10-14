@@ -11,10 +11,7 @@ use Illuminate\Support\Facades\DB;
 
 class CryptoTransaction extends AbstractRevolutModel
 {
-    use HasFactory, SoftDeletes;
-
-    protected $fillable
-        = [
+    protected $fillable = [
             'hash',
             'date',
             'symbol',

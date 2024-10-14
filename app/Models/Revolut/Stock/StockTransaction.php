@@ -11,8 +11,6 @@ use App\Livewire\Revolut\Stock\Summary\StockCalculations;
 
 class StockTransaction extends AbstractTransactions
 {
-    use HasFactory, SoftDeletes;
-
     protected $fillable = [
         'hash',
         'date',

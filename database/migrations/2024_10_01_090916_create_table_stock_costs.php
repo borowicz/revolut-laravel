@@ -33,6 +33,7 @@ return new class extends Migration {
             //  Type of Cost / Charge | RSEUAB | Local Currency | Notes
 
             $table->timestamps();
+            $table->softDeletes();
 
             $table->comment('Costs and Charges Report');
         });
