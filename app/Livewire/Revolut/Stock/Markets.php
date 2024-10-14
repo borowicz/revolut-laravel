@@ -12,6 +12,17 @@ class Markets extends AbstractComponent
     public $itemStatus = [];
     public $sortField = 'disabled';
     public $sortDirection = 'ASC';
+    public $name;
+    public $short_name;
+    public $symbol;
+    public $suffix;
+    public $suffix_ft;
+    public $suffix_bb;
+    public $suffix_gf;
+    public $suffix_yf;
+    public $suffix_cn;
+    public $country;
+    public $currency;
 
     public function updateStatus($itemId, $status)
     {
@@ -47,4 +58,3 @@ class Markets extends AbstractComponent
         $item->delete();
     }
 }
-

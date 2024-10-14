@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 
 /**
- * ddev exec ./artisan db:seed --class=DatabaseSeeder
+                                         * ddev exec ./artisan db:seed --class=DatabaseSeeder
  */
 class DatabaseSeeder extends Seeder
 {

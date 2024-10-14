@@ -1,20 +1,20 @@
 <table class="min-w-full divide-y divide-gray-300 table-fixed">
     <thead class="font-medium text-gray-500 uppercase tracking-wider text-center">
     <tr>
-        <th scope="col" class="px-6 py-3 pl-4 pr-2 text-left text-sm font-semibold text-gray-900 sm:pl-0">&nbsp;</th>
-        <th class="px-6 py-3 text-left text-sm font-semibold text-gray-900 hover:bg-gray-300">
-            @include('livewire.partials.button-sort-field', [
+        <th>&nbsp;</th>
+        <th class="text-left">
+            @include('livewire.partials.text-sort-field', [
                 'label' => 'when',
                 'field' => 'date',
             ])
         </th>
-        <th class="px-6 py-3 text-left text-sm font-semibold text-gray-900 hover:bg-gray-300">
-            @include('livewire.partials.button-sort-field', [
+        <th class="text-right">
+            @include('livewire.partials.text-sort-field', [
                 'label' => 'value',
                 'field' => 'total',
             ])
         </th>
-        <th scope="col" class="px-6 py-3 text-left text-sm font-semibold text-gray-900 hover:bg-gray-300">&nbsp;</th>
+        <th class="text-center">
     </tr>
     </thead>
     <tbody class="divide-y divide-gray-200">
@@ -23,7 +23,7 @@
             <td title="{{ $item->id }}">
                 @include('revolutPartials::tooltip', ['ttTxt' => ((int)$key+1), 'ttComment' => $item->hash])</td>
             <td class="px-3 py-2">{{ $item->date ?? '' }}</td>
-            <td class="px-3 py-2">{{ numberFormat($item->total ?? 0) }}</td>
+            <td class="px-3 py-2 text-right">{{ numberFormat($item->total ?? 0) }}</td>
             <td class="px-3 py-2 text-center text-sm text-gray-500">
                 @include('livewire.partials.button-edit', [
                          'label' => 'edit',

@@ -1,12 +1,11 @@
 <?php
 
-namespace App\Imports\Crypto;
+namespace App\Imports;
 
-use Carbon\Carbon;
-use Illuminate\Support\Facades\Session;
-use App\Imports\AbstractImport;
 use App\Http\Controllers\Revolut\AbstractRevolutController;
 use App\Models\Revolut\Crypto\CryptoTransaction;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\Session;
 
 class CryptoTransactionsImport extends AbstractImport
 {
@@ -26,7 +25,6 @@ class CryptoTransactionsImport extends AbstractImport
         if ($check) {
             $importStats['skipped']++;
             Session::put('importStats', $importStats);
-//            $check->update();
 
             return null;
         }
@@ -41,12 +39,17 @@ class CryptoTransactionsImport extends AbstractImport
         $quantity = $row[2] ?? 0;
         $price = $row[3] ?? 0;
         $value = $row[4] ?? 0;
-        $fees = $row[5] ?? 0;
+        $fee = $row[5] ?? 0;
 
         $when = $row[6] ?? '';
         if (!empty($when)) {
             $when = Carbon::parse($when)->format('Y-m-d H:i:s');
         }
+
+        $quantity = str_replace(',', '', $quantity);
+        $price = str_replace(',', '', $price);
+        $value = str_replace(',', '', $value);
+        $fee = str_replace(',', '', $fee);
 
         $currency = $this->getCurrency($price);
         $currency = htmlspecialchars_decode($currency);
@@ -56,7 +59,7 @@ class CryptoTransactionsImport extends AbstractImport
 //        $quantity = $this->cleanValue($quantity);
         $quantity = (float)$quantity;
         $value = $this->cleanValue($value);
-        $fees = $this->cleanValue($fees);
+        $fee = $this->cleanValue($fee);
 
         $entry = [
             'hash'     => $hash,
@@ -73,7 +76,7 @@ class CryptoTransactionsImport extends AbstractImport
             'price_raw' => $row[3] ?? 0,
             'value'     => $value,
             'value_raw' => $row[4] ?? 0,
-            'fees'      => $fees,
+            'fees'      => $fee,
             'fees_raw'  => $row[5] ?? 0,
         ];
 

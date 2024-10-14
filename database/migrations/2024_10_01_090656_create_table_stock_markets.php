@@ -24,11 +24,13 @@ return new class extends Migration {
 
             $table->string('symbol')->nullable();
 
-            $table->string('suffix')->nullable();
+            $table->string('suffix', 10)->nullable();
 
-            $table->string('suffix_ft')->nullable()->comment('financial times');
-            $table->string('suffix_bb')->nullable()->comment('blomberg');
-            $table->string('suffix_gf')->nullable()->comment('google finance');
+            $table->string('suffix_gf', 10)->nullable()->comment('google finance');
+//            $table->string('suffix_yf', 10)->nullable()->comment('yahoo finance');
+            $table->string('suffix_ft', 10)->nullable()->comment('financial times');
+            $table->string('suffix_bb', 10)->nullable()->comment('blomberg');
+//            $table->string('suffix_cn', 10)->nullable()->comment('cnn');
 
             $table->string('country')->nullable();
             $table->string('currency')->nullable();

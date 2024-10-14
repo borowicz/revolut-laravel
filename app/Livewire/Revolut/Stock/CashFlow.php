@@ -11,12 +11,16 @@ class CashFlow extends AbstractComponent
 {
     use WithPagination;
 
-
+    public $sortField = 'id';
+    public $sortDirection = 'asc';
+    public $buttonAction;
+    public $when;
+    public $cash;
 
     public function render()
     {
         $query = Money::query();
-        $query->orderBy($this->sortField, $this->sortDirection);;
+        $query->orderBy($this->sortField, $this->sortDirection);
 
         $items = $this->setPagination($query);
         $hasPages = $this->hasPagination($items);

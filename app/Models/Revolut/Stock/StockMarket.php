@@ -19,6 +19,8 @@ class StockMarket extends AbstractRevolutModel
         'suffix_ft',
         'suffix_bb',
         'suffix_gf',
+//        'suffix_yf',
+//        'suffix_cn',
         'country',
         'currency',
     ];

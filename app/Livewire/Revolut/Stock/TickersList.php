@@ -17,12 +17,13 @@ class TickersList extends AbstractComponent
 
     public $sortField = 'ticker';
     public $sortDirection = 'ASC';
+    public $itemStatus = [];
+    public $showButtons = false;
+    public $tickers;
     protected $listeners = ['refreshComponent' => '$refresh'];
 
     public function mount()
     {
-//        parent::mount($ticker, $perPage);
-
         $this->itemStatus = StockTicker::pluck('disabled', 'id')->toArray();
     }
 

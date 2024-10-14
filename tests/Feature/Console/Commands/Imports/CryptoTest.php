@@ -2,10 +2,10 @@
 
 namespace Tests\Console\Commands\Import;
 
+use App\Console\Commands\Import\Crypto;
+use App\Imports\CryptoTransactionsImport;
 use Illuminate\Console\Scheduling\Schedule;
 use Maatwebsite\Excel\Facades\Excel;
-use App\Console\Commands\Import\Crypto;
-use App\Imports\Crypto\CryptoTransactionsImport;
 
 it('has the correct command signature', function () {
     $command = new Crypto();

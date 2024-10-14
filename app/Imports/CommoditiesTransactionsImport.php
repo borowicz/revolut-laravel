@@ -41,6 +41,18 @@ class CommoditiesTransactionsImport extends AbstractImport
             $dateCompleted = Carbon::parse($dateCompleted)->format('Y-m-d H:i:s');
         }
 
+        $amount = $row[5] ?? 0;
+        $amount = str_replace(',', '.', $amount);
+        $amount = number_format($amount, 2, '.', '');
+
+        $fee = $row[6] ?? 0;
+        $fee = str_replace(',', '.', $fee);
+        $fee = number_format($fee, 2, '.', '');
+
+        $balance = $row[9] ?? 0;
+        $balance = str_replace(',', '.', $balance);
+        $balance = number_format($balance, 2, '.', '');
+
         //Type,Product,Started Date,Completed Date,Description,Amount,Fee,Currency,State,Balance
         $entry = [
             'hash'           => $hash,
@@ -49,11 +61,14 @@ class CommoditiesTransactionsImport extends AbstractImport
             'started_date'   => $dateStarted,
             'completed_date' => $dateCompleted,
             'description'    => $row[4] ?? '',
-            'amount'         => $this->cleanValue($row[5] ?? 0),
-            'fee'            => $this->cleanValue($row[6] ?? 0),
+            'amount'         => $amount,
+            'amount_raw'     => $row[5] ?? 0,
+            'fee'            => $fee,
+            'fee_raw'        => $row[6] ?? 0,
             'currency'       => $row[7] ?? '',
             'state'          => $row[8] ?? '',
-            'balance'        => $this->cleanValue($row[9] ?? 0),
+            'balance'        => $balance,
+            'balance_raw'    => $row[9] ?? 0,
         ];
 
         $importStats['inserted']++;

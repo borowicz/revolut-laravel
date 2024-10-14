@@ -2,10 +2,10 @@
 
 namespace App\Livewire\Revolut\Crypto;
 
+use App\Imports\CryptoTransactionsImport;
+use App\Livewire\Forms\UploadForm;
 use Illuminate\Support\Facades\Session;
 use Maatwebsite\Excel\Facades\Excel;
-use App\Livewire\Forms\UploadForm;
-use App\Imports\Crypto\CryptoTransactionsImport;
 
 class Upload extends UploadForm
 {

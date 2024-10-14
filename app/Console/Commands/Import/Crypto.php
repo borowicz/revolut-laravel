@@ -2,11 +2,11 @@
 
 namespace App\Console\Commands\Import;
 
+use App\Console\AbstractCsvImport;
+use App\Console\FetchDataInterface;
+use App\Imports\CryptoTransactionsImport;
 use Illuminate\Console\Scheduling\Schedule;
 use Maatwebsite\Excel\Facades\Excel;
-use App\Console\FetchDataInterface;
-use App\Console\AbstractCsvImport;
-use App\Imports\Crypto\CryptoTransactionsImport;
 
 /**
  * @see /revolut/crypto/transactions

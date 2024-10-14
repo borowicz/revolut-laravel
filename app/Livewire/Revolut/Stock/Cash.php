@@ -38,7 +38,6 @@ class Cash extends AbstractComponent
         $items = $this->setPagination($query);
         $hasPages = $this->hasPagination($items);
 
-
         return view('livewire.revolut.stock.cash', [
             'items'      => $items,
             'total'      => $total,

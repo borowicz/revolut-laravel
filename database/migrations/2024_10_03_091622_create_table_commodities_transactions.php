@@ -24,11 +24,18 @@ return new class extends Migration {
             $table->datetime('started_date')->nullable();
             $table->dateTime('completed_date')->nullable();
             $table->string('description')->default('');
+
             $table->decimal('amount', 14, 6)->nullable();
+            $table->string('amount_raw')->default('');
+
             $table->decimal('fee', 14, 6)->nullable();
+            $table->string('fee_raw')->default('');
+
             $table->string('currency')->default('');
             $table->string('state')->default('');
-            $table->string('balance')->default('');
+
+            $table->decimal('balance', 14, 6)->nullable();
+            $table->string('balance_raw')->default('');
 
             // Additional columns for price and traded value editable by user
             $table->string('note')->nullable();

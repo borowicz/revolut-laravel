@@ -29,6 +29,11 @@ class MoneyAccountsTransactionsImport extends AbstractImport
             return null;
         }
 
+        $amount = str_replace(',', '.', $row[5]);
+        $amount = number_format($amount, 2, '.', '');
+        $fee = str_replace(',', '.', $row[6]);
+        $fee = number_format($fee, 2, '.', '');
+
         // Type,Product,Started Date,Completed Date,Description,Amount,Fee,Currency,State,Balance
         // CASHBACK,Savings,2019-12-20 12:42:05,2019-12-22 09:31:45,Metal Cashback,0.01,0.00,EUR,COMPLETED,0.01
         $item = [
@@ -40,9 +45,9 @@ class MoneyAccountsTransactionsImport extends AbstractImport
             'started_date' => $row[2] ?? '',
             'completed_date' => $row[3] ?? '',
             'description' => $row[4] ?? '',
-            'amount' => number_format($row[5], 2, '.', ''),
+            'amount' => $amount,
             'amount_raw' => $row[5],
-            'fee' => number_format($row[6], 2, '.', ''),
+            'fee' => $fee,
             'fee_raw' => $row[6],
             'currency' => $row[7],
             'state' => $row[8],

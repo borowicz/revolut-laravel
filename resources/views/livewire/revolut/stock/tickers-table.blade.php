@@ -14,9 +14,6 @@
         <th class="px-6 py-3 text-left lowercase">
             {{ __('news services') }}
         </th>
-        <th class="px-6 py-3 text-center lowercase">
-            &nbsp;
-        </th>
         <th class="px-6 py-3 text-right text-sm font-semibold text-gray-900 hover:bg-gray-300 focus:bg-gray-700 active:bg-gray-900">
             @include('livewire.partials.button-sort-field', [
                 'label' => 'status',
@@ -27,7 +24,6 @@
     </thead>
     <tbody class="bg-white divide-y divide-gray-200">
     @forelse ($items as $key => $item)
-{{--@dd($item->stockMarket)--}}
         <tr class="even:bg-gray-50 odd:bg-white">
             <td title="{{ $item->hash }}">
                 @include('revolutPartials::tooltip', ['ttTxt' => ((int)$key+1), 'ttComment' => $item->hash])</td>
@@ -70,7 +66,6 @@
                     'urlCmt' => ' bloomberg.com - ' . $item->ticker,
                 ])
 
-
             </td>
             <td class="px-3 py-2 text-center text-sm text-gray-500">
                 @include('livewire.partials.button-action', [
@@ -83,7 +78,7 @@
         </tr>
     @empty
         <tr>
-            <td colspan="8" class="px-3 py-2 text-center">
+            <td colspan="5" class="px-3 py-2 text-center">
                 {{ __('No items found') }}.
             </td>
         </tr>

@@ -14,9 +14,6 @@
         <th class="px-6 py-3 text-left lowercase">
             {{ __('news services') }}
         </th>
-        <th class="px-6 py-3 text-center lowercase">
-            &nbsp;
-        </th>
         <th class="px-6 py-3 text-right text-sm font-semibold text-gray-900 hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900">
             @include('livewire.partials.button-sort-field', [
                 'label' => 'status',
@@ -36,7 +33,6 @@
                 {{ $item->market ?? '' }}
             </td>
             <td class="px-3 py-2 text-left text-sm text-gray-500">
-
                 [<a target="_blank"
                     href="https://finance.yahoo.com/quote/{{ $item->ticker }}/?.tsrc={{ config('revolut.source') }}"
                 >{{ __('financeYahoo') }}</a>],&nbsp;
@@ -59,8 +55,7 @@
                     'routeName' =>'stock.money.edit',
                     'itemId' => $item->id,
                 ])
-            </td>
-            <td class="px-3 py-2 text-right text-sm text-gray-500">
+&nbsp;
                 @include('livewire.partials.button-disable', [
                     'itemId' => $item->id,
                     'status' => $item->disabled,
@@ -69,7 +64,7 @@
         </tr>
     @empty
         <tr>
-            <td colspan="8" class="px-3 py-2 text-center">
+            <td colspan="5" class="px-3 py-2 text-center">
                 {{ __('No items found') }}.
             </td>
         </tr>

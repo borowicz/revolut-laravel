@@ -13,7 +13,7 @@ class UploadForm extends Component
     public $isUploaded = false;
 
     protected $rules = [
-            'file' => 'required|mimes:csv,txt|max:1024', // Maximum file size of 1MB
+            'file' => 'required|mimes:csv,txt|max:10240', // Maximum file size of 1MB
         ];
 
     public function resetUpload()

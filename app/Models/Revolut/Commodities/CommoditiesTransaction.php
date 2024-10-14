@@ -16,10 +16,13 @@ class CommoditiesTransaction extends AbstractTransactions
             'completed_date',
             'description',
             'amount',
+            'amount_raw',
             'fee',
+            'fee_raw',
             'currency',
             'state',
             'balance',
+            'balance_raw',
         ];
 
     public static function getTickersList()
