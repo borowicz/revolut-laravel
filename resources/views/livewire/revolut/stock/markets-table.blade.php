@@ -1,30 +1,30 @@
 <table class="min-w-full divide-y divide-gray-300 table-fixed">
-    <thead class="font-medium uppercase text-gray-500 tracking-wider text-center">
+    <thead class="font-medium text-gray-500 uppercase tracking-wider text-center">
     <tr>
         <th>&nbsp;</th>
-        <th class="px-6 py-3 text-left text-sm font-semibold text-gray-900 hover:bg-gray-300">
-            @include('livewire.partials.button-sort-field', [
+        <th class="text-center">
+            @include('livewire.partials.text-sort-field', [
                 'label' => 'market',
                 'field' => 'name',
             ])
         </th>
-        <th class="px-6 py-3 text-left text-sm font-semibold text-gray-900 hover:bg-gray-300">
-            @include('livewire.partials.button-sort-field', [
+        <th class="text-left">
+            @include('livewire.partials.text-sort-field', [
                 'label' => 'symbol',
                 'field' => 'symbol',
             ])
         </th>
-        <th class="px-6 py-3 text-center text-sm font-semibold text-gray-900 hover:bg-gray-300">
-            @include('livewire.partials.button-sort-field', [
+        <th class="text-center">
+            @include('livewire.partials.text-sort-field', [
                 'label' => 'country',
                 'field' => 'country',
             ])
         </th>
-        <th class="px-6 py-3 text-center text-sm font-semibold text-gray-900">
+        <th class="text-center">
             {{ __('suffixes') }}
         </th>
-        <th class="px-6 py-3 text-center text-sm font-semibold text-gray-900 hover:bg-gray-300">
-            @include('livewire.partials.button-sort-field', [
+        <th class="text-center">
+            @include('livewire.partials.text-sort-field', [
                 'label' => 'status',
                 'field' => 'disabled',
             ])

@@ -47,7 +47,6 @@ class Transactions extends AbstractComponent
         debugbar()->info('$this->perPage: ' . $this->perPage);
 
         $results = $this->getItems();
-
         $this->types = CryptoTransaction::getTypes();
         $this->tickers = CryptoTransaction::getTickers();
 

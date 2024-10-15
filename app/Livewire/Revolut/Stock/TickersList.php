@@ -4,8 +4,8 @@ namespace App\Livewire\Revolut\Stock;
 
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Livewire\Attributes\Rule;
 use Livewire\WithPagination;
-use Livewire\Component;
 use App\Http\Controllers\Revolut\AbstractRevolutController;
 use App\Models\Revolut\Stock\StockTicker;
 use App\Models\Revolut\Stock\StockTransaction;
@@ -15,12 +15,15 @@ class TickersList extends AbstractComponent
 {
     use WithPagination;
 
-    public $sortField = 'ticker';
-    public $sortDirection = 'ASC';
     public $itemStatus = [];
     public $showButtons = false;
     public $tickers;
     protected $listeners = ['refreshComponent' => '$refresh'];
+    public $searchBox = false;
+    public $search = '';
+    public $sortField = 'ticker';
+    public $sortDirection = 'ASC';
+    public $selectedTicker = null;
 
     public function mount()
     {
@@ -52,11 +55,11 @@ class TickersList extends AbstractComponent
         $this->showButtons = false;
         $this->tickers = null;
 
-        return view(
-            'livewire.revolut.stock.tickers',
-            compact('items', 'hasPages')
-        )
-            ->layout('layouts.app');
+        return view('livewire.revolut.stock.tickers', [
+            'items'      => $items,
+            'hasPages'   => $hasPages,
+        ])
+        ->layout('layouts.app');
     }
 
     private function getAndSetTickersFromStockTransactions(array $tickers): void

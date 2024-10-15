@@ -28,7 +28,7 @@ use App\Livewire\Revolut\Crypto\{
 use App\Livewire\Revolut\Stock\CashFlow\{CreateCash, EditCash,};
 use App\Livewire\Revolut\Stock\Markets\{ShowMarket, CreateMarket, EditMarket};
 use App\Livewire\Revolut\Stock\{
-    Cash,
+    CashTopUp,
     CashFlow,
     Details,
     Dividends,
@@ -93,7 +93,7 @@ Route::prefix('revolut')
             Route::get('/prices/detail', Prices::class)->name('stock.prices.details');
 
             Route::prefix('cash')->group(function () {
-                Route::get('/', Cash::class)->name('stock.cash');
+                Route::get('/', CashTopUp::class)->name('stock.cash');
                 Route::get('/flow', CashFlow::class)->name('stock.cash.flow');
                 Route::get('/flow/create', CreateCash::class)->name('stock.cash.flow.create');
                 Route::get('/flow/edit/{item}', EditCash::class)->name('stock.cash.flow.edit');

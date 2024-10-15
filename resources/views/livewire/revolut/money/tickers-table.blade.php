@@ -1,5 +1,5 @@
 <table class="min-w-full divide-y divide-gray-300 table-fixed">
-    <thead class="font-medium uppercase text-gray-500 tracking-wider text-center">
+    <thead class="font-medium text-gray-500 uppercase tracking-wider text-center">
     <tr>
         <th>&nbsp;</th>
         <th class="px-6 py-3 text-left text-sm font-semibold text-gray-900 hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900">

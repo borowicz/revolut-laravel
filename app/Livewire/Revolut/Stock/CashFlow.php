@@ -11,11 +11,14 @@ class CashFlow extends AbstractComponent
 {
     use WithPagination;
 
-    public $sortField = 'id';
-    public $sortDirection = 'asc';
     public $buttonAction;
     public $when;
-    public $cash;
+    public $searchBox = false;
+    public $search = '';
+    public $perPage = 30; // Number of items per page
+    public $sortField = 'date';
+    public $sortDirection = 'DESC';
+    public $selectedTicker = null;
 
     public function render()
     {

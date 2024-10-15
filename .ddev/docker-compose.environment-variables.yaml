@@ -1,0 +1,9 @@
+
+services:
+  web:
+    environment:
+      IS_DDEV: true
+      environment: ddev
+      APP_ENV: dev
+      DBGP_IDEKEY: PHPSTORM
+      PHP_IDE_CONFIG: "serverName: ${DDEV_SITENAME}.ddev.site"

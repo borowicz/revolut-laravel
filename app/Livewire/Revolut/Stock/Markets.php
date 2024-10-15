@@ -19,8 +19,8 @@ class Markets extends AbstractComponent
     public $suffix_ft;
     public $suffix_bb;
     public $suffix_gf;
-    public $suffix_yf;
-    public $suffix_cn;
+//    public $suffix_yf;
+//    public $suffix_cn;
     public $country;
     public $currency;
 

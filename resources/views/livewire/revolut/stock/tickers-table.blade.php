@@ -1,20 +1,20 @@
 <table class="min-w-full divide-y divide-gray-300 table-fixed">
-    <thead class="font-medium uppercase text-gray-500 tracking-wider text-center">
+    <thead class="font-medium text-gray-500 uppercase tracking-wider text-center">
     <tr>
         <th>&nbsp;</th>
-        <th class="px-6 py-3 text-left text-sm font-semibold text-gray-900 hover:bg-gray-300 focus:bg-gray-700 active:bg-gray-900">
-            @include('livewire.partials.button-sort-field', [
+        <th class="text-center">
+            @include('livewire.partials.text-sort-field', [
                 'label' => 'ticker',
                 'field' => 'ticker',
             ])
         </th>
-        <th class="px-6 py-3 text-left lowercase">
+        <th class="text-center lowercase">
             {{ __('market') }}
         </th>
-        <th class="px-6 py-3 text-left lowercase">
+        <th class="text-left lowercase">
             {{ __('news services') }}
         </th>
-        <th class="px-6 py-3 text-right text-sm font-semibold text-gray-900 hover:bg-gray-300 focus:bg-gray-700 active:bg-gray-900">
+        <th class="text-right">
             @include('livewire.partials.button-sort-field', [
                 'label' => 'status',
                 'field' => 'disabled',

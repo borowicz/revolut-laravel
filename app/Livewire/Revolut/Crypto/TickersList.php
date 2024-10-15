@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Revolut\Crypto;
 
+use App\Models\Revolut\Stock\StockTicker;
 use Illuminate\Http\Request;
 use Livewire\WithPagination;
 use App\Livewire\Revolut\AbstractComponent;
@@ -17,6 +18,16 @@ class TickersList extends AbstractComponent
 
     public $status = 0; // Initial status
     public $itemStatus = []; // To track status for each item
+
+    public function mount()
+    {
+//        $this->itemStatus = CryptoTransaction::pluck('disabled', 'id')->toArray();
+    }
+
+    public function updateStatus($itemId)
+    {
+//        $this->setStatusDisabled(CryptoTransaction::class, $itemId);
+    }
 
     public function render(Request $request)
     {

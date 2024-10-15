@@ -2,7 +2,7 @@
     <thead class="font-medium text-gray-500 uppercase tracking-wider text-center">
     <tr>
         <th>&nbsp;</th>
-        <th class="text-left">
+        <th class="text-center">
             @include('livewire.partials.text-sort-field', [
                 'label' => 'when',
                 'field' => 'date',
