@@ -11,6 +11,9 @@ class Transactions extends AbstractComponent
 {
     use WithPagination;
 
+    public $sortField = 'date';
+    public $sortDirection = 'DESC';
+
     public function updatingSearch()
     {
         $this->resetPage();

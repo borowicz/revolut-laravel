@@ -1,26 +1,20 @@
 <table class="min-w-full divide-y divide-gray-300 table-fixed">
-    <thead class="font-medium uppercase text-gray-500 tracking-wider text-center">
+    <thead class="font-medium text-gray-500 uppercase tracking-wider text-center">
     <tr>
         <th>&nbsp;</th>
-        <th class="px-6 py-3 text-left text-sm font-semibold text-gray-900 hover:bg-gray-300">
-            @include('livewire.partials.button-sort-field', [
+        <th class="text-center">
+            @include('livewire.partials.text-sort-field', [
                 'label' => 'ticker',
-                'field' => 'symbol',
-            ])
-        </th>
-        <th class="px-6 py-3 text-left text-sm font-semibold text-gray-900 hover:bg-gray-300">
-            @include('livewire.partials.button-sort-field', [
-                'label' => 'currency',
                 'field' => 'currency',
             ])
         </th>
-        <th class="px-6 py-3 text-left lowercase">
+        <th class="text-left lowercase">
+            {{ __('currency') }}
+        </th>
+        <th class="text-left lowercase">
             {{ __('news services') }}
         </th>
-        <th class="px-6 py-3 text-center lowercase">
-            &nbsp;
-        </th>
-        <th class="px-6 py-3">
+        <th class="text-center">
             &nbsp;
         </th>
     </tr>
@@ -53,15 +47,10 @@
             <td class="px-3 py-2 text-center text-sm text-gray-500">
                 @include('livewire.partials.button-action', [
                     'label' => 'edit',
-                    'routeName' =>'stock.markets.edit',
+                    'routeName' =>'crypto.tickers.create',
                     'itemId' => $item->id,
                 ])
-            </td>
-            <td class="px-3 py-2 text-right text-sm text-gray-500">
-                @include('livewire.partials.button-disable', [
-                    'itemId' => $item->id,
-                    'status' => $item->disabled,
-                ])
+                @include('livewire.partials.button-disable')
             </td>
         </tr>
     @empty

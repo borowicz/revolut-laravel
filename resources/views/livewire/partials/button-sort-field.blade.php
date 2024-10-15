@@ -6,7 +6,7 @@
             <svg class="w-4 h-4 text-gray-600" fill="currentColor"
                  viewBox="0 0 20 20">
                 <path d="M5 10l5-5 5 5H5z"/>
-            </svg> UP
+            </svg>
         @else
             <svg class="w-4 h-4 text-gray-600" fill="currentColor"
                  viewBox="0 0 20 20">
