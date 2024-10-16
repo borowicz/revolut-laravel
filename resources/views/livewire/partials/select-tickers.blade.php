@@ -19,4 +19,11 @@
             @endforeach
         </select>
     </div>
+    <script>
+        // document.addEventListener('livewire:load', function () {
+        //     Livewire.on('reloadPage', () => {
+        //         location.reload();
+        //     });
+        // });
+    </script>
 @endif

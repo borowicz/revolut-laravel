@@ -3,17 +3,19 @@
 namespace App\Livewire\Revolut\Commodities;
 
 use App\Livewire\Revolut\AbstractComponent;
-use App\Livewire\Revolut\Stock\Summary\StockCalculations;
-use Illuminate\Http\Request;
+use App\Models\Revolut\Commodities\CommoditiesTransaction;
 
 class Summary extends AbstractComponent
 {
-    public function render(StockCalculations $calculations, Request $request)
+    public function render()
     {
         $items = [];
-        $items['stocks'] = [];
+        $items['menu'] = 'livewire.revolut.commodities.menu';
+        $items['types'] = CommoditiesTransaction::getTypesSummary();
+//        $items['tickers'] = CommoditiesTransaction::getSummary($this->showAll)->get();
+        $items['tickers'] = [];
 
-        return view('livewire.revolut.commodities.summary', ['items' => $items])
+        return view('livewire.revolut.summary', ['items' => $items])
             ->layout('layouts.app');
     }
 }

@@ -11,7 +11,7 @@ class Upload extends UploadForm
 {
     public function render()
     {
-        return view('livewire.revolut.money.upload')->layout('layouts.app');
+        return view('livewire.revolut.money.upload');
     }
 
     public function uploadCsv()

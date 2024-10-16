@@ -43,8 +43,10 @@
             <td class="px-3 py-2 text-sm">
                 {{ shorted($item->type) }}
             </td>
-            <td class="px-3 py-2">
-                {{ $item->ticker }}
+            <td>
+{{--                <a href="{{ route('stock.transactions.list', ['ticker' => $item->ticker ?? '']) }}">--}}
+                    {{ $item->ticker ?? '' }}
+{{--                </a>--}}
             </td>
             <td class="px-3 py-2 text-right text-sm">
                 {{ numberFormat($item->quantity, 3) }}
@@ -57,16 +59,17 @@
             </td>
             <td class="text-right">
                 @if($showButtons)
-                    <a href="{{ route('stock.transactions.details', [$item->ticker]) }}"
-                       title="{{ $item->created_at }} | {{ $item->updated_at }}"
-                       class="inline-flex items-center px-2 py-2 bg-gray-800
-border border-transparent rounded-md
-font-semibold text-xs text-white
-uppercase tracking-widest
-hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900
-focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2
-transition ease-in-out duration-150"
-                    >{{ __('details') }}</a>
+                    <a
+{{--                        href="{{ route('stock.transactions.details', ['hash' => $item->hash]) }}"--}}
+                        href="{{ route('stock.transactions.details', ['hash' => $item->hash, 'ticker' => $item->ticker ?? 'none']) }}"
+{{--                       title="{{ $item->created_at }} | {{ $item->updated_at | $item->ticker ?? 'none' }}"--}}
+                    >
+                        <svg class="w-6 h-6 text-gray-800 dark:text-white"
+                             aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                             fill="currentColor" viewBox="0 0 17 14">
+                            <path d="M16 2H1a1 1 0 0 1 0-2h15a1 1 0 1 1 0 2Zm0 6H1a1 1 0 0 1 0-2h15a1 1 0 1 1 0 2Zm0 6H1a1 1 0 0 1 0-2h15a1 1 0 0 1 0 2Z"/>
+                        </svg>
+                    </a>
                 @endif
             </td>
         </tr>

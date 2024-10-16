@@ -48,6 +48,6 @@ class Transactions extends AbstractComponent
         return view('livewire.revolut.money.transactions', [
             'hasPages' => $results['hasPages'],
             'items' => $results['items'],
-        ])->layout('layouts.app');
+        ]);
     }
 }

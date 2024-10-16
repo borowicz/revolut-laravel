@@ -71,13 +71,15 @@ class CommoditiesTransactionsImport extends AbstractImport
             'balance_raw'    => $row[9] ?? 0,
         ];
 
-        $importStats['inserted']++;
+        try {
+            CommoditiesTransaction::create($entry);
+        } catch (\Exception $e) {
+            $importStats['failed']++;
+            Session::put('importStats', $importStats);
+        }
+
         Session::put('importStats', $importStats);
 
-        $results = CommoditiesTransaction::create($entry);
-
-        debugbar()->info('$entry: ' . json_encode($entry, JSON_PRETTY_PRINT));
-
-        return $results;
+        return null;
     }
 }

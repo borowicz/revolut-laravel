@@ -27,7 +27,7 @@
         <tr class="even:bg-gray-50 odd:bg-white">
             <td title="{{ $item->hash }}">
                 @include('revolutPartials::tooltip', ['ttTxt' => ((int)$key+1), 'ttComment' => $item->hash])</td>
-            <td class="px-3 py-2" title="{{ $item->notes }}">
+            <td class="px-3 py-2 text-left" title="{{ $item->notes }}">
                 <a href="{{ route('stock.details', ['ticker' => $item->ticker]) }}">{{ $item->ticker }}</a>
             </td>
             <td class="px-3 py-2 text-left">
@@ -39,19 +39,19 @@
                 @include('livewire.partials.tooltip-href', [
                     'url' => newsUrl('yf', $item->ticker, ''),
                     'urlTxt' => '[yF]',
-                    'urlCmt' => ' Yahoo Finance - ' . $item->ticker,
+                    'urlCmt' => ' GooGle Finance - ' . $item->ticker . ':' . $item->stockMarket->suffix_yf ?? '' . ' [' . $item->stockMarket->name . '] ',
                 ])
 
                 @include('livewire.partials.tooltip-href', [
-                    'url' => newsUrl('gf', $item->ticker, $item->suffix_gf ?? 'NASDAQ'),
+                    'url' => newsUrl('gf', $item->ticker, $item->stockMarket->suffix_gf ?? 'NASDAQ'),
                     'urlTxt' => '[gF]',
-                    'urlCmt' => ' GooGle Finance - ' . $item->ticker,
+                    'urlCmt' => ' GooGle Finance - ' . $item->ticker . ':' . $item->stockMarket->suffix_gf ?? '' . ' [' . $item->stockMarket->name . '] ',
                 ])
 
                 @include('livewire.partials.tooltip-href', [
-                    'url' => newsUrl('ft', $item->ticker, $item->suffix_ft ?? 'NSQ'),
+                    'url' => newsUrl('ft', $item->ticker, $item->stockMarket->suffix_ft ?? 'NSQ'),
                     'urlTxt' => '[FT]',
-                    'urlCmt' => ' ft.com - ' . $item->ticker,
+                    'urlCmt' => ' ft.com - ' . $item->ticker . ':' . $item->stockMarket->suffix_ft ?? '' . ' [' . $item->stockMarket->name . '] ',
                 ])
 
                 @include('livewire.partials.tooltip-href', [
@@ -60,14 +60,14 @@
                     'urlCmt' => ' cnn.com - ' . $item->ticker,
                 ])
 
-                @include('livewire.partials.tooltip-href', [
-                    'url' => newsUrl('bb', $item->ticker, $item->suffix_gf ?? 'US'),
-                    'urlTxt' => '[BB]',
-                    'urlCmt' => ' bloomberg.com - ' . $item->ticker,
-                ])
+{{--                @include('livewire.partials.tooltip-href', [--}}
+{{--                    'url' => newsUrl('bb', $item->ticker, 'US'),--}}
+{{--                    'urlTxt' => '[BB]',--}}
+{{--                    'urlCmt' => ' bloomberg.com - ' . $item->ticker . ':' . $item->stockMarket->suffix_bb ?? 'US' . ' [' . $item->stockMarket->name . '] ',--}}
+{{--                ])--}}
 
             </td>
-            <td class="px-3 py-2 text-center text-sm text-gray-500">
+            <td class="px-3 py-2 text-right text-sm text-gray-500">
                 @include('livewire.partials.button-action', [
                     'label' => 'edit',
                     'routeName' =>'stock.tickers.edit',

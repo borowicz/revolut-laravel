@@ -34,7 +34,8 @@ return new class extends Migration {
             $table->string('currency')->nullable();
 
             $table->string('state')->nullable();
-            $table->string('balance')->nullable();
+            $table->string('balance_raw')->nullable();
+            $table->decimal('balance', 14, 6)->nullable();
 
             $table->timestamps();
             $table->softDeletes();

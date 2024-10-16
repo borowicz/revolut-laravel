@@ -56,6 +56,19 @@
             <td class="px-3 py-2 text-sm">
                 {{ shorted($item->balance) }}
             </td>
+            <td class="text-right">
+                @if($showButtons)
+                    <a href="{{ route('commodities.transactions.details', ['ticker' => $item->currency, 'hash' => $item->hash]) }}"
+                       title="{{ $item->created_at }} | {{ $item->updated_at }}"
+                    >
+                        <svg class="w-6 h-6 text-gray-800 dark:text-white"
+                             aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                             fill="currentColor" viewBox="0 0 17 14">
+                            <path d="M16 2H1a1 1 0 0 1 0-2h15a1 1 0 1 1 0 2Zm0 6H1a1 1 0 0 1 0-2h15a1 1 0 1 1 0 2Zm0 6H1a1 1 0 0 1 0-2h15a1 1 0 0 1 0 2Z"/>
+                        </svg>
+                    </a>
+                @endif
+            </td>
         </tr>
     @empty
         <tr>

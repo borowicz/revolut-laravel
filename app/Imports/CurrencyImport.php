@@ -64,8 +64,15 @@ class CurrencyImport extends AbstractImport
         $importStats['inserted']++;
         $importStats['sheets'][$currentCurrency]['inserted']++;
 
+        try {
+            new CurrencyExchanges($item);
+        } catch (\Exception $e) {
+            $importStats['failed']++;
+            Session::put('importStats', $importStats);
+        }
+
         Session::put('importStats', $importStats);
 
-        return new CurrencyExchanges($item);
+        return null;
     }
 }

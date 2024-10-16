@@ -40,6 +40,6 @@ class Summary extends AbstractComponent
         return view('livewire.revolut.stock.summary', [
             'detailsView' => $this->detailsView,
             'items' => $items
-        ])->layout('layouts.app');
+        ]);
     }
 }

@@ -16,16 +16,6 @@ class Dividends extends Transactions
         $this->resetPage();
     }
 
-//    public function sortBy($field)
-//    {
-//        if ($this->sortField === $field) {
-//            $this->sortDirection = $this->sortDirection === 'ASC' ? 'DESC' : 'ASC';
-//        } else {
-//            $this->sortField = $field;
-//            $this->sortDirection = 'DESC';
-//        }
-//    }
-
     public function render(Request $request, string $ticker = null)
     {
         $query = StockTransaction::query()
@@ -50,6 +40,6 @@ class Dividends extends Transactions
             'tickers' => $this->tickers,
             'items' => $items,
             'hasPages' => $hasPages,
-        ])->layout('layouts.app');
+        ]);
     }
 }

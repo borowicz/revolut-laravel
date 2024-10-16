@@ -82,12 +82,15 @@ class CryptoTransactionsImport extends AbstractImport
 
         $importStats['inserted']++;
 
+        try {
+            CryptoTransaction::create($entry);
+        } catch (\Exception $e) {
+            $importStats['failed']++;
+            Session::put('importStats', $importStats);
+        }
+
         Session::put('importStats', $importStats);
 
-        $results = CryptoTransaction::create($entry);
-
-        debugbar()->info('$entry: ' . json_encode($entry, JSON_PRETTY_PRINT));
-
-        return $results;
+        return null;
     }
 }

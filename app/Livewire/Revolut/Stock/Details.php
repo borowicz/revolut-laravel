@@ -56,6 +56,6 @@ class Details extends Transactions
             'perPage' => $this->perPage,
             'tickers' => $tickers,
             'items' => $items,
-        ])->layout('layouts.app');
+        ]);
     }
 }

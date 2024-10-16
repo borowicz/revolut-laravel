@@ -32,7 +32,7 @@ class CashFlow extends AbstractComponent
             'showButtons' => false,
             'items' => $items,
             'hasPages' => $hasPages,
-        ])->layout('layouts.app');
+        ]);
     }
 
     public function create()

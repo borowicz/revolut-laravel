@@ -50,7 +50,7 @@ class Markets extends AbstractComponent
             'items' => $items,
             'hasPages' => false,
             'sortField' => '',
-        ])->layout('layouts.app');
+        ]);
     }
 
     public function delete(StockMarket $item)

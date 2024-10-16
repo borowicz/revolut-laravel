@@ -14,12 +14,6 @@ class Transactions extends AbstractComponent
     private function getItems()
     {
         $ticker = '';
-//        if (!empty($this->selectedTicker)) {
-//            $ticker = $this->selectedTicker;
-//        }
-//        if (!empty($this->ticker)) {
-//            $ticker = $this->ticker;
-//        }
 
         $query = CryptoTransaction::query()
 //            ->search($this->search)
@@ -53,6 +47,6 @@ class Transactions extends AbstractComponent
         return view('livewire.revolut.crypto.transactions', [
             'hasPages' => $results['hasPages'],
             'items' => $results['items'],
-        ])->layout('layouts.app');
+        ]);
     }
 }

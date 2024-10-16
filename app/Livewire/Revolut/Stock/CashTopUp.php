@@ -35,7 +35,7 @@ class CashTopUp extends AbstractComponent
             'total'      => $total,
             'calculated' => $calculated,
             'hasPages'   => $hasPages,
-        ])->layout('layouts.app');
+        ]);
     }
 
     private function calculate($query): array

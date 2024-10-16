@@ -1,9 +1,7 @@
 <?php
 
-namespace App\Models\Revolut\StockRobo;
+namespace App\Models\Revolut\Stock;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Models\Revolut\AbstractTransactions;
 
 /**
