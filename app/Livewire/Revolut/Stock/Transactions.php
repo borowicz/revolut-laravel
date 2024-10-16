@@ -11,6 +11,9 @@ class Transactions extends AbstractComponent
 {
     use WithPagination;
 
+    public $sortField = 'date';
+    public $sortDirection = 'DESC';
+
     public function updatingSearch()
     {
         $this->resetPage();
@@ -44,6 +47,6 @@ class Transactions extends AbstractComponent
         return view('livewire.revolut.stock.transactions', [
             'hasPages' => $results['hasPages'],
             'items' => $results['items'],
-        ])->layout('layouts.app');
+        ]);
     }
 }

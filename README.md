@@ -12,7 +12,7 @@ work in progres, pork in wrongress :-D
  
 go to:
  - revolut.com app on your mobile
- - invest
+ - invest / crypto / commodities / robo / accounts
  - more (three dots button) 
     >> documents
     >> brokerage account
@@ -34,12 +34,11 @@ ddev start
 ddev exec bash
 composer install
 ./artisan migrate
-php artisan breeze:install
-npm install
+./artisan db:seedphp artisan breeze:install
+npm i
 npm run build
-./artisan db:seed --class=DatabaseSeeder
 
 ```
  
- > *github://borowicz/revolut-laravel* - revolut.com + laravel
+ > *github://borowicz/revolut-laravel* - revolut.com data + laravel
  

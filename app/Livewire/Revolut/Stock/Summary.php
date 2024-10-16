@@ -4,27 +4,32 @@ namespace App\Livewire\Revolut\Stock;
 
 use App\Livewire\Revolut\AbstractComponent;
 use App\Livewire\Revolut\Stock\Summary\StockCalculations;
-use App\Models\Revolut\Stock\StockPrices;
+use App\Models\Revolut\Stock\StockTicker;
 use Illuminate\Http\Request;
 
 class Summary extends AbstractComponent
 {
     public $detailsView = false;
+    public $tickerChart;
+    public $markets = [];
 
     public function render(StockCalculations $calculations, Request $request)
     {
         if ($request->get('all') > 0) {
             $this->showAll = true;
         }
-        debugbar()->info('$this->showAll: ' . (int)$this->showAll);
-        $this->tickers = $calculations->getTickersList($this->showAll)
-            ->get()->pluck('ticker')->toArray();
+
+        $query = $calculations->getTickersList($this->showAll);
+        $this->tickers = $query->get()->pluck('ticker')->toArray();
 
         if (null !== $this->ticker) {
             if(in_array($this->ticker, $this->tickers)) {
                 $this->tickers = [$this->ticker];
                 $this->selectedTicker = $this->ticker;
                 $this->detailsView = true;
+                $market = StockTicker::where('ticker', $this->ticker)->get()->first()->symbol;
+
+                $this->tickerChart = $market . ':' . $this->ticker;
             } else {
                 $this->selectedTicker = null;
             }
@@ -35,6 +40,6 @@ class Summary extends AbstractComponent
         return view('livewire.revolut.stock.summary', [
             'detailsView' => $this->detailsView,
             'items' => $items
-        ])->layout('layouts.app');
+        ]);
     }
 }

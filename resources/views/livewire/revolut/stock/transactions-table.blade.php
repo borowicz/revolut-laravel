@@ -2,42 +2,31 @@
     <thead class="font-medium text-gray-500 uppercase tracking-wider text-center">
     <tr>
         <th>&nbsp;</th>
-        <th class="px-6 py-3 text-left text-sm font-semibold text-gray-900 hover:bg-gray-300 focus:bg-gray-900 active:bg-gray-900">
-            {{ __('When') }}
+        <th class="text-center">
+            @include('livewire.partials.text-sort-field', [
+                'label' => 'when',
+                'field' => 'date',
+            ])
         </th>
-        <th class="px-6 py-3 text-center text-sm font-semibold text-gray-900 hover:bg-gray-300 focus:bg-gray-700 active:bg-gray-900">
-            @if(isset($sortField))
-                <button wire:click="sortBy('type')"
-                        class="flex items-center space-x-1">
-                    <span>{{ __('Type') }}</span>
-                    @if ($sortField === 'type')
-                        @if ($sortDirection === 'asc')
-                            <!-- Up Arrow Icon -->
-                            <svg class="w-4 h-4 text-gray-600" fill="currentColor"
-                                 viewBox="0 0 20 20">
-                                <path d="M5 10l5-5 5 5H5z"/>
-                            </svg>
-                        @else
-                            <!-- Down Arrow Icon -->
-                            <svg class="w-4 h-4 text-gray-600" fill="currentColor"
-                                 viewBox="0 0 20 20">
-                                <path d="M15 10l-5 5-5-5h10z"/>
-                            </svg>
-                        @endif
-                    @endif
-                </button>
-            @endif
+        <th>
+            @include('livewire.partials.text-sort-field', [
+                'label' => 'type',
+                'field' => 'type',
+            ])
         </th>
-        <th class="px-6 py-3 text-left text-sm font-semibold text-gray-900 hover:bg-gray-300 focus:bg-gray-900 active:bg-gray-900">
-            {{ __('Ticker') }}
+        <th>
+            @include('livewire.partials.text-sort-field', [
+                'label' => 'ticker',
+                'field' => 'ticker',
+            ])
         </th>
-        <th class="px-6 py-3 text-left text-sm font-semibold text-gray-900 hover:bg-gray-300 focus:bg-gray-900 active:bg-gray-900">
+        <th>
             {{ __('Quantity') }}
         </th>
-        <th class="px-6 py-3 text-left text-sm font-semibold text-gray-900 hover:bg-gray-300 focus:bg-gray-900 active:bg-gray-900">
+        <th>
             {{ __('Price') }}
         </th>
-        <th class="px-6 py-3 text-left text-sm font-semibold text-gray-900 hover:bg-gray-300 focus:bg-gray-900 active:bg-gray-900">
+        <th>
             {{ __('Total') }}
         </th>
     </tr>
@@ -54,8 +43,10 @@
             <td class="px-3 py-2 text-sm">
                 {{ shorted($item->type) }}
             </td>
-            <td class="px-3 py-2">
-                {{ $item->ticker }}
+            <td>
+{{--                <a href="{{ route('stock.transactions.list', ['ticker' => $item->ticker ?? '']) }}">--}}
+                    {{ $item->ticker ?? '' }}
+{{--                </a>--}}
             </td>
             <td class="px-3 py-2 text-right text-sm">
                 {{ numberFormat($item->quantity, 3) }}
@@ -68,16 +59,17 @@
             </td>
             <td class="text-right">
                 @if($showButtons)
-                    <a href="{{ route('stock.transactions.details', [$item->ticker]) }}"
-                       title="{{ $item->created_at }} | {{ $item->updated_at }}"
-                       class="inline-flex items-center px-2 py-2 bg-gray-800
-border border-transparent rounded-md
-font-semibold text-xs text-white
-uppercase tracking-widest
-hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900
-focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2
-transition ease-in-out duration-150"
-                    >{{ __('details') }}</a>
+                    <a
+{{--                        href="{{ route('stock.transactions.details', ['hash' => $item->hash]) }}"--}}
+                        href="{{ route('stock.transactions.details', ['hash' => $item->hash, 'ticker' => $item->ticker ?? 'none']) }}"
+{{--                       title="{{ $item->created_at }} | {{ $item->updated_at | $item->ticker ?? 'none' }}"--}}
+                    >
+                        <svg class="w-6 h-6 text-gray-800 dark:text-white"
+                             aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                             fill="currentColor" viewBox="0 0 17 14">
+                            <path d="M16 2H1a1 1 0 0 1 0-2h15a1 1 0 1 1 0 2Zm0 6H1a1 1 0 0 1 0-2h15a1 1 0 1 1 0 2Zm0 6H1a1 1 0 0 1 0-2h15a1 1 0 0 1 0 2Z"/>
+                        </svg>
+                    </a>
                 @endif
             </td>
         </tr>

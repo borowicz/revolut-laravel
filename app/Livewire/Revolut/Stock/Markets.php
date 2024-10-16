@@ -19,8 +19,8 @@ class Markets extends AbstractComponent
     public $suffix_ft;
     public $suffix_bb;
     public $suffix_gf;
-    public $suffix_yf;
-    public $suffix_cn;
+//    public $suffix_yf;
+//    public $suffix_cn;
     public $country;
     public $currency;
 
@@ -50,7 +50,7 @@ class Markets extends AbstractComponent
             'items' => $items,
             'hasPages' => false,
             'sortField' => '',
-        ])->layout('layouts.app');
+        ]);
     }
 
     public function delete(StockMarket $item)

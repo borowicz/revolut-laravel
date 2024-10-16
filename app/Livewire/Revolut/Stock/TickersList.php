@@ -2,80 +2,72 @@
 
 namespace App\Livewire\Revolut\Stock;
 
-use Carbon\Carbon;
-use Illuminate\Http\Request;
-use Livewire\WithPagination;
-use Livewire\Component;
-use App\Http\Controllers\Revolut\AbstractRevolutController;
 use App\Models\Revolut\Stock\StockTicker;
 use App\Models\Revolut\Stock\StockTransaction;
-use App\Livewire\Revolut\AbstractComponent;
+use App\Livewire\Revolut\AbstractTickersComponent;
 
-class TickersList extends AbstractComponent
+class TickersList extends AbstractTickersComponent
 {
-    use WithPagination;
+    public $showButtons = false;
+    protected $listeners = ['refreshComponent' => '$refresh'];
 
     public $sortField = 'ticker';
     public $sortDirection = 'ASC';
-    public $itemStatus = [];
-    public $showButtons = false;
-    public $tickers;
-    protected $listeners = ['refreshComponent' => '$refresh'];
+
 
     public function mount()
     {
-        $this->itemStatus = StockTicker::pluck('disabled', 'id')->toArray();
+        $this->modelTickers = StockTicker::class;
+        $this->modelTransaction = StockTransaction::class;
+        $this->itemStatus = $this->modelTickers::pluck('disabled', 'id')->toArray();
     }
 
-    public function updateStatus($itemId)
+    public function render()
     {
-        $this->setStatusDisabled(StockTicker::class, $itemId);
-    }
-
-    public function render(Request $request)
-    {
-        $query = StockTicker::query();
-        $stockTickers = StockTransaction::getTickers();
-        if ($query->count() < count($stockTickers)) {
-            $this->getAndSetTickersFromStockTransactions($stockTickers);
-        }
-
-        $query->orderBy($this->sortField, $this->sortDirection);
-
-        $items = $this->setPagination($query);
+        $items = $this->getItems();
         $hasPages = $this->hasPagination($items);
-
         foreach ($items as $item) {
             $this->itemStatus[$item->id] = $item->disabled;
         }
-
         $this->showButtons = false;
         $this->tickers = null;
 
-        return view(
-            'livewire.revolut.stock.tickers',
-            compact('items', 'hasPages')
-        )
-            ->layout('layouts.app');
+        return view('livewire.revolut.stock.tickers', [
+            'items'      => $items,
+            'hasPages'   => $hasPages,
+        ]);
     }
 
-    private function getAndSetTickersFromStockTransactions(array $tickers): void
-    {
-        $new = 0;
-        foreach ($tickers as $ticker) {
-            $check = StockTicker::where('ticker', $ticker)->first();
-            if ($check) {
-                continue;
-            }
+//    public function getItems()
+//    {
+//        $query = $this->model::query();
+//        $stockTickers = $this->modelTransaction::getTickers();
+//        if ($query->count() < count($stockTickers)) {
+//            $this->getAndSetTickersFromStockTransactions($stockTickers, $this->model);
+//        }
+//
+//        $query->orderBy($this->sortField, $this->sortDirection);
+//
+//        return $this->setPagination($query);
+//    }
 
-            $hash = AbstractRevolutController::setHash([$ticker]);
-            $result = StockTicker::firstOrCreate(['ticker' => $ticker], ['hash' => $hash, 'ticker' => $ticker]);
-
-            if (!$result) {
-                $new++;
-            }
-        }
-
-        session('message', 'new entries: ' . $new);
-    }
+//    private function getAndSetTickersFromStockTransactions(array $tickers, mixed $model): void
+//    {
+//        $new = 0;
+//        foreach ($tickers as $ticker) {
+//            $check = $this->model::where('ticker', $ticker)->first();
+//            if ($check) {
+//                continue;
+//            }
+//
+//            $hash = AbstractRevolutController::setHash([$ticker]);
+//            $result = $this->model::firstOrCreate(['ticker' => $ticker], ['hash' => $hash, 'ticker' => $ticker]);
+//
+//            if (!$result) {
+//                $new++;
+//            }
+//        }
+//
+//        session('message', 'new entries: ' . $new);
+//    }
 }

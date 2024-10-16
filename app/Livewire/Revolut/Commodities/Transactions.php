@@ -7,11 +7,7 @@ use App\Livewire\Revolut\AbstractComponent;
 
 class Transactions extends AbstractComponent
 {
-    public $selectedTicker = '';
-    public $selectedType = '';
-    public $sortField = 'completed_date';
-    public $sortDirection = 'asc';
-    public $perPage = 10;
+    public $sortField = 'started_date';
 
     private function getItems()
     {
@@ -20,9 +16,10 @@ class Transactions extends AbstractComponent
             ->when($this->selectedType, fn($q) => $q->where('type', $this->selectedType))
             ->orderBy($this->sortField, $this->sortDirection);
 
-        $items = $query->paginate($this->perPage);
+        $items = $this->setPagination($query);
+        $hasPages = $this->hasPagination($items);
 
-        return ['items' => $items, 'hasPages' => $items->hasMorePages()];
+        return ['items' => $items, 'hasPages' => $hasPages];
     }
 
     public function render()
@@ -34,6 +31,6 @@ class Transactions extends AbstractComponent
         return view('livewire.revolut.commodities.transactions', [
             'hasPages' => $results['hasPages'],
             'items'    => $results['items'],
-        ])->layout('layouts.app');
+        ]);
     }
 }

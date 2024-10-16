@@ -2,14 +2,12 @@
 
 namespace App\Models\Revolut\Crypto;
 
-use App\Livewire\Revolut\Stock\Summary\StockCalculations;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\SoftDeletes;
-use App\Models\Revolut\AbstractRevolutModel;
 use Illuminate\Support\Facades\DB;
+use App\Livewire\Revolut\Stock\Summary\StockCalculations;
+use App\Models\Revolut\AbstractRevolutModel;
+use App\Models\Revolut\AbstractTransactions;
 
-class CryptoTransaction extends AbstractRevolutModel
+class CryptoTransaction extends AbstractTransactions
 {
     protected $fillable = [
             'hash',
@@ -37,6 +35,28 @@ class CryptoTransaction extends AbstractRevolutModel
             ->whereNotNull('symbol');;
     }
 
+    public static function getTickers(bool $all = false)
+    {
+        return self::query()
+            ->select('symbol')
+            ->distinct()
+            ->where('symbol', '!=', '')
+            ->whereNotNull('symbol')
+            ->orderBy('symbol')
+            ->pluck('symbol')
+            ->toArray();
+    }
+
+    public static function getTypes()
+    {
+        return self::query()
+            ->select('type')
+            ->distinct()
+            ->orderBy('type')
+            ->pluck('type')
+            ->toArray();
+    }
+
     public static function getSummary(bool $all = true)
     {
         $sell = StockCalculations::TYPE_SELL;
@@ -61,18 +81,6 @@ class CryptoTransaction extends AbstractRevolutModel
         return $query;
     }
 
-    public static function getTickers(bool $all = false)
-    {
-        return self::query()
-            ->select('symbol')
-            ->distinct()
-            ->where('symbol', '!=', '')
-            ->whereNotNull('symbol')
-            ->orderBy('symbol')
-            ->pluck('symbol')
-            ->toArray();
-    }
-
     public static function getTypesSummary()
     {
         return self::query()
@@ -80,16 +88,6 @@ class CryptoTransaction extends AbstractRevolutModel
             ->groupBy('type')
             ->orderBy('type')
             ->get()
-            ->toArray();
-    }
-
-    public static function getTypes()
-    {
-        return self::query()
-            ->select('type')
-            ->distinct()
-            ->orderBy('type')
-            ->pluck('type')
             ->toArray();
     }
 }

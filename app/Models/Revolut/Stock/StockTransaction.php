@@ -56,7 +56,7 @@ class StockTransaction extends AbstractTransactions
         $tableCurrency = (new CurrencyExchanges)->getTable();
         $tableStock = (new self)->getTable();
 
-        return self::query()
+        $query = self::query()
             ->addSelect($tableStock . '.*')
             ->addSelect($tableCurrency . '.code', $tableCurrency . '.exchange_rate')
             ->leftJoin(
@@ -66,7 +66,10 @@ class StockTransaction extends AbstractTransactions
                 DB::raw('(DATE_FORMAT(' . $tableCurrency . '.date, "%Y-%m-%d"))')
             )
             ->where($tableStock . '.type', 'LIKE', '%' . $cash . '%')
-            ->where($tableCurrency . '.code', '=', $currencyTo);
+//            ->where($tableCurrency . '.code', '=', $currencyTo)
+        ;
+
+        return $query;
     }
 
     public function scopeSearch($query, $term)

@@ -9,6 +9,7 @@ use App\Livewire\Feed\{CreateFeed, EditFeed, ShowFeeds,};
 use App\Livewire\Revolut\Stock\Tickers\{EditTicker, CreateTicker};
 use App\Livewire\Revolut\Money\{
     Summary as MoneySummary,
+    TransactionDetails as MoneyTransactionDetails,
     Transactions as MoneyTransactions,
     TickersList as MoneyTickersList,
     Upload as MoneyUpload,
@@ -16,19 +17,21 @@ use App\Livewire\Revolut\Money\{
 use App\Livewire\Revolut\Commodities\{
     Summary as CommoditiesSummary,
     Transactions as CommoditiesTransactions,
+    TransactionDetails as CommoditiesTransactionDetails,
     TickersList as CommoditiesTickersList,
     Upload as CommoditiesUpload,
 };
 use App\Livewire\Revolut\Crypto\{
     Summary as CryptoSummary,
     Transactions as CryptoTransactions,
+    TransactionDetails as CryptoTransactionDetails,
     TickersList as CryptoTickersList,
     Upload as CryptoUpload,
 };
 use App\Livewire\Revolut\Stock\CashFlow\{CreateCash, EditCash,};
 use App\Livewire\Revolut\Stock\Markets\{ShowMarket, CreateMarket, EditMarket};
 use App\Livewire\Revolut\Stock\{
-    Cash,
+    CashTopUp,
     CashFlow,
     Details,
     Dividends,
@@ -37,6 +40,7 @@ use App\Livewire\Revolut\Stock\{
     Summary,
     TickersList,
     Transactions,
+    TransactionDetails,
     Markets,
     Upload as StockUpload,
 };
@@ -93,14 +97,15 @@ Route::prefix('revolut')
             Route::get('/prices/detail', Prices::class)->name('stock.prices.details');
 
             Route::prefix('cash')->group(function () {
-                Route::get('/', Cash::class)->name('stock.cash');
+                Route::get('/', CashTopUp::class)->name('stock.cash');
                 Route::get('/flow', CashFlow::class)->name('stock.cash.flow');
                 Route::get('/flow/create', CreateCash::class)->name('stock.cash.flow.create');
                 Route::get('/flow/edit/{item}', EditCash::class)->name('stock.cash.flow.edit');
             });
 
             Route::get('/transactions', Transactions::class)->name('stock.transactions');
-            Route::get('/transaction/details/{ticker}', Transactions::class)
+            Route::get('/transactions/{ticker}', Transactions::class)->name('stock.transactions.list');
+            Route::get('/transaction/details/{hash}', TransactionDetails::class)
                 ->name('stock.transactions.details');
 
             Route::prefix('markets')->group(function () {
@@ -123,7 +128,7 @@ Route::prefix('revolut')
             Route::get('/', CryptoSummary::class)->name('crypto.index');
 
             Route::get('/transactions', CryptoTransactions::class)->name('crypto.transactions');
-            Route::get('/transaction/details/{id}', CryptoTransactions::class)
+            Route::get('/transaction/details/{hash}', CryptoTransactionDetails::class)
                 ->name('crypto.transactions.details');
 
             Route::prefix('tickers')->group(function () {
@@ -140,7 +145,7 @@ Route::prefix('revolut')
 
             Route::get('/transactions', CommoditiesTransactions::class)
                 ->name('commodities.transactions');
-            Route::get('/transaction/details/{id}', CommoditiesTransactions::class)
+            Route::get('/transaction/details/{hash}', CommoditiesTransactionDetails::class)
                 ->name('commodities.transactions.details');
 
             Route::prefix('tickers')->group(function () {
@@ -159,7 +164,7 @@ Route::prefix('revolut')
 
             Route::get('/transactions', MoneyTransactions::class)
                 ->name('money.transactions');
-            Route::get('/transaction/details/{id}', MoneyTransactions::class)
+            Route::get('/transaction/details/{hash}', MoneyTransactionDetails::class)
                 ->name('money.transactions.details');
 
             Route::get('/tickers', MoneyTickersList::class)->name('money.tickers');

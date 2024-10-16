@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Revolut;
 
+use App\Http\Controllers\Revolut\AbstractRevolutController;
 use Livewire\Component;
 
 abstract class AbstractComponent extends Component
@@ -65,6 +66,11 @@ abstract class AbstractComponent extends Component
     public function updatingSearch()
     {
         $this->resetPage();
+    }
+
+    public function reloadPage()
+    {
+        $this->emit('reloadPage');
     }
 
     public function setStatusDisabled(mixed $modelClass, int $itemId): void

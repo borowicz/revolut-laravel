@@ -1,5 +1,5 @@
 <div wire:click="sortBy('{{ $field }}')"
-     class="px-2 py-2 text-sm font-semibold text-gray-900
+     class="px-2 py-2 font-semibold text-gray-900
             {{ ($sortField === $field) ? 'bg-gray-200' : '' }}
             hover:bg-gray-300">
     @if ($sortField === $field)

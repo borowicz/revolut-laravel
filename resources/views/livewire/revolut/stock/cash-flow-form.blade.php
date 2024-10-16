@@ -10,7 +10,7 @@
             <div class="p-6 text-gray-900">
                 <header>
                     <h2 class="text-lg font-medium text-gray-900">
-                        {{ __('add current value') }}
+                        {{ __('add current money/cash value') }}
                     </h2>
 
                     <p class="mt-1 text-sm text-gray-600">
@@ -19,26 +19,30 @@
                 </header>
 
                 <form wire:submit.prevent="save" class="mt-6 space-y-6">
-                    <div>
-                        <x-input-label for="date" :value="__('when')" />
-                        <x-text-input wire:model="date"
-                                      id="date"
-                                      name="date"
-                                      type="text"
-                                      value="{{ $date ?? '' }}"
-                                      readonly="readonly"
-                                      class="mt-1 block w-full bg-gray-100 text-black"/>
-                        <x-input-error class="mt-2" :messages="$errors->get('date')" />
-                    </div>
-                    <div>
-                        <x-input-label for="title" :value="__('cash value')" />
-                        <x-text-input wire:model="total"
-                                      id="total"
-                                      name="total"
-                                      type="text"
-                                      value="{{ $total ?? 0 }}"
-                                      class="mt-1 block w-full" required autofocus/>
-                        <x-input-error class="mt-2" :messages="$errors->get('cash')" />
+                    <div class="py-3">
+                        <div class="grid grid-cols-2 gap-1">
+                            <div>
+                                <x-input-label for="date" :value="__('when')" />
+                                <x-text-input wire:model="date"
+                                              id="date"
+                                              name="date"
+                                              type="text"
+                                              value="{{ $date ?? '' }}"
+                                              readonly="readonly"
+                                              class="mt-1 block w-full bg-gray-100 text-black"/>
+                                <x-input-error class="mt-2" :messages="$errors->get('date')" />
+                            </div>
+                            <div>
+                                <x-input-label for="title" :value="__('cash value')" />
+                                <x-text-input wire:model="total"
+                                              id="total"
+                                              name="total"
+                                              type="text"
+                                              value="{{ $total ?? 0 }}"
+                                              class="mt-1 block w-full" required autofocus/>
+                                <x-input-error class="mt-2" :messages="$errors->get('cash')" />
+                            </div>
+                        </div>
                     </div>
 
                     <div class="flex items-center gap-4">

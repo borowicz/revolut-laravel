@@ -2,38 +2,39 @@
 
 namespace App\Livewire\Revolut\Crypto;
 
-use Illuminate\Http\Request;
-use Livewire\WithPagination;
-use App\Livewire\Revolut\AbstractComponent;
+use App\Livewire\Revolut\AbstractTickersComponent;
 use App\Models\Revolut\Crypto\CryptoTransaction;
+use App\Models\Revolut\Crypto\CryptoTicker;
 
-class TickersList extends AbstractComponent
+class TickersList extends AbstractTickersComponent
 {
-    use WithPagination;
+    public $showButtons = false;
+    protected $listeners = ['refreshComponent' => '$refresh'];
 
-    public $sortField = 'symbol';
-
+    public $sortField = 'ticker';
     public $sortDirection = 'ASC';
 
-    public $status = 0; // Initial status
-    public $itemStatus = []; // To track status for each item
 
-    public function render(Request $request)
+    public function mount()
     {
-        $query = CryptoTransaction::getTickersList();
-        $query->orderBy($this->sortField, $this->sortDirection);
+        $this->modelTickers = CryptoTicker::class;
+        $this->modelTransaction = CryptoTransaction::class;
+        $this->itemStatus = $this->modelTickers::pluck('disabled', 'id')->toArray();
+    }
 
-        $items = $this->setPagination($query);
+    public function render()
+    {
+        $items = $this->getItems();
         $hasPages = $this->hasPagination($items);
-
         foreach ($items as $item) {
             $this->itemStatus[$item->id] = $item->disabled;
         }
-
         $this->showButtons = false;
         $this->tickers = null;
 
-        return view('livewire.revolut.crypto.tickers', ['items' => $items, 'hasPages' => $hasPages])
-            ->layout('layouts.app');
+        return view('livewire.revolut.crypto.tickers', [
+            'items'      => $items,
+            'hasPages'   => $hasPages,
+        ]);
     }
 }

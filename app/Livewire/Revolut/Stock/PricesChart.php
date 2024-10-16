@@ -38,6 +38,6 @@ class PricesChart extends Component
     {
         return view('livewire.pages.stock.price-chart', [
             'stockData' => $this->stockData,
-        ])->layout('layouts.app');
+        ]);
     }
 }

@@ -1,20 +1,20 @@
 <table class="min-w-full divide-y divide-gray-300 table-fixed">
-    <thead class="font-medium uppercase text-gray-500 tracking-wider text-center">
+    <thead class="font-medium text-gray-500 uppercase tracking-wider text-center">
     <tr>
         <th>&nbsp;</th>
-        <th class="px-6 py-3 text-left text-sm font-semibold text-gray-900 hover:bg-gray-300 focus:bg-gray-700 active:bg-gray-900">
-            @include('livewire.partials.button-sort-field', [
+        <th class="text-center">
+            @include('livewire.partials.text-sort-field', [
                 'label' => 'ticker',
                 'field' => 'ticker',
             ])
         </th>
-        <th class="px-6 py-3 text-left lowercase">
+        <th class="text-center lowercase">
             {{ __('market') }}
         </th>
-        <th class="px-6 py-3 text-left lowercase">
+        <th class="text-left lowercase">
             {{ __('news services') }}
         </th>
-        <th class="px-6 py-3 text-right text-sm font-semibold text-gray-900 hover:bg-gray-300 focus:bg-gray-700 active:bg-gray-900">
+        <th class="text-right">
             @include('livewire.partials.button-sort-field', [
                 'label' => 'status',
                 'field' => 'disabled',
@@ -27,7 +27,7 @@
         <tr class="even:bg-gray-50 odd:bg-white">
             <td title="{{ $item->hash }}">
                 @include('revolutPartials::tooltip', ['ttTxt' => ((int)$key+1), 'ttComment' => $item->hash])</td>
-            <td class="px-3 py-2" title="{{ $item->notes }}">
+            <td class="px-3 py-2 text-left" title="{{ $item->notes }}">
                 <a href="{{ route('stock.details', ['ticker' => $item->ticker]) }}">{{ $item->ticker }}</a>
             </td>
             <td class="px-3 py-2 text-left">
@@ -39,19 +39,19 @@
                 @include('livewire.partials.tooltip-href', [
                     'url' => newsUrl('yf', $item->ticker, ''),
                     'urlTxt' => '[yF]',
-                    'urlCmt' => ' Yahoo Finance - ' . $item->ticker,
+                    'urlCmt' => ' GooGle Finance - ' . $item->ticker . ':' . $item->stockMarket->suffix_yf ?? '' . ' [' . $item->stockMarket->name . '] ',
                 ])
 
                 @include('livewire.partials.tooltip-href', [
-                    'url' => newsUrl('gf', $item->ticker, $item->suffix_gf ?? 'NASDAQ'),
+                    'url' => newsUrl('gf', $item->ticker, $item->stockMarket->suffix_gf ?? 'NASDAQ'),
                     'urlTxt' => '[gF]',
-                    'urlCmt' => ' GooGle Finance - ' . $item->ticker,
+                    'urlCmt' => ' GooGle Finance - ' . $item->ticker . ':' . $item->stockMarket->suffix_gf ?? '' . ' [' . $item->stockMarket->name . '] ',
                 ])
 
                 @include('livewire.partials.tooltip-href', [
-                    'url' => newsUrl('ft', $item->ticker, $item->suffix_ft ?? 'NSQ'),
+                    'url' => newsUrl('ft', $item->ticker, $item->stockMarket->suffix_ft ?? 'NSQ'),
                     'urlTxt' => '[FT]',
-                    'urlCmt' => ' ft.com - ' . $item->ticker,
+                    'urlCmt' => ' ft.com - ' . $item->ticker . ':' . $item->stockMarket->suffix_ft ?? '' . ' [' . $item->stockMarket->name . '] ',
                 ])
 
                 @include('livewire.partials.tooltip-href', [
@@ -60,14 +60,14 @@
                     'urlCmt' => ' cnn.com - ' . $item->ticker,
                 ])
 
-                @include('livewire.partials.tooltip-href', [
-                    'url' => newsUrl('bb', $item->ticker, $item->suffix_gf ?? 'US'),
-                    'urlTxt' => '[BB]',
-                    'urlCmt' => ' bloomberg.com - ' . $item->ticker,
-                ])
+{{--                @include('livewire.partials.tooltip-href', [--}}
+{{--                    'url' => newsUrl('bb', $item->ticker, 'US'),--}}
+{{--                    'urlTxt' => '[BB]',--}}
+{{--                    'urlCmt' => ' bloomberg.com - ' . $item->ticker . ':' . $item->stockMarket->suffix_bb ?? 'US' . ' [' . $item->stockMarket->name . '] ',--}}
+{{--                ])--}}
 
             </td>
-            <td class="px-3 py-2 text-center text-sm text-gray-500">
+            <td class="px-3 py-2 text-right text-sm text-gray-500">
                 @include('livewire.partials.button-action', [
                     'label' => 'edit',
                     'routeName' =>'stock.tickers.edit',

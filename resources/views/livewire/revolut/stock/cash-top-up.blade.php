@@ -1,6 +1,6 @@
 <x-slot name="header">
     <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-        {{ __('Stock tickers') }}
+        {{ __('Stock top up cash') }}
     </h2>
 </x-slot>
 
@@ -14,26 +14,22 @@
                     <p class="mt-2 text-sm text-gray-700">...</p>
                 </div>
                 <div class="mt-4 sm:ml-16 sm:mt-0 sm:flex-none">
-                    @include('livewire.partials.button-create',
-                            ['label' => 'market', 'routeName'=> 'stock.markets.create']
-                    )
-                    @include('livewire.revolut.commodities.menu')
+                    @include('revolut::stock.menu')
                 </div>
             </div>
             <div class="items-center">
                 @include('livewire.partials.pagination')
                 <div>
                     @include('livewire.partials.select-pagination')
-                    @include('livewire.partials.select-tickers')
                 </div>
             </div>
         </div>
 
         <div class="px-4 sm:px-6 lg:px-8">
-            @include('livewire.revolut.money.tickers-table')
-
-            @include('livewire.partials.pagination')
+            @include('livewire.revolut.stock.cash-table')
         </div>
+        @include('livewire.partials.pagination')
         <br class="clearfix"/>
     </div>
 </div>
+

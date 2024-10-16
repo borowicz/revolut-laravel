@@ -4,26 +4,19 @@ namespace App\Livewire\Revolut\Stock;
 
 use Carbon\Carbon;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
+use Livewire\Attributes\Rule;
 use Livewire\WithPagination;
 use App\Livewire\Revolut\Stock\Summary\StockCalculations;
-//use App\Livewire\Revolut\Stock\Summary\CalculatedDetails;
 use App\Models\Revolut\Stock\StockTransaction;
 use App\Models\Revolut\CurrencyExchanges;
-use App\Models\Revolut\Stock\StockPrices;
-use App\Models\Revolut\Stock\CashCurrent;
 use App\Livewire\Revolut\AbstractComponent;
 
-class Cash extends AbstractComponent
+class CashTopUp extends AbstractComponent
 {
     use WithPagination;
 
-    public $searchBox = false;
-    public $search = '';
     public $perPage = 30; // Number of items per page
-    public $sortField = 'date';
-    public $sortDirection = 'DESC';
-    public $selectedTicker = null;
+
     public function render(Request $request)
     {
         debugbar()->info('$this->perPage: ' . $this->perPage);
@@ -33,17 +26,16 @@ class Cash extends AbstractComponent
         $total = $model::getTransactionsCash($model);
         $query = $model->getCashTopUp();
         $query->orderBy($this->sortField, $this->sortDirection);
-
         $calculated = $this->calculate($query);
         $items = $this->setPagination($query);
         $hasPages = $this->hasPagination($items);
 
-        return view('livewire.revolut.stock.cash', [
+        return view('livewire.revolut.stock.cash-top-up', [
             'items'      => $items,
             'total'      => $total,
             'calculated' => $calculated,
             'hasPages'   => $hasPages,
-        ])->layout('layouts.app');
+        ]);
     }
 
     private function calculate($query): array

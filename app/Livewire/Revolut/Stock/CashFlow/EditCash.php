@@ -37,7 +37,6 @@ class EditCash extends CreateCash
 
     public function render()
     {
-        return view('livewire.revolut.stock.cash-flow-form')
-            ->layout('layouts.app');
+        return view('livewire.revolut.stock.cash-flow-form');
     }
 }

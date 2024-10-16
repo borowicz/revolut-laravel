@@ -29,4 +29,14 @@ class StockMarket extends AbstractRevolutModel
     {
         return $this->hasMany(StockTicker::class);
     }
+
+    public function getMarketsList()
+    {
+        $query = self::query()->select('id')
+            ->addSelect(...$this->fillable)
+            ->where('disabled', 0)
+            ->orderBy('name');
+
+        return $query;
+    }
 }

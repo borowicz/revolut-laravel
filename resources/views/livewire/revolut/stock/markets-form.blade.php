@@ -86,15 +86,6 @@
                             <x-input-error class="mt-2" :messages="$errors->get('suffix')" />
                         </div>
                         <div>
-                            <x-input-label for="suffix_gf" :value="__('Suffix yF')" />
-                            <x-text-input wire:model="suffix_yf"
-                                          id="suffix_yf"
-                                          name="suffix_yf"
-                                          type="text"
-                                          class="mt-1 block w-full" required autocomplete="suffix_yf" />
-                            <x-input-error class="mt-2" :messages="$errors->get('suffix_yf')" />
-                        </div>
-                        <div>
                             <x-input-label for="suffix_gf" :value="__('Suffix GF')" />
                             <x-text-input wire:model="suffix_gf"
                                           id="suffix_gf"
@@ -121,15 +112,28 @@
                                           class="mt-1 block w-full" required autocomplete="suffix_bb" />
                             <x-input-error class="mt-2" :messages="$errors->get('suffix_bb')" />
                         </div>
+{{--
+                        <div>
+                            <x-input-label for="suffix_gf" :value="__('Suffix yF')" />
+                            <x-text-input wire:model="suffix_yf"
+                                          id="suffix_yf"
+                                          name="suffix_yf"
+                                          type="text"
+                                          disabled="disabled"
+                                          class="mt-1 block w-full" required autocomplete="suffix_yf" />
+                            <x-input-error class="mt-2" :messages="$errors->get('suffix_yf')" />
+                        </div>
                         <div>
                             <x-input-label for="suffix_bb" :value="__('Suffix CNN')" />
-                            <x-text-input wire:model="suffix_nc"
+                            <x-text-input wire:model="suffix_cn"
                                           id="suffix_cn"
                                           name="suffix_cn"
                                           type="text"
+                                          disabled="disabled"
                                           class="mt-1 block w-full" required autocomplete="suffix_cn" />
                             <x-input-error class="mt-2" :messages="$errors->get('suffix_cn')" />
                         </div>
+--}}
                     </div>
 
 

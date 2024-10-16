@@ -40,6 +40,6 @@ class Prices  extends AbstractComponent
             'showButtons' => false,
             'items' => $items,
             'hasPages' => $hasPages,
-        ])->layout('layouts.app');
+        ]);
     }
 }

@@ -1,20 +1,17 @@
 <table class="min-w-full divide-y divide-gray-300 table-fixed">
-    <thead class="font-medium uppercase text-gray-500 tracking-wider text-center">
+    <thead class="font-medium text-gray-500 uppercase tracking-wider text-center">
     <tr>
         <th>&nbsp;</th>
-        <th class="px-6 py-3 text-left text-sm font-semibold text-gray-900 hover:bg-gray-300">
-            @include('livewire.partials.button-sort-field', [
+        <th class="text-center">
+            @include('livewire.partials.text-sort-field', [
                 'label' => 'ticker',
-                'field' => 'currency',
+                'field' => 'ticker',
             ])
         </th>
-        <th class="px-6 py-3 text-left lowercase">
-            {{ __('amount') }}
+        <th class="text-center lowercase">
+            {{ __('currency') }}
         </th>
-        <th class="px-6 py-3 text-left lowercase">
-            {{ __('news services') }}
-        </th>
-        <th class="px-6 py-3 text-center lowercase">
+        <th class="text-center">
             &nbsp;
         </th>
     </tr>
@@ -23,27 +20,19 @@
     @forelse ($items as $key => $item)
         <tr class="even:bg-gray-50 odd:bg-white">
             <td title="{{ $item->hash }}">&nbsp;{{ (int)$key+1 }}&nbsp;</td>
-            <td class="px-3 py-2>
-                @include('revolutPartials::tooltip', [
-                    'ttTxt' => ($item->currency ?? ''),
-                    'ttComment' => $item->currency ?? '' . ' ' . $item->description ?? ''
-                        . ' ' . $item->product ?? '' . ' ' . $item->state ?? '' . ' ' . $item->type ?? '',
-                ])
+            <td class="px-3 py-2" title="{{ $item->notes }}">
+                {{ $item->ticker }}
             </td>
             <td class="px-3 py-2 text-left">
-                {{ $item->amount ?? '' }}
+                {{ $currency[$item->ticker] ?? '' }}
             </td>
-            <td class="px-3 py-2 text-left text-sm text-gray-500">
-                [<a target="_blank"
-                    href="https://finance.yahoo.com/quote/{{ $item->ticker }}/?.tsrc={{ config('revolut.source') }}"
-                >{{ __('financeYahoo') }}</a>],&nbsp;
-            </td>
-            <td class="px-3 py-2 text-center text-sm text-gray-500">
-                @include('livewire.partials.button-action', [
-                    'label' => 'details',
-                    'routeName' =>'commodities.transactions.details',
+            <td class="px-3 py-2 text-right text-sm text-gray-500">
+{{--                @include('livewire.partials.button-action', [
+                    'label' => 'edit',
+                    'routeName' =>'commodities.tickers.edit',
                     'itemId' => $item->id,
-                ])
+                ])--}}
+                @include('livewire.partials.button-disable')
             </td>
         </tr>
     @empty

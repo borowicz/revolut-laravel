@@ -10,11 +10,13 @@
         <div class="px-4 sm:px-6 lg:px-8">
             <div class="sm:flex sm:items-center">
                 <div class="sm:flex-auto pt-6">
-                    <h1 class="text-base font-semibold leading-6 text-gray-900">{{ __('Crypto Summary') }}</h1>
+                    <h1 class="text-base font-semibold leading-6 text-gray-900">{{ $title ?? '' }} {{ __('Summary') }}</h1>
                     <p class="mt-2 text-sm text-gray-700">...</p>
                 </div>
                 <div class="mt-4 sm:ml-16 sm:mt-0 sm:flex-none">
-                    @include('livewire.revolut.crypto.menu')
+                    @if (!empty($items['menu'] ?? ''))
+                        @include($items['menu'])
+                    @endif
                 </div>
             </div>
         </div>
@@ -29,10 +31,10 @@
                 </div>
                 <div>
                     <div class="grid grid-cols-2 gap-1 w-96">
-                        @if (isset($items['crypto']))
-                            @foreach($items['crypto'] as $crypto)
-                                <div class="text-right w-24">{{ $crypto->symbol }}: </div>
-                                <div class="text-right w-48">{{ numberFormat($crypto->total, 6) }}</div>
+                        @if (isset($items['tickers']))
+                            @foreach($items['tickers'] as $ticker)
+                                <div class="text-right w-24">{{ $ticker->symbol }}: </div>
+                                <div class="text-right w-48">{{ numberFormat($ticker->total, 6) }}</div>
                             @endforeach
                         @endif
                     </div>
