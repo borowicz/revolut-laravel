@@ -2,9 +2,8 @@
 
 namespace Database\Seeders\Revolut;
 
+use App\Models\Revolut\Stock\StockRoboTransaction;
 use Illuminate\Database\Seeder;
-use App\Models\Revolut\StockRobo\StockRoboTransaction;
-use Illuminate\Support\Str;
 
 /**
  *- -***

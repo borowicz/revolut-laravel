@@ -1,12 +1,12 @@
 <?php
 
-namespace Database\Factories\Revolut\Crypto;
+namespace Database\Factories\Revolut\Money;
 
 use App\Models\Revolut\Money\CashTransaction;
 use Database\Factories\Revolut\AbstractRevolut;
 use Illuminate\Support\Str;
 
-class CryptoTransactionFactory extends AbstractRevolut
+class CashTransactionFactory extends AbstractRevolut
 {
     protected $model = CashTransaction::class;
 
